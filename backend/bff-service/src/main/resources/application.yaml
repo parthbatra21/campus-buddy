@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: bff-service
+
+server:
+  port: 8080
+
+# JWT Configuration (MUST MATCH Auth Service)
+jwt:
+  secret: ${JWT_SECRET:campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security}
+  expiration: 86400000  # 24 hours
+
+# Microservice URLs
+services:
+  auth:
+    url: http://localhost:8081
+  academic:
+    url: http://localhost:8082
+  campus:
+    url: http://localhost:8083

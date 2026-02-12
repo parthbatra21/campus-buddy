@@ -1,0 +1,62 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< com.campus-buddy:bff-service >--------------------
+[INFO] Building bff-service 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:4.0.2:run (default-cli) > test-compile @ bff-service >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ bff-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ bff-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 10 source files with javac [debug parameters release 21] to target/classes
+[INFO] /Users/parth/Desktop/campus-buddy/backend/bff-service/src/main/java/com/campus_buddy/bff_service/security/JwtAuthenticationFilter.java: /Users/parth/Desktop/campus-buddy/backend/bff-service/src/main/java/com/campus_buddy/bff_service/security/JwtAuthenticationFilter.java uses or overrides a deprecated API.
+[INFO] /Users/parth/Desktop/campus-buddy/backend/bff-service/src/main/java/com/campus_buddy/bff_service/security/JwtAuthenticationFilter.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ bff-service ---
+[INFO] skip non existing resourceDirectory /Users/parth/Desktop/campus-buddy/backend/bff-service/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ bff-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] <<< spring-boot:4.0.2:run (default-cli) < test-compile @ bff-service <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:4.0.2:run (default-cli) @ bff-service ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.2)
+
+2026-02-13T02:19:52.194+05:30  INFO 88390 --- [bff-service] [           main] c.c.bff_service.BffServiceApplication    : Starting BffServiceApplication using Java 23.0.2 with PID 88390 (/Users/parth/Desktop/campus-buddy/backend/bff-service/target/classes started by parth in /Users/parth/Desktop/campus-buddy/backend/bff-service)
+2026-02-13T02:19:52.196+05:30  INFO 88390 --- [bff-service] [           main] c.c.bff_service.BffServiceApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-02-13T02:19:52.674+05:30  INFO 88390 --- [bff-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-02-13T02:19:52.683+05:30  INFO 88390 --- [bff-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-13T02:19:52.683+05:30  INFO 88390 --- [bff-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-13T02:19:52.718+05:30  INFO 88390 --- [bff-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 495 ms
+2026-02-13T02:19:52.961+05:30  WARN 88390 --- [bff-service] [           main] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 922b8d50-0132-41d9-af39-15e1c59637da
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-02-13T02:19:52.966+05:30  INFO 88390 --- [bff-service] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-13T02:19:53.187+05:30  INFO 88390 --- [bff-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-02-13T02:19:53.190+05:30  INFO 88390 --- [bff-service] [           main] c.c.bff_service.BffServiceApplication    : Started BffServiceApplication in 1.198 seconds (process running for 1.402)
+2026-02-13T02:26:11.987+05:30  INFO 88390 --- [bff-service] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-13T02:26:11.991+05:30  INFO 88390 --- [bff-service] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-13T02:26:12.000+05:30  INFO 88390 --- [bff-service] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2026-02-13T02:26:12.147+05:30 ERROR 88390 --- [bff-service] [nio-8080-exec-2] i.n.r.d.DnsServerAddressStreamProviders  : Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-02-13T03:14:39.357+05:30  INFO 88390 --- [bff-service] [ionShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-13T03:14:39.373+05:30  INFO 88390 --- [bff-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete

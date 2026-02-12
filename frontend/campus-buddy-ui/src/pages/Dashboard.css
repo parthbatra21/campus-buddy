@@ -1,0 +1,341 @@
+.dashboard-container {
+    min-height: 100vh;
+    /* Match AuthLayout background */
+    background: radial-gradient(circle at top left, #EEF2FF 0%, transparent 40%),
+        radial-gradient(circle at bottom right, #F0F9FF 0%, transparent 40%);
+    background-color: var(--bg-color);
+    padding: 2rem;
+}
+
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.9);
+    /* Slight transparency */
+    backdrop-filter: blur(12px);
+    /* Glassmorphism */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    box-shadow: var(--shadow-xl, 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1));
+    max-width: 1000px;
+    /* Bit wider */
+    margin: 0 auto;
+    padding: 2.5rem;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.logout-btn {
+    padding: 0.6rem 1.25rem;
+    background: white;
+    color: var(--error);
+    border: 1px solid var(--error);
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.logout-btn:hover {
+    background: #FEF2F2;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.user-info {
+    background: linear-gradient(to right, #EEF2FF, #E0E7FF);
+    color: var(--text-primary);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    border: 1px solid #C7D2FE;
+}
+
+.user-info h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+}
+
+.user-info p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.role-badge.student {
+    background: #4facfe;
+}
+
+.role-badge.faculty {
+    background: #f093fb;
+}
+
+.role-badge.admin {
+    background: #feca57;
+    color: #333;
+}
+
+.test-section {
+    background: #F8FAFC;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.test-section h3 {
+    margin: 0 0 1rem 0;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+}
+
+.test-section p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.test-btn {
+    padding: 0.75rem 2rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+    box-shadow: var(--shadow-sm);
+}
+
+.test-btn:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.test-btn:disabled {
+    background-color: var(--secondary);
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* ... existing test result styles ... */
+
+.navigation-section {
+    background: #F0F9FF;
+    /* Light blue */
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 2.5rem;
+    border: 1px solid #BAE6FD;
+}
+
+.navigation-section h3 {
+    margin: 0 0 1.5rem 0;
+    color: #0369A1;
+    /* Sky 700 */
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.nav-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Action Section (for Dashboard Cards) */
+.action-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.action-section h3 {
+    margin: 0 0 1.5rem 0;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.action-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    font-size: 0.95rem;
+}
+
+.action-btn.primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.action-btn.primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.action-btn.secondary {
+    background-color: white;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.action-btn.secondary:hover {
+    background-color: #F8FAFC;
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+}
+
+/* Info Section */
+.info-section {
+    background: #FFFBEB;
+    /* Amber 50 */
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #FCD34D;
+    /* Amber 300 */
+    margin-bottom: 2rem;
+}
+
+.info-section h3 {
+    margin: 0 0 0.75rem 0;
+    color: #92400E;
+    /* Amber 800 */
+    font-size: 1.1rem;
+}
+
+.info-section p,
+.info-section li {
+    color: #92400E;
+    font-size: 0.95rem;
+}
+
+.info-section ul {
+    margin: 0.5rem 0 0 1.5rem;
+}
+
+.loading {
+    text-align: center;
+    padding: 4rem;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Accessibility / Session Code Styles */
+.session-code-display {
+    margin-top: 1rem;
+    text-align: center;
+    background: #f3f4f6;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px dashed #cbd5e1;
+}
+
+.session-code-display p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+}
+
+.code-text {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: #1e293b;
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    /* Monospace for distinct chars */
+}
+
+/* Manual Entry Section (Student) */
+.manual-entry-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.manual-entry-section h4 {
+    margin-bottom: 1rem;
+    color: #475569;
+    font-size: 1rem;
+}
+
+.manual-entry-section .input-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    /* responsive */
+}
+
+.code-input {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.75rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.code-input:focus {
+    border-color: #3b82f6;
+    outline: none;
+}
+
+.course-select-small {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background-color: white;
+}
