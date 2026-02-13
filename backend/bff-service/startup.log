@@ -5,6 +5,9 @@
 [INFO]   from pom.xml
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ bff-service ---
+[INFO] Deleting /Users/parth/Desktop/campus-buddy/backend/bff-service/target
+[INFO] 
 [INFO] >>> spring-boot:4.0.2:run (default-cli) > test-compile @ bff-service >>>
 [INFO] 
 [INFO] --- resources:3.3.1:resources (default-resources) @ bff-service ---
@@ -39,24 +42,24 @@
 
  :: Spring Boot ::                (v4.0.2)
 
-2026-02-13T02:19:52.194+05:30  INFO 88390 --- [bff-service] [           main] c.c.bff_service.BffServiceApplication    : Starting BffServiceApplication using Java 23.0.2 with PID 88390 (/Users/parth/Desktop/campus-buddy/backend/bff-service/target/classes started by parth in /Users/parth/Desktop/campus-buddy/backend/bff-service)
-2026-02-13T02:19:52.196+05:30  INFO 88390 --- [bff-service] [           main] c.c.bff_service.BffServiceApplication    : No active profile set, falling back to 1 default profile: "default"
-2026-02-13T02:19:52.674+05:30  INFO 88390 --- [bff-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
-2026-02-13T02:19:52.683+05:30  INFO 88390 --- [bff-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-02-13T02:19:52.683+05:30  INFO 88390 --- [bff-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
-2026-02-13T02:19:52.718+05:30  INFO 88390 --- [bff-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 495 ms
-2026-02-13T02:19:52.961+05:30  WARN 88390 --- [bff-service] [           main] .s.a.UserDetailsServiceAutoConfiguration : 
+2026-02-13T17:51:40.201+05:30  INFO 8233 --- [bff-service] [           main] c.c.bff_service.BffServiceApplication    : Starting BffServiceApplication using Java 23.0.2 with PID 8233 (/Users/parth/Desktop/campus-buddy/backend/bff-service/target/classes started by parth in /Users/parth/Desktop/campus-buddy/backend/bff-service)
+2026-02-13T17:51:40.203+05:30  INFO 8233 --- [bff-service] [           main] c.c.bff_service.BffServiceApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-02-13T17:51:40.803+05:30  INFO 8233 --- [bff-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-02-13T17:51:40.811+05:30  INFO 8233 --- [bff-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-13T17:51:40.811+05:30  INFO 8233 --- [bff-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-13T17:51:40.839+05:30  INFO 8233 --- [bff-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 598 ms
+2026-02-13T17:51:41.054+05:30  WARN 8233 --- [bff-service] [           main] .s.a.UserDetailsServiceAutoConfiguration : 
 
-Using generated security password: 922b8d50-0132-41d9-af39-15e1c59637da
+Using generated security password: 9c67f579-030c-40f9-a9c7-582cb6cc6575
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2026-02-13T02:19:52.966+05:30  INFO 88390 --- [bff-service] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-02-13T02:19:53.187+05:30  INFO 88390 --- [bff-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
-2026-02-13T02:19:53.190+05:30  INFO 88390 --- [bff-service] [           main] c.c.bff_service.BffServiceApplication    : Started BffServiceApplication in 1.198 seconds (process running for 1.402)
-2026-02-13T02:26:11.987+05:30  INFO 88390 --- [bff-service] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-02-13T02:26:11.991+05:30  INFO 88390 --- [bff-service] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-02-13T02:26:12.000+05:30  INFO 88390 --- [bff-service] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
-2026-02-13T02:26:12.147+05:30 ERROR 88390 --- [bff-service] [nio-8080-exec-2] i.n.r.d.DnsServerAddressStreamProviders  : Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
-2026-02-13T03:14:39.357+05:30  INFO 88390 --- [bff-service] [ionShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
-2026-02-13T03:14:39.373+05:30  INFO 88390 --- [bff-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-02-13T17:51:41.057+05:30  INFO 8233 --- [bff-service] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-13T17:51:41.310+05:30  INFO 8233 --- [bff-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-02-13T17:51:41.313+05:30  INFO 8233 --- [bff-service] [           main] c.c.bff_service.BffServiceApplication    : Started BffServiceApplication in 1.333 seconds (process running for 1.574)
+2026-02-13T17:52:39.145+05:30  INFO 8233 --- [bff-service] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-13T17:52:39.146+05:30  INFO 8233 --- [bff-service] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-13T17:52:39.149+05:30  INFO 8233 --- [bff-service] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-02-13T17:52:39.299+05:30 ERROR 8233 --- [bff-service] [nio-8080-exec-2] i.n.r.d.DnsServerAddressStreamProviders  : Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-02-13T18:39:07.299+05:30  INFO 8233 --- [bff-service] [ionShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-13T18:39:07.319+05:30  INFO 8233 --- [bff-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
