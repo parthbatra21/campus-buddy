@@ -1,0 +1,16 @@
+# Node
+node_modules/
+dist/
+build/
+
+# Spring Boot / Maven
+target/
+*.jar
+*.class
+
+# Env
+.env
+.venv/
+
+# Mac
+.DS_Store
