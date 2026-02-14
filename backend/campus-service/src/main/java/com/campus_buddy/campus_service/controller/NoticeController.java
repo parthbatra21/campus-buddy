@@ -22,8 +22,8 @@ public class NoticeController {
     private NoticeRepository noticeRepository;
 
     @GetMapping
-    public ResponseEntity<List<Notice>> getAllNotices() {
-        return ResponseEntity.ok(noticeRepository.findByOrderByPriorityAscCreatedAtDesc());
+    public ResponseEntity<List<Notice>> getAllNotices(@RequestParam(defaultValue = "false") boolean archived) {
+        return ResponseEntity.ok(noticeRepository.findByIsArchivedOrderByPriorityAscCreatedAtDesc(archived));
     }
 
     @PostMapping
@@ -42,7 +42,29 @@ public class NoticeController {
         }
 
         notice.setPostedBy(auth.getName());
+        notice.setArchived(false); // Default to not archived
         Notice saved = noticeRepository.save(notice);
         return ResponseEntity.ok(saved);
+    }
+
+    @PutMapping("/{id}/archive")
+    public ResponseEntity<?> archiveNotice(@PathVariable Long id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean canEdit = auth.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch(role -> role.equals("ROLE_FACULTY") || role.equals("ROLE_ADMIN"));
+
+        if (!canEdit) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Access denied.");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+        }
+
+        return noticeRepository.findById(id)
+                .map(notice -> {
+                    notice.setArchived(true);
+                    return ResponseEntity.ok(noticeRepository.save(notice));
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 }

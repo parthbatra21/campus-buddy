@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import QRCode from 'react-qr-code';
 import { academicAPI } from '../services/api';
 import NoticeBoard from '../components/NoticeBoard';
+import ChangePasswordModal from '../components/ChangePasswordModal';
 import './Dashboard.css';
 
 function FacultyDashboard({ user, handleLogout }) {
@@ -9,6 +10,7 @@ function FacultyDashboard({ user, handleLogout }) {
     const [selectedCourse, setSelectedCourse] = useState('');
     const [activeSession, setActiveSession] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [showPasswordModal, setShowPasswordModal] = useState(false);
 
     useEffect(() => {
         // Fetch timetable to get list of courses the faculty teaches
@@ -72,14 +74,22 @@ function FacultyDashboard({ user, handleLogout }) {
 
     return (
         <div className="dashboard-container">
+            {showPasswordModal && <ChangePasswordModal onClose={() => setShowPasswordModal(false)} />}
+
             <div className="dashboard-card">
                 <div className="dashboard-header">
-                    <h1>🎓 Faculty Dashboard</h1>
-                    <button onClick={handleLogout} className="logout-btn">Logout</button>
-                </div>
-
-                <div className="user-info">
-                    <p>Welcome, <strong>{user.email}</strong> (Faculty)</p>
+                    <div>
+                        <h1>🎓 Faculty Dashboard</h1>
+                        <p style={{ color: '#64748b', margin: 0 }}>Welcome, <strong>{user.email}</strong></p>
+                    </div>
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                        <button onClick={() => setShowPasswordModal(true)} className="action-btn secondary small">
+                            🔐 Change Password
+                        </button>
+                        <button onClick={handleLogout} className="logout-btn">
+                            🚪 Logout
+                        </button>
+                    </div>
                 </div>
 
                 {/* Create Session */}

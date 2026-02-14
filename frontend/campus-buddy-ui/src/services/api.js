@@ -27,6 +27,7 @@ export const authAPI = {
   login: (email, password) => api.post('/auth/login', { email, password }),
   register: (studentId, email, password, role) => api.post('/auth/register', { studentId, email, password, role }),
   getCurrentUser: () => api.get('/auth/me'),
+  changePassword: (currentPassword, newPassword) => api.post('/auth/change-password', { currentPassword, newPassword }),
 };
 
 // Academic API
@@ -48,8 +49,12 @@ export const academicAPI = {
   addClass: (timetableData) => api.post('/academic/timetable', timetableData),
 
   // Notices
-  getNotices: () => api.get('/campus/notices'),
+  getNotices: (archived = false) => api.get('/campus/notices', { params: { archived } }),
   createNotice: (noticeData) => api.post('/campus/notices', noticeData),
+  archiveNotice: (id) => api.put(`/campus/notices/${id}/archive`),
 };
+
+// Campus API (Alias for clarity if needed)
+export const campusAPI = academicAPI;
 
 export default api;

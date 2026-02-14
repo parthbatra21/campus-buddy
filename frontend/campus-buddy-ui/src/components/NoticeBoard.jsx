@@ -1,32 +1,39 @@
 import { useState, useEffect } from 'react';
-import api from '../services/api'; // Correct default import
-import '../pages/Dashboard.css'; // Reuse dashboard styles
+import { academicAPI } from '../services/api';
+import '../pages/Dashboard.css';
 
 function NoticeBoard({ role }) {
     const [notices, setNotices] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    // Mock data for initial UI dev if backend is empty
-    const mockNotices = [
-        { id: 1, title: "Final Exam Schedule", category: "IMPORTANT", priority: "HIGH", content: "The final exam schedule for Spring 2026 has been released.", createdAt: "2026-02-12", postedBy: "admin@college.edu" },
-        { id: 2, title: "Tech Fest 2026", category: "EVENT", priority: "MEDIUM", content: "Register for the upcoming Hackathon!", createdAt: "2026-02-10", postedBy: "student_council@college.edu" }
-    ];
+    const [showArchived, setShowArchived] = useState(false);
+    const [priorityFilter, setPriorityFilter] = useState('ALL');
 
     useEffect(() => {
         fetchNotices();
-    }, []);
+        // Poll every 30 seconds for realtime updates
+        const interval = setInterval(fetchNotices, 30000);
+        return () => clearInterval(interval);
+    }, [showArchived]); // Re-fetch when toggle changes
 
     const fetchNotices = async () => {
         try {
-            // Uncomment when backend is fully ready
-            const response = await api.get('/campus/notices');
+            const response = await academicAPI.getNotices(showArchived);
             setNotices(response.data);
-            // setNotices(mockNotices); // Fallback for testing UI
+            setLoading(false);
         } catch (error) {
             console.error("Failed to fetch notices", error);
-            // setNotices(mockNotices); // Fallback on error
-        } finally {
             setLoading(false);
+        }
+    };
+
+    const handleArchive = async (id) => {
+        if (window.confirm("Are you sure you want to archive this notice?")) {
+            try {
+                await academicAPI.archiveNotice(id);
+                fetchNotices(); // Refresh list
+            } catch (error) {
+                alert("Failed to archive notice.");
+            }
         }
     };
 
@@ -41,52 +48,96 @@ function NoticeBoard({ role }) {
 
     const getCategoryBadge = (category) => {
         const style = {
-            padding: '2px 8px',
-            borderRadius: '12px',
-            fontSize: '0.75rem',
-            fontWeight: '600',
-            backgroundColor: '#e5e7eb',
-            color: '#374151'
+            padding: '4px 8px',
+            borderRadius: '6px',
+            fontSize: '0.7rem',
+            fontWeight: '700',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px'
         };
 
-        if (category === 'IMPORTANT') {
-            style.backgroundColor = '#fee2e2';
-            style.color = '#991b1b';
-        } else if (category === 'EVENT') {
-            style.backgroundColor = '#dbeafe';
-            style.color = '#1e40af';
+        switch (category) {
+            case 'EXAM':
+                return <span style={{ ...style, background: '#FEE2E2', color: '#991B1B' }}>🎓 Exam</span>;
+            case 'ALERT':
+                return <span style={{ ...style, background: '#FEF3C7', color: '#92400E' }}>⚠️ Alert</span>;
+            case 'EVENT':
+                return <span style={{ ...style, background: '#DBEAFE', color: '#1E40AF' }}>🎉 Event</span>;
+            case 'SPORTS':
+                return <span style={{ ...style, background: '#D1FAE5', color: '#065F46' }}>🏀 Sports</span>;
+            default:
+                return <span style={{ ...style, background: '#F3F4F6', color: '#374151' }}>📢 General</span>;
         }
-
-        return <span style={style}>{category}</span>;
     };
 
+    // Filter notices client-side for priority (since backend sorts but doesn't filter by priority param yet)
+    const filteredNotices = notices.filter(notice =>
+        priorityFilter === 'ALL' || notice.priority === priorityFilter
+    );
+
     return (
-        <div className="notice-board-section">
-            <div className="section-header">
-                <h3>📢 Digital Notice Board</h3>
-                {role === 'FACULTY' && (
-                    <button className="action-btn small">Post Notice</button> // modal trigger to be implemented
-                )}
+        <div className="section-card notice-board-section">
+            <div className="section-header" style={{ flexWrap: 'wrap', gap: '10px' }}>
+                <h3 style={{ margin: 0 }}>📌 Notice Board</h3>
+
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                    <select
+                        value={priorityFilter}
+                        onChange={(e) => setPriorityFilter(e.target.value)}
+                        className="filter-select"
+                        style={{ padding: '4px', borderRadius: '4px', border: '1px solid #e2e8f0', fontSize: '0.8rem' }}
+                    >
+                        <option value="ALL">All Priorities</option>
+                        <option value="HIGH">High</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="LOW">Low</option>
+                    </select>
+
+                    <label style={{ fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer' }}>
+                        <input
+                            type="checkbox"
+                            checked={showArchived}
+                            onChange={(e) => setShowArchived(e.target.checked)}
+                        />
+                        Archived
+                    </label>
+
+                    {role === 'FACULTY' && (
+                        <button className="action-btn small">Post New</button>
+                    )}
+                </div>
             </div>
 
             {loading ? (
-                <p>Loading notices...</p>
-            ) : notices.length === 0 ? (
-                <p className="empty-state">No notices at the moment.</p>
+                <div style={{ textAlign: 'center', padding: '2rem', color: '#9ca3af' }}>
+                    Loading updates...
+                </div>
+            ) : filteredNotices.length === 0 ? (
+                <p className="empty-state">No notices found.</p>
             ) : (
                 <div className="notices-list">
-                    {notices.map(notice => (
-                        <div key={notice.id} className="notice-card">
+                    {filteredNotices.map(notice => (
+                        <div key={notice.id} className="notice-card" style={{ borderLeftColor: getPriorityColor(notice.priority), opacity: notice.archived ? 0.7 : 1 }}>
                             <div className="notice-header">
-                                <div className="notice-meta">
-                                    {getCategoryBadge(notice.category)}
-                                    <span className="notice-date">{new Date(notice.createdAt).toLocaleDateString()}</span>
+                                {getCategoryBadge(notice.category)}
+                                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                                    <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>{new Date(notice.createdAt).toLocaleDateString()}</span>
+                                    {role === 'FACULTY' && !notice.archived && (
+                                        <button
+                                            onClick={() => handleArchive(notice.id)}
+                                            style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem' }}
+                                            title="Archive Notice"
+                                        >
+                                            📥
+                                        </button>
+                                    )}
                                 </div>
-                                <div className="priority-indicator" style={{ backgroundColor: getPriorityColor(notice.priority) }} title={`Priority: ${notice.priority}`}></div>
                             </div>
                             <h4 className="notice-title">{notice.title}</h4>
                             <p className="notice-content">{notice.content}</p>
-                            <p className="notice-author">Posted by: {notice.postedBy}</p>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#6b7280', marginTop: '0.5rem', borderTop: '1px solid #f3f4f6', paddingTop: '0.5rem' }}>
+                                <span>By: {notice.postedBy}</span>
+                            </div>
                         </div>
                     ))}
                 </div>

@@ -36,6 +36,9 @@ public class Notice {
     @Column(nullable = false)
     private String postedBy; // Faculty/Admin email
 
+    @Column(nullable = false)
+    private boolean isArchived = false;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 }

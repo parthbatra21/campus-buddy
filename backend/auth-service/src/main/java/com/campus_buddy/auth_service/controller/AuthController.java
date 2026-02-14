@@ -58,4 +58,17 @@ public class AuthController {
         UserResponse response = authService.getCurrentUser(email);
         return ResponseEntity.ok(response);
     }
+
+    /**
+     * Change password
+     * POST /auth/change-password
+     */
+    @PostMapping("/change-password")
+    public ResponseEntity<?> changePassword(@Valid @RequestBody com.campus_buddy.auth_service.dto.PasswordChangeRequest request) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        authService.changePassword(email, request.getCurrentPassword(), request.getNewPassword());
+        return ResponseEntity.ok().build();
+    }
 }

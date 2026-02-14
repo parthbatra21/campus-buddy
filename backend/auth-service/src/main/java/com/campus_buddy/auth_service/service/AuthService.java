@@ -24,4 +24,9 @@ public interface AuthService {
      * Get current user information from email (SecurityContext)
      */
     UserResponse getCurrentUser(String email);
+
+    /**
+     * Change password for authenticated user
+     */
+    void changePassword(String email, String currentPassword, String newPassword);
 }
