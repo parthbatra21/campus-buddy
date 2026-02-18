@@ -1,8 +1,14 @@
 import axios from 'axios';
 
-// Base URL = BFF Service (ONLY frontend-facing endpoint)
+// Base URL = BFF Service
+// In Docker (Nginx), this will be relative '/api'
+// In local dev, it falls back to 'http://localhost:8080/api'
+const baseURL = import.meta.env.PROD
+  ? '/api'
+  : 'http://localhost:8080/api';
+
 const api = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL,
   headers: {
     'Content-Type': 'application/json',
   },

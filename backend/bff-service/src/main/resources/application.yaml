@@ -2,8 +2,11 @@ spring:
   application:
     name: bff-service
 
-server:
-  port: 8080
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    com.campus_buddy: DEBUG
 
 # JWT Configuration (MUST MATCH Auth Service)
 jwt:

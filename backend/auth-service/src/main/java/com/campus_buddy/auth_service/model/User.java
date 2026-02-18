@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -39,11 +40,20 @@ public class User implements UserDetails {
     private Role role;
 
     @Column(nullable = false, updatable = false)
-    private java.time.LocalDateTime createdAt;
+    private LocalDateTime createdAt; // Changed type from java.time.LocalDateTime
+
+    @Column(nullable = false)
+    private LocalDateTime updatedAt; // Added updatedAt field
 
     @PrePersist
     protected void onCreate() {
-        createdAt = java.time.LocalDateTime.now();
+        createdAt = LocalDateTime.now(); // Changed to use LocalDateTime
+        updatedAt = LocalDateTime.now(); // Set updatedAt on creation
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now(); // Set updatedAt on update
     }
 
     @Override

@@ -1,0 +1,118 @@
+services:
+  # Databases
+  postgres-auth:
+    image: postgres:16-alpine
+    container_name: campus-buddy-postgres-auth
+    environment:
+      POSTGRES_DB: campus_buddy_auth
+      POSTGRES_USER: parth
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_auth_data:/var/lib/postgresql/data
+    networks:
+      - campus-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U parth -d campus_buddy_auth"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres-academic:
+    image: postgres:16-alpine
+    container_name: campus-buddy-postgres-academic
+    environment:
+      POSTGRES_DB: campus_buddy_academic
+      POSTGRES_USER: parth
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_academic_data:/var/lib/postgresql/data
+    networks:
+      - campus-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U parth -d campus_buddy_academic"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend Services
+  auth-service:
+    build: ./backend/auth-service
+    container_name: campus-buddy-auth-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-auth:5432/campus_buddy_auth
+      SPRING_DATASOURCE_USERNAME: parth
+      SPRING_DATASOURCE_PASSWORD: password
+      JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
+    depends_on:
+      postgres-auth:
+        condition: service_healthy
+    networks:
+      - campus-network
+
+  academic-service:
+    build: ./backend/academic-service
+    container_name: campus-buddy-academic-service
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-academic:5432/campus_buddy_academic
+      SPRING_DATASOURCE_USERNAME: parth
+      SPRING_DATASOURCE_PASSWORD: password
+      JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
+    depends_on:
+      postgres-academic:
+        condition: service_healthy
+    networks:
+      - campus-network
+
+  campus-service:
+    build: ./backend/campus-service
+    container_name: campus-buddy-campus-service
+    ports:
+      - "8083:8083"
+    environment:
+      JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
+    networks:
+      - campus-network
+
+  bff-service:
+    build: ./backend/bff-service
+    container_name: campus-buddy-bff-service
+    ports:
+      - "8080:8080"
+    environment:
+      JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
+      SERVICES_AUTH_URL: http://auth-service:8081
+      SERVICES_ACADEMIC_URL: http://academic-service:8082
+      SERVICES_CAMPUS_URL: http://campus-service:8083
+    depends_on:
+      - auth-service
+      - academic-service
+      - campus-service
+    networks:
+      - campus-network
+
+  # Frontend
+  frontend:
+    build: ./frontend/campus-buddy-ui
+    container_name: campus-buddy-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - bff-service
+    networks:
+      - campus-network
+
+networks:
+  campus-network:
+    driver: bridge
+
+volumes:
+  postgres_auth_data:
+  postgres_academic_data:

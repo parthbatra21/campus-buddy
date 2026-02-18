@@ -17,7 +17,6 @@ public class MarkAttendanceRequest {
     private String sessionId; // Optional if sessionCode is provided
     private String sessionCode; // Optional if sessionId is provided
 
-    @NotBlank(message = "Course code is required")
     private String courseCode;
 
     private Double latitude;

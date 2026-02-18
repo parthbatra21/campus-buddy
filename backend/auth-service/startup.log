@@ -35,22 +35,22 @@
 
  :: Spring Boot ::                (v4.0.2)
 
-2026-02-15T03:37:14.904+05:30  INFO 2864 --- [auth-service] [           main] c.c.auth_service.AuthServiceApplication  : Starting AuthServiceApplication using Java 23.0.2 with PID 2864 (/Users/parth/Desktop/campus-buddy/backend/auth-service/target/classes started by parth in /Users/parth/Desktop/campus-buddy/backend/auth-service)
-2026-02-15T03:37:14.907+05:30  INFO 2864 --- [auth-service] [           main] c.c.auth_service.AuthServiceApplication  : No active profile set, falling back to 1 default profile: "default"
-2026-02-15T03:37:15.212+05:30  INFO 2864 --- [auth-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-02-15T03:37:15.240+05:30  INFO 2864 --- [auth-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 24 ms. Found 1 JPA repository interface.
-2026-02-15T03:37:15.482+05:30  INFO 2864 --- [auth-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
-2026-02-15T03:37:15.489+05:30  INFO 2864 --- [auth-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-02-15T03:37:15.489+05:30  INFO 2864 --- [auth-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
-2026-02-15T03:37:15.515+05:30  INFO 2864 --- [auth-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 580 ms
-2026-02-15T03:37:15.593+05:30  INFO 2864 --- [auth-service] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-02-15T03:37:15.628+05:30  INFO 2864 --- [auth-service] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.1.Final
-2026-02-15T03:37:15.848+05:30  INFO 2864 --- [auth-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-02-15T03:37:15.864+05:30  INFO 2864 --- [auth-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-02-15T03:37:15.961+05:30  INFO 2864 --- [auth-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2e0652ab
-2026-02-15T03:37:15.962+05:30  INFO 2864 --- [auth-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-02-15T03:37:15.995+05:30  WARN 2864 --- [auth-service] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-02-15T03:37:16.014+05:30  INFO 2864 --- [auth-service] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-02-18T10:24:04.149+05:30  INFO 66870 --- [auth-service] [           main] c.c.auth_service.AuthServiceApplication  : Starting AuthServiceApplication using Java 23.0.2 with PID 66870 (/Users/parth/Desktop/campus-buddy/backend/auth-service/target/classes started by parth in /Users/parth/Desktop/campus-buddy/backend/auth-service)
+2026-02-18T10:24:04.153+05:30  INFO 66870 --- [auth-service] [           main] c.c.auth_service.AuthServiceApplication  : No active profile set, falling back to 1 default profile: "default"
+2026-02-18T10:24:04.728+05:30  INFO 66870 --- [auth-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-18T10:24:04.799+05:30  INFO 66870 --- [auth-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 1 JPA repository interface.
+2026-02-18T10:24:05.312+05:30  INFO 66870 --- [auth-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-02-18T10:24:05.324+05:30  INFO 66870 --- [auth-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-18T10:24:05.324+05:30  INFO 66870 --- [auth-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-18T10:24:05.351+05:30  INFO 66870 --- [auth-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1149 ms
+2026-02-18T10:24:05.525+05:30  INFO 66870 --- [auth-service] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-18T10:24:05.630+05:30  INFO 66870 --- [auth-service] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-18T10:24:06.117+05:30  INFO 66870 --- [auth-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-18T10:24:06.146+05:30  INFO 66870 --- [auth-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-18T10:24:06.294+05:30  INFO 66870 --- [auth-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@12be4f83
+2026-02-18T10:24:06.296+05:30  INFO 66870 --- [auth-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-18T10:24:06.474+05:30  WARN 66870 --- [auth-service] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-18T10:24:06.531+05:30  INFO 66870 --- [auth-service] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [jdbc:postgresql://localhost:5432/campus_buddy_auth]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
@@ -62,22 +62,22 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-02-15T03:37:16.540+05:30  INFO 2864 --- [auth-service] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-02-15T03:37:16.596+05:30  INFO 2864 --- [auth-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-02-15T03:37:16.635+05:30  INFO 2864 --- [auth-service] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-02-15T03:37:16.770+05:30  WARN 2864 --- [auth-service] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-02-15T03:37:16.804+05:30  WARN 2864 --- [auth-service] [           main] .s.a.UserDetailsServiceAutoConfiguration : 
+2026-02-18T10:24:07.743+05:30  INFO 66870 --- [auth-service] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-18T10:24:07.913+05:30  INFO 66870 --- [auth-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-18T10:24:07.994+05:30  INFO 66870 --- [auth-service] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-18T10:24:08.244+05:30  WARN 66870 --- [auth-service] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-18T10:24:08.292+05:30  WARN 66870 --- [auth-service] [           main] .s.a.UserDetailsServiceAutoConfiguration : 
 
-Using generated security password: 81874630-0f1f-49b5-a289-facdf5c757ad
+Using generated security password: fffdda39-3602-40fd-9987-acf460e969b8
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2026-02-15T03:37:16.808+05:30  INFO 2864 --- [auth-service] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-02-15T03:37:17.019+05:30  INFO 2864 --- [auth-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
-2026-02-15T03:37:17.023+05:30  INFO 2864 --- [auth-service] [           main] c.c.auth_service.AuthServiceApplication  : Started AuthServiceApplication in 2.311 seconds (process running for 2.492)
-2026-02-15T03:44:25.224+05:30  INFO 2864 --- [auth-service] [nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-02-15T03:44:25.243+05:30  INFO 2864 --- [auth-service] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-02-15T03:44:25.286+05:30  INFO 2864 --- [auth-service] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 43 ms
+2026-02-18T10:24:08.297+05:30  INFO 66870 --- [auth-service] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-18T10:24:08.617+05:30  INFO 66870 --- [auth-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-02-18T10:24:08.622+05:30  INFO 66870 --- [auth-service] [           main] c.c.auth_service.AuthServiceApplication  : Started AuthServiceApplication in 4.869 seconds (process running for 5.26)
+2026-02-18T10:27:24.244+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-18T10:27:24.250+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-18T10:27:24.283+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 32 ms
 Hibernate: 
     select
         u1_0.id,
@@ -85,14 +85,15 @@ Hibernate:
         u1_0.email,
         u1_0.password_hash,
         u1_0.role,
-        u1_0.student_id 
+        u1_0.student_id,
+        u1_0.updated_at 
     from
         users u1_0 
     where
         u1_0.email=?
-2026-02-15T03:44:27.259+05:30  INFO 2864 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
-2026-02-15T03:44:27.278+05:30  INFO 2864 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: student@example.com
-2026-02-15T03:44:27.281+05:30  INFO 2864 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+2026-02-18T10:27:25.710+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-02-18T10:27:25.734+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: faculty@example.com
+2026-02-18T10:27:25.735+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
 Hibernate: 
     select
         u1_0.id,
@@ -100,8 +101,76 @@ Hibernate:
         u1_0.email,
         u1_0.password_hash,
         u1_0.role,
-        u1_0.student_id 
+        u1_0.student_id,
+        u1_0.updated_at 
     from
         users u1_0 
     where
         u1_0.email=?
+2026-02-18T10:27:25.750+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-3] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-02-18T10:27:25.750+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-3] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: faculty@example.com
+2026-02-18T10:27:25.751+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-3] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-02-18T10:33:14.476+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-5] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-02-18T10:33:14.482+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-5] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: faculty@example.com
+2026-02-18T10:33:14.483+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-5] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-02-18T10:33:14.525+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-6] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-02-18T10:33:14.526+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-6] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: faculty@example.com
+2026-02-18T10:33:14.527+05:30  INFO 66870 --- [auth-service] [nio-8081-exec-6] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-02-18T10:39:49.976+05:30  WARN 66870 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m43s506ms).
+2026-02-18T10:51:02.366+05:30  WARN 66870 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m12s391ms).
+2026-02-18T10:52:25.272+05:30  WARN 66870 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m22s905ms).
+2026-02-18T10:53:12.218+05:30  WARN 66870 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46s946ms).
+2026-02-18T11:00:32.920+05:30  WARN 66870 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m20s702ms).
+2026-02-18T11:24:10.745+05:30  WARN 66870 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=23m37s824ms).
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:02 h
+[INFO] Finished at: 2026-02-18T11:26:56+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:4.0.2:run (default-cli) on project auth-service: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

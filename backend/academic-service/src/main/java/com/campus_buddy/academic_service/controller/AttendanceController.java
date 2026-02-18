@@ -131,11 +131,15 @@ public class AttendanceController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
         }
 
-        // Verify course code matches
-        if (!session.getCourseCode().equals(request.getCourseCode())) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Course code does not match the session.");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        // Verify course code matches if provided, otherwise set it from session
+        if (request.getCourseCode() != null && !request.getCourseCode().isEmpty()) {
+            if (!session.getCourseCode().equals(request.getCourseCode())) {
+                Map<String, String> error = new HashMap<>();
+                error.put("error", "Course code does not match the session.");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+            }
+        } else {
+            request.setCourseCode(session.getCourseCode());
         }
 
         // Geolocation Validation using Haversine Formula

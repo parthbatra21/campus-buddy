@@ -39,6 +39,10 @@ public class AcademicController {
                 .map(entity -> ResponseEntity.status(entity.getStatusCode())
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(entity.getBody()))
+                .onErrorResume(org.springframework.web.reactive.function.client.WebClientResponseException.class, e -> 
+                    Mono.just(ResponseEntity.status(e.getStatusCode())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(e.getResponseBodyAsString())))
                 .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Academic service unavailable\"}")))
                 .block();
     }
@@ -61,6 +65,10 @@ public class AcademicController {
                 .map(entity -> ResponseEntity.status(entity.getStatusCode())
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(entity.getBody()))
+                .onErrorResume(org.springframework.web.reactive.function.client.WebClientResponseException.class, e -> 
+                    Mono.just(ResponseEntity.status(e.getStatusCode())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(e.getResponseBodyAsString())))
                 .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to create session\"}")))
                 .block();
     }
@@ -83,6 +91,10 @@ public class AcademicController {
                 .map(entity -> ResponseEntity.status(entity.getStatusCode())
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(entity.getBody()))
+                .onErrorResume(org.springframework.web.reactive.function.client.WebClientResponseException.class, e -> 
+                    Mono.just(ResponseEntity.status(e.getStatusCode())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(e.getResponseBodyAsString())))
                 .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to mark attendance\"}")))
                 .block();
     }
@@ -102,6 +114,10 @@ public class AcademicController {
                 .map(entity -> ResponseEntity.status(entity.getStatusCode())
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(entity.getBody()))
+                .onErrorResume(org.springframework.web.reactive.function.client.WebClientResponseException.class, e -> 
+                    Mono.just(ResponseEntity.status(e.getStatusCode())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(e.getResponseBodyAsString())))
                 .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to fetch attendance\"}")))
                 .block();
     }
@@ -122,6 +138,10 @@ public class AcademicController {
                 .map(entity -> ResponseEntity.status(entity.getStatusCode())
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(entity.getBody()))
+                .onErrorResume(org.springframework.web.reactive.function.client.WebClientResponseException.class, e -> 
+                    Mono.just(ResponseEntity.status(e.getStatusCode())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(e.getResponseBodyAsString())))
                 .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to fetch course attendance\"}")))
                 .block();
     }

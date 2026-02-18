@@ -45,14 +45,14 @@ public class Attendance {
 
     @PrePersist
     protected void onCreate() {
-        if (markedAt == null) {
-            markedAt = LocalDateTime.now();
+        if (this.markedAt == null) {
+            this.markedAt = LocalDateTime.now();
         }
-        if (lectureDate == null) {
-            lectureDate = LocalDate.now();
+        if (this.lectureDate == null) {
+            this.lectureDate = LocalDate.now();
         }
-        if (status == null) {
-            status = "PRESENT";
+        if (this.status == null) {
+            this.status = "PRESENT";
         }
     }
 }

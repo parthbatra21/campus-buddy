@@ -8,7 +8,7 @@
 [INFO] >>> spring-boot:4.0.2:run (default-cli) > test-compile @ campus-service >>>
 [INFO] 
 [INFO] --- resources:3.3.1:resources (default-resources) @ campus-service ---
-[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
 [INFO] Copying 0 resource from src/main/resources to target/classes
 [INFO] 
 [INFO] --- compiler:3.14.1:compile (default-compile) @ campus-service ---
@@ -35,23 +35,23 @@
 
  :: Spring Boot ::                (v4.0.2)
 
-2026-02-15T03:37:17.433+05:30  INFO 2876 --- [campus-service] [           main] c.c.c.CampusServiceApplication           : Starting CampusServiceApplication using Java 23.0.2 with PID 2876 (/Users/parth/Desktop/campus-buddy/backend/campus-service/target/classes started by parth in /Users/parth/Desktop/campus-buddy/backend/campus-service)
-2026-02-15T03:37:17.435+05:30  INFO 2876 --- [campus-service] [           main] c.c.c.CampusServiceApplication           : No active profile set, falling back to 1 default profile: "default"
-2026-02-15T03:37:17.698+05:30  INFO 2876 --- [campus-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-02-15T03:37:17.717+05:30  INFO 2876 --- [campus-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16 ms. Found 1 JPA repository interface.
-2026-02-15T03:37:17.914+05:30  INFO 2876 --- [campus-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8083 (http)
-2026-02-15T03:37:17.920+05:30  INFO 2876 --- [campus-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-02-15T03:37:17.921+05:30  INFO 2876 --- [campus-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
-2026-02-15T03:37:17.940+05:30  INFO 2876 --- [campus-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 481 ms
-2026-02-15T03:37:18.005+05:30  INFO 2876 --- [campus-service] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-02-15T03:37:18.024+05:30  INFO 2876 --- [campus-service] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.1.Final
-2026-02-15T03:37:18.191+05:30  INFO 2876 --- [campus-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-02-15T03:37:18.204+05:30  INFO 2876 --- [campus-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-02-15T03:37:18.297+05:30  INFO 2876 --- [campus-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:campusdb user=SA
-2026-02-15T03:37:18.298+05:30  INFO 2876 --- [campus-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-02-15T03:37:18.309+05:30  WARN 2876 --- [campus-service] [           main] org.hibernate.orm.core                   : HHH000511: The 2.4.240 version for [org.hibernate.dialect.PostgreSQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 13.0.0. Check the community dialects project for available legacy versions.
-2026-02-15T03:37:18.310+05:30  WARN 2876 --- [campus-service] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-02-15T03:37:18.320+05:30  INFO 2876 --- [campus-service] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-02-18T10:24:02.675+05:30  INFO 66868 --- [campus-service] [           main] c.c.c.CampusServiceApplication           : Starting CampusServiceApplication using Java 23.0.2 with PID 66868 (/Users/parth/Desktop/campus-buddy/backend/campus-service/target/classes started by parth in /Users/parth/Desktop/campus-buddy/backend/campus-service)
+2026-02-18T10:24:02.679+05:30  INFO 66868 --- [campus-service] [           main] c.c.c.CampusServiceApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-02-18T10:24:03.614+05:30  INFO 66868 --- [campus-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-18T10:24:03.679+05:30  INFO 66868 --- [campus-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 51 ms. Found 1 JPA repository interface.
+2026-02-18T10:24:04.183+05:30  INFO 66868 --- [campus-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8083 (http)
+2026-02-18T10:24:04.197+05:30  INFO 66868 --- [campus-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-18T10:24:04.197+05:30  INFO 66868 --- [campus-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-18T10:24:04.236+05:30  INFO 66868 --- [campus-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1484 ms
+2026-02-18T10:24:04.407+05:30  INFO 66868 --- [campus-service] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-02-18T10:24:04.447+05:30  INFO 66868 --- [campus-service] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.1.Final
+2026-02-18T10:24:04.840+05:30  INFO 66868 --- [campus-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-18T10:24:05.027+05:30  INFO 66868 --- [campus-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-18T10:24:05.155+05:30  INFO 66868 --- [campus-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:campusdb user=SA
+2026-02-18T10:24:05.156+05:30  INFO 66868 --- [campus-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-18T10:24:05.178+05:30  WARN 66868 --- [campus-service] [           main] org.hibernate.orm.core                   : HHH000511: The 2.4.240 version for [org.hibernate.dialect.PostgreSQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 13.0.0. Check the community dialects project for available legacy versions.
+2026-02-18T10:24:05.184+05:30  WARN 66868 --- [campus-service] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-18T10:24:05.197+05:30  INFO 66868 --- [campus-service] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [jdbc:h2:mem:campusdb]
 	Database driver: H2 JDBC Driver
 	Database dialect: PostgreSQLDialect
@@ -63,7 +63,7 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-02-15T03:37:18.726+05:30  INFO 2876 --- [campus-service] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-18T10:24:06.381+05:30  INFO 66868 --- [campus-service] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: 
     create table notices (
         id bigint generated by default as identity,
@@ -76,19 +76,564 @@ Hibernate:
         title varchar(255) not null,
         primary key (id)
     )
-2026-02-15T03:37:18.757+05:30  INFO 2876 --- [campus-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-02-15T03:37:18.797+05:30  INFO 2876 --- [campus-service] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-02-15T03:37:18.906+05:30  WARN 2876 --- [campus-service] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-02-15T03:37:18.945+05:30  WARN 2876 --- [campus-service] [           main] .s.a.UserDetailsServiceAutoConfiguration : 
+2026-02-18T10:24:06.565+05:30  INFO 66868 --- [campus-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-18T10:24:06.726+05:30  INFO 66868 --- [campus-service] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-18T10:24:07.007+05:30  WARN 66868 --- [campus-service] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-18T10:24:07.076+05:30  WARN 66868 --- [campus-service] [           main] .s.a.UserDetailsServiceAutoConfiguration : 
 
-Using generated security password: 3295bf3b-cc9e-4ac3-95f9-526400c1a237
+Using generated security password: 8017a2a5-f799-481d-81fd-33a1fea6e0d2
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2026-02-15T03:37:18.949+05:30  INFO 2876 --- [campus-service] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-02-15T03:37:19.136+05:30  INFO 2876 --- [campus-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8083 (http) with context path '/'
-2026-02-15T03:37:19.139+05:30  INFO 2876 --- [campus-service] [           main] c.c.c.CampusServiceApplication           : Started CampusServiceApplication in 1.885 seconds (process running for 2.046)
-2026-02-15T03:44:28.627+05:30  INFO 2876 --- [campus-service] [nio-8083-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-02-15T03:44:28.634+05:30  INFO 2876 --- [campus-service] [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-02-15T03:44:28.699+05:30  INFO 2876 --- [campus-service] [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 65 ms
-2026-02-15T03:44:28.855+05:30 ERROR 2876 --- [campus-service] [nio-8083-exec-1] c.c.c.security.JwtAuthenticationFilter   : JWT validation error: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+2026-02-18T10:24:07.087+05:30  INFO 66868 --- [campus-service] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-18T10:24:07.605+05:30  INFO 66868 --- [campus-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8083 (http) with context path '/'
+2026-02-18T10:24:07.614+05:30  INFO 66868 --- [campus-service] [           main] c.c.c.CampusServiceApplication           : Started CampusServiceApplication in 5.438 seconds (process running for 5.877)
+2026-02-18T10:27:26.231+05:30  INFO 66868 --- [campus-service] [nio-8083-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-18T10:27:26.239+05:30  INFO 66868 --- [campus-service] [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-18T10:27:26.271+05:30  INFO 66868 --- [campus-service] [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 30 ms
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+2026-02-18T10:39:48.823+05:30  WARN 66868 --- [campus-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m43s510ms).
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+2026-02-18T10:51:01.222+05:30  WARN 66868 --- [campus-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m12s398ms).
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+2026-02-18T10:52:24.121+05:30  WARN 66868 --- [campus-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m22s899ms).
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+2026-02-18T10:53:11.067+05:30  WARN 66868 --- [campus-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46s948ms).
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+2026-02-18T11:00:31.774+05:30  WARN 66868 --- [campus-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m20s706ms).
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+2026-02-18T11:24:09.613+05:30  WARN 66868 --- [campus-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=23m37s839ms).
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+Hibernate: 
+    select
+        n1_0.id,
+        n1_0.category,
+        n1_0.content,
+        n1_0.created_at,
+        n1_0.is_archived,
+        n1_0.posted_by,
+        n1_0.priority,
+        n1_0.title 
+    from
+        notices n1_0 
+    where
+        n1_0.is_archived=? 
+    order by
+        n1_0.priority,
+        n1_0.created_at desc
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:02 h
+[INFO] Finished at: 2026-02-18T11:26:56+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:4.0.2:run (default-cli) on project campus-service: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
