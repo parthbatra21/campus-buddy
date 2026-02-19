@@ -40,7 +40,29 @@ CREATE DATABASE campus_buddy_academic;
 > **Note**: The application assumes the default PostgreSQL user is `postgres` with no password or `parth` with no password based on configuration.
 > Check `backend/*/src/main/resources/application.yaml` if you need to update `spring.datasource.username` and `spring.datasource.password` to match your local setup.
 
-## 🏃‍♂️ How to Run
+## 🐳 Running with Docker (Recommended)
+
+The easiest way to run Campus Buddy is using Docker. This will set up all services and databases automatically.
+
+### Prerequisites
+*   **Docker Desktop**: [Download](https://www.docker.com/products/docker-desktop/)
+
+### Quick Start
+1.  Open your terminal in the root directory.
+2.  Run the following command:
+    ```bash
+    docker-compose up --build -d
+    ```
+3.  Access the application:
+    *   **Frontend**: [http://localhost](http://localhost)
+    *   **BFF Service API**: [http://localhost:8080](http://localhost:8080)
+
+4.  To stop the application:
+    ```bash
+    docker-compose down
+    ```
+
+## 🏃‍♂️ How to Run (Manual Setup)
 
 ### 1. Backend (Microservices)
 
