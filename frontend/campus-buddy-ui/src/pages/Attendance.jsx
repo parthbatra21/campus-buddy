@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { academicAPI } from '../services/api';
-import './Attendance.css';
 
 function Attendance() {
     const [role, setRole] = useState('');
@@ -8,14 +7,12 @@ function Attendance() {
 
     // Faculty state
     const [courseCode, setCourseCode] = useState('');
-    const [sessionResponse, setSessionResponse] = useState(null);
     const [facultyCourseCode, setFacultyCourseCode] = useState('');
     const [courseAttendance, setCourseAttendance] = useState([]);
 
     // Student state
     const [sessionId, setSessionId] = useState('');
     const [studentCourseCode, setStudentCourseCode] = useState('');
-    const [markResponse, setMarkResponse] = useState(null);
     const [studentAttendance, setStudentAttendance] = useState([]);
 
     // Error and success messages
@@ -25,8 +22,6 @@ function Attendance() {
     useEffect(() => {
         const userRole = localStorage.getItem('role');
         setRole(userRole);
-
-        // Auto-load attendance on mount
         if (userRole === 'STUDENT') {
             fetchStudentAttendance();
         }
@@ -47,16 +42,33 @@ function Attendance() {
         setSuccess('');
         setLoading(true);
 
-        try {
-            const response = await academicAPI.createSession(courseCode);
-            setSessionResponse(response.data);
-            setSuccess(`Session created successfully! Session ID: ${response.data.sessionId}`);
-            setCourseCode('');
-        } catch (err) {
-            setError(err.response?.data?.error || 'Failed to create session');
-        } finally {
+        // Geolocation boilerplate (same as dashboard, but simplified for manual test if they want)
+        if (!navigator.geolocation) {
+            setError("Geolocation is not supported by your browser.");
             setLoading(false);
+            return;
         }
+
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            try {
+                const payload = {
+                    courseCode: courseCode,
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    allowedRadius: 100
+                };
+                const response = await academicAPI.createSession(payload);
+                setSuccess(`Session created successfully! ID: ${response.data.sessionId}`);
+                setCourseCode('');
+            } catch (err) {
+                setError(err.response?.data?.error || 'Failed to create session');
+            } finally {
+                setLoading(false);
+            }
+        }, () => {
+            setError("Location access required.");
+            setLoading(false);
+        });
     };
 
     const handleMarkAttendance = async (e) => {
@@ -65,20 +77,33 @@ function Attendance() {
         setSuccess('');
         setLoading(true);
 
-        try {
-            const response = await academicAPI.markAttendance(sessionId, studentCourseCode);
-            setMarkResponse(response.data);
-            setSuccess('Attendance marked successfully!');
-            setSessionId('');
-            setStudentCourseCode('');
-
-            // Refresh student attendance list
-            fetchStudentAttendance();
-        } catch (err) {
-            setError(err.response?.data?.error || 'Failed to mark attendance');
-        } finally {
+        if (!navigator.geolocation) {
+            setError("Geolocation is not supported by your browser.");
             setLoading(false);
+            return;
         }
+
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            try {
+                const response = await academicAPI.markAttendance({
+                    sessionCode: sessionId,
+                    courseCode: studentCourseCode,
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                });
+                setSuccess('Attendance marked successfully!');
+                setSessionId('');
+                setStudentCourseCode('');
+                fetchStudentAttendance();
+            } catch (err) {
+                setError(err.response?.data?.error || 'Failed to mark attendance');
+            } finally {
+                setLoading(false);
+            }
+        }, () => {
+            setError("Location access required.");
+            setLoading(false);
+        });
     };
 
     const handleViewCourseAttendance = async (e) => {
@@ -100,185 +125,181 @@ function Attendance() {
 
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
+            year: 'numeric', month: 'short', day: 'numeric',
         });
     };
 
     const formatDateTime = (dateString) => {
         return new Date(dateString).toLocaleString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
+            year: 'numeric', month: 'short', day: 'numeric',
+            hour: '2-digit', minute: '2-digit',
         });
     };
 
     return (
-        <div className="attendance-container">
-            <div className="attendance-header">
-                <h1>📋 Attendance Management</h1>
-                <a href="/dashboard" className="back-link">← Back to Dashboard</a>
+        <div style={{ animation: 'fadeIn 0.4s ease-out' }}>
+            <div className="page-header" style={{ marginBottom: '2rem' }}>
+                <h1>📝 Academic Records</h1>
+                <p>Manage and view comprehensive attendance and grades.</p>
             </div>
 
-            {error && <div className="error-message">{error}</div>}
-            {success && <div className="success-message">{success}</div>}
+            {error && (
+                <div style={{ padding: '1rem', background: '#fee2e2', color: '#b91c1c', borderRadius: '12px', marginBottom: '1.5rem', fontWeight: 600, border: '1px solid #fca5a5' }}>
+                    <span style={{ marginRight: '0.5rem' }}>⚠️</span> {error}
+                </div>
+            )}
+            {success && (
+                <div style={{ padding: '1rem', background: '#d1fae5', color: '#047857', borderRadius: '12px', marginBottom: '1.5rem', fontWeight: 600, border: '1px solid #6ee7b7' }}>
+                    <span style={{ marginRight: '0.5rem' }}>✅</span> {success}
+                </div>
+            )}
 
             {role === 'FACULTY' && (
-                <div className="faculty-section">
-                    {/* Session Generation */}
-                    <div className="card">
-                        <h2>Generate Attendance Session</h2>
-                        <form onSubmit={handleCreateSession}>
-                            <div className="form-group">
-                                <label htmlFor="courseCode">Course Code</label>
-                                <input
-                                    id="courseCode"
-                                    type="text"
-                                    value={courseCode}
-                                    onChange={(e) => setCourseCode(e.target.value)}
-                                    placeholder="e.g., CS101"
-                                    required
-                                />
+                <div className="dashboard-grid" style={{ gridTemplateColumns: '1fr' }}>
+                    <div className="dashboard-column">
+                        <div className="section-card">
+                            <div className="section-header">
+                                <h3>📊 View Course Attendance</h3>
                             </div>
-                            <button type="submit" disabled={loading} className="btn-primary">
-                                {loading ? 'Generating...' : 'Generate Session'}
-                            </button>
-                        </form>
-
-                        {sessionResponse && (
-                            <div className="session-result">
-                                <h3>✅ Session Created</h3>
-                                <div className="session-info">
-                                    <p><strong>Session ID:</strong> <code>{sessionResponse.sessionId}</code></p>
-                                    <p><strong>Course:</strong> {sessionResponse.courseCode}</p>
-                                    <p><strong>Expires:</strong> {formatDateTime(sessionResponse.expiryTime)}</p>
-                                    <p className="qr-placeholder">📱 QR Code Display (Coming Soon)</p>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-
-                    {/* View Course Attendance */}
-                    <div className="card">
-                        <h2>View Course Attendance</h2>
-                        <form onSubmit={handleViewCourseAttendance}>
-                            <div className="form-group">
-                                <label htmlFor="facultyCourseCode">Course Code</label>
+                            <form onSubmit={handleViewCourseAttendance} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
                                 <input
-                                    id="facultyCourseCode"
                                     type="text"
                                     value={facultyCourseCode}
                                     onChange={(e) => setFacultyCourseCode(e.target.value)}
-                                    placeholder="e.g., CS101"
+                                    placeholder="Enter Course Code (e.g., CS101)"
+                                    className="input-field"
+                                    style={{ flex: 1, minWidth: '200px' }}
                                     required
                                 />
-                            </div>
-                            <button type="submit" disabled={loading} className="btn-secondary">
-                                {loading ? 'Loading...' : 'View Attendance'}
-                            </button>
-                        </form>
+                                <button type="submit" disabled={loading} className="btn btn-primary">
+                                    {loading ? 'Loading...' : 'View Records'}
+                                </button>
+                            </form>
 
-                        {courseAttendance.length > 0 && (
-                            <div className="attendance-table-wrapper">
-                                <h3>Course Attendance Records</h3>
-                                <table className="attendance-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Student Email</th>
-                                            <th>Course</th>
-                                            <th>Date</th>
-                                            <th>Status</th>
-                                            <th>Marked At</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {courseAttendance.map((record) => (
-                                            <tr key={record.id}>
-                                                <td>{record.studentEmail}</td>
-                                                <td>{record.courseCode}</td>
-                                                <td>{formatDate(record.lectureDate)}</td>
-                                                <td>
-                                                    <span className="status-badge">{record.status}</span>
-                                                </td>
-                                                <td>{formatDateTime(record.markedAt)}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                            {courseAttendance.length > 0 && (
+                                <div style={{ border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
+                                    <div style={{ overflowX: 'auto' }}>
+                                        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                                            <thead style={{ background: '#f8fafc', color: '#64748b', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                                <tr>
+                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Student Email</th>
+                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Course</th>
+                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Date</th>
+                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Status</th>
+                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Marked At</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {courseAttendance.map((record) => (
+                                                    <tr key={record.id} style={{ borderBottom: '1px solid #f1f5f9', background: 'white' }}>
+                                                        <td style={{ padding: '1rem 1.5rem', fontWeight: 500 }}>{record.studentEmail}</td>
+                                                        <td style={{ padding: '1rem 1.5rem', color: '#64748b' }}>{record.courseCode}</td>
+                                                        <td style={{ padding: '1rem 1.5rem' }}>{formatDate(record.lectureDate)}</td>
+                                                        <td style={{ padding: '1rem 1.5rem' }}>
+                                                            <span className={`history-status ${record.status.toLowerCase()}`}>{record.status}</span>
+                                                        </td>
+                                                        <td style={{ padding: '1rem 1.5rem', color: '#94a3b8', fontSize: '0.9rem' }}>{formatDateTime(record.markedAt)}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="section-card">
+                            <div className="section-header">
+                                <h3>🚀 Quick Generate Session</h3>
                             </div>
-                        )}
+                            <form onSubmit={handleCreateSession} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                                <input
+                                    type="text"
+                                    value={courseCode}
+                                    onChange={(e) => setCourseCode(e.target.value)}
+                                    placeholder="Enter Course Code (e.g., CS101)"
+                                    className="input-field"
+                                    style={{ flex: 1, minWidth: '200px' }}
+                                    required
+                                />
+                                <button type="submit" disabled={loading} className="btn" style={{ background: 'white', color: '#4f46e5', border: '1px solid #c7d2fe' }}>
+                                    {loading ? 'Creating...' : 'Create Session'}
+                                </button>
+                            </form>
+                            <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#64748b' }}>Use the Overview tab for an interactive QR code display.</p>
+                        </div>
                     </div>
                 </div>
             )}
 
             {role === 'STUDENT' && (
-                <div className="student-section">
-                    {/* Mark Attendance */}
-                    <div className="card">
-                        <h2>Mark Attendance</h2>
-                        <form onSubmit={handleMarkAttendance}>
-                            <div className="form-group">
-                                <label htmlFor="sessionId">Session ID</label>
+                <div className="dashboard-grid" style={{ gridTemplateColumns: '1fr' }}>
+                    <div className="dashboard-column">
+                        <div className="section-card">
+                            <div className="section-header">
+                                <h3>📚 My Attendance History</h3>
+                            </div>
+                            {studentAttendance.length > 0 ? (
+                                <div style={{ border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
+                                    <div style={{ overflowX: 'auto' }}>
+                                        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                                            <thead style={{ background: '#f8fafc', color: '#64748b', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                                <tr>
+                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Course</th>
+                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Date</th>
+                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Status</th>
+                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Marked At</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {studentAttendance.map((record) => (
+                                                    <tr key={record.id} style={{ borderBottom: '1px solid #f1f5f9', background: 'white', transition: 'background 0.2s' }}>
+                                                        <td style={{ padding: '1rem 1.5rem', fontWeight: 600, color: '#0f172a' }}>{record.courseCode}</td>
+                                                        <td style={{ padding: '1rem 1.5rem', color: '#475569' }}>{formatDate(record.lectureDate)}</td>
+                                                        <td style={{ padding: '1rem 1.5rem' }}>
+                                                            <span className={`history-status ${record.status.toLowerCase()}`}>{record.status}</span>
+                                                        </td>
+                                                        <td style={{ padding: '1rem 1.5rem', color: '#94a3b8', fontSize: '0.9rem' }}>{formatDateTime(record.markedAt)}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            ) : (
+                                <p className="empty-state" style={{ margin: 0 }}>No attendance records found yet.</p>
+                            )}
+                        </div>
+
+                        <div className="section-card" style={{ background: 'linear-gradient(135deg, rgba(238,242,255,0.5) 0%, rgba(224,231,255,0.5) 100%)' }}>
+                            <div className="section-header">
+                                <h3>📝 Manual Code Entry</h3>
+                            </div>
+                            <form onSubmit={handleMarkAttendance} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                                 <input
-                                    id="sessionId"
                                     type="text"
                                     value={sessionId}
                                     onChange={(e) => setSessionId(e.target.value)}
-                                    placeholder="Enter session ID from QR/faculty"
+                                    placeholder="6-Digit Session Code"
+                                    className="input-field"
+                                    maxLength="6"
+                                    style={{ width: '180px', letterSpacing: '0.1em', textAlign: 'center', fontWeight: 'bold' }}
                                     required
                                 />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="studentCourseCode">Course Code</label>
                                 <input
-                                    id="studentCourseCode"
                                     type="text"
                                     value={studentCourseCode}
                                     onChange={(e) => setStudentCourseCode(e.target.value)}
-                                    placeholder="e.g., CS101"
+                                    placeholder="Course Code"
+                                    className="input-field"
+                                    style={{ flex: 1, minWidth: '150px' }}
                                     required
                                 />
-                            </div>
-                            <button type="submit" disabled={loading} className="btn-primary">
-                                {loading ? 'Marking...' : 'Mark Attendance'}
-                            </button>
-                        </form>
-                    </div>
-
-                    {/* View Own Attendance */}
-                    <div className="card">
-                        <h2>My Attendance History</h2>
-                        {studentAttendance.length > 0 ? (
-                            <div className="attendance-table-wrapper">
-                                <table className="attendance-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Course</th>
-                                            <th>Date</th>
-                                            <th>Status</th>
-                                            <th>Marked At</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {studentAttendance.map((record) => (
-                                            <tr key={record.id}>
-                                                <td>{record.courseCode}</td>
-                                                <td>{formatDate(record.lectureDate)}</td>
-                                                <td>
-                                                    <span className="status-badge">{record.status}</span>
-                                                </td>
-                                                <td>{formatDateTime(record.markedAt)}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        ) : (
-                            <p className="no-data">No attendance records found.</p>
-                        )}
+                                <button type="submit" disabled={loading} className="btn btn-primary">
+                                    {loading ? 'Marking...' : 'Mark Attendance'}
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             )}
