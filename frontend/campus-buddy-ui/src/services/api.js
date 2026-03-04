@@ -61,6 +61,12 @@ export const academicAPI = {
 };
 
 // Campus API (Alias for clarity if needed)
-export const campusAPI = academicAPI;
+export const campusAPI = {
+  ...academicAPI,
+  // Facilities
+  getFacilities: () => api.get('/campus/facilities'),
+  getMyBookings: (userEmail) => api.get(`/campus/facilities/bookings?userEmail=${userEmail}`),
+  createBooking: (userEmail, bookingData) => api.post(`/campus/facilities/bookings?userEmail=${userEmail}`, bookingData),
+};
 
 export default api;

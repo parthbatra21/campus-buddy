@@ -3,6 +3,7 @@ import QRCode from 'react-qr-code';
 import { academicAPI } from '../services/api';
 import NoticeBoard from '../components/NoticeBoard';
 import ChangePasswordModal from '../components/ChangePasswordModal';
+import FacilityBooking from '../components/FacilityBooking';
 import './Dashboard.css';
 
 function FacultyDashboard({ user, handleLogout }) {
@@ -11,6 +12,7 @@ function FacultyDashboard({ user, handleLogout }) {
     const [activeSession, setActiveSession] = useState(null);
     const [loading, setLoading] = useState(false);
     const [showPasswordModal, setShowPasswordModal] = useState(false);
+    const [activeTab, setActiveTab] = useState('attendance');
 
     useEffect(() => {
         // Fetch timetable to get list of courses the faculty teaches
@@ -90,73 +92,98 @@ function FacultyDashboard({ user, handleLogout }) {
                             🚪 Logout
                         </button>
                     </div>
-                </div>
-
-                {/* Create Session */}
-                <div className="action-section">
-                    <h3>🚀 Start Attendance Session</h3>
-                    <div className="control-group">
-                        <select
-                            value={selectedCourse}
-                            onChange={(e) => setSelectedCourse(e.target.value)}
-                            className="course-select"
-                        >
-                            <option value="">Select Course...</option>
-                            {uniqueCourses.map(code => (
-                                <option key={code} value={code}>{code}</option>
-                            ))}
-                            {/* Fallback for testing if no timetable exists */}
-                            <option value="CS101">CS101 - Intro to CS</option>
-                            <option value="CS102">CS102 - Data Structures</option>
-                        </select>
+                    {/* Navigation Tabs */}
+                    <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '0.5rem' }}>
                         <button
-                            className="action-btn primary"
-                            onClick={handleCreateSession}
-                            disabled={!selectedCourse || loading}
+                            className={`action-btn ${activeTab === 'attendance' ? 'primary' : 'secondary'}`}
+                            onClick={() => setActiveTab('attendance')}
                         >
-                            {loading ? "Generating..." : "Generate QR Code"}
+                            📋 Attendance & Timetable
+                        </button>
+                        <button
+                            className={`action-btn ${activeTab === 'facilities' ? 'primary' : 'secondary'}`}
+                            onClick={() => setActiveTab('facilities')}
+                        >
+                            🏢 Facility Booking
                         </button>
                     </div>
+                </div>
 
-                    {activeSession && (
-                        <div className="qr-section">
-                            <div className="qr-card">
-                                <h4>Scan to Mark Attendance</h4>
-                                <p className="course-badge">{activeSession.courseCode}</p>
-                                <div className="qr-wrapper">
-                                    <QRCode value={activeSession.payload} size={250} />
-                                </div>
-                                <div className="session-code-display">
-                                    <p>Or enter code:</p>
-                                    <h2 className="code-text">{activeSession.sessionCode}</h2>
-                                </div>
-                                <p className="expiry-info">Session expires at: {new Date(activeSession.expiryTime).toLocaleTimeString()}</p>
-                                <button className="close-btn" onClick={() => setActiveSession(null)}>End Session</button>
+                {activeTab === 'attendance' ? (
+                    <>
+                        {/* Create Session */}
+                        <div className="action-section">
+                            <h3>🚀 Start Attendance Session</h3>
+                            <div className="control-group">
+                                <select
+                                    value={selectedCourse}
+                                    onChange={(e) => setSelectedCourse(e.target.value)}
+                                    className="course-select"
+                                >
+                                    <option value="">Select Course...</option>
+                                    {uniqueCourses.map(code => (
+                                        <option key={code} value={code}>{code}</option>
+                                    ))}
+                                    {/* Fallback for testing if no timetable exists */}
+                                    <option value="CS101">CS101 - Intro to CS</option>
+                                    <option value="CS102">CS102 - Data Structures</option>
+                                </select>
+                                <button
+                                    className="action-btn primary"
+                                    onClick={handleCreateSession}
+                                    disabled={!selectedCourse || loading}
+                                >
+                                    {loading ? "Generating..." : "Generate QR Code"}
+                                </button>
                             </div>
-                        </div>
-                    )}
-                </div>
 
-                {/* Timetable View */}
-                <div className="timetable-section">
-                    <h3>📅 Your Schedule</h3>
-                    {timetable.length === 0 ? (
-                        <p className="empty-state">No classes scheduled yet.</p>
-                    ) : (
-                        <div className="timetable-grid">
-                            {timetable.map((cls) => (
-                                <div key={cls.id} className="timetable-item">
-                                    <span className="time">{cls.startTime.substring(0, 5)} - {cls.endTime.substring(0, 5)}</span>
-                                    <span className="course">{cls.courseName} ({cls.courseCode})</span>
-                                    <span className="room">📍 {cls.roomNumber}</span>
+                            {activeSession && (
+                                <div className="qr-section">
+                                    <div className="qr-card">
+                                        <h4>Scan to Mark Attendance</h4>
+                                        <p className="course-badge">{activeSession.courseCode}</p>
+                                        <div className="qr-wrapper">
+                                            <QRCode value={activeSession.payload} size={250} />
+                                        </div>
+                                        <div className="session-code-display">
+                                            <p>Or enter code:</p>
+                                            <h2 className="code-text">{activeSession.sessionCode}</h2>
+                                        </div>
+                                        <p className="expiry-info">Session expires at: {new Date(activeSession.expiryTime).toLocaleTimeString()}</p>
+                                        <button className="close-btn" onClick={() => setActiveSession(null)}>End Session</button>
+                                    </div>
                                 </div>
-                            ))}
+                            )}
                         </div>
-                    )}
-                </div>
+
+                        {/* Timetable View */}
+                        <div className="timetable-section">
+                            <h3>📅 Your Schedule</h3>
+                            {timetable.length === 0 ? (
+                                <p className="empty-state">No classes scheduled yet.</p>
+                            ) : (
+                                <div className="timetable-grid">
+                                    {timetable.map((cls) => (
+                                        <div key={cls.id} className="timetable-item">
+                                            <span className="time">{cls.startTime.substring(0, 5)} - {cls.endTime.substring(0, 5)}</span>
+                                            <span className="course">{cls.courseName} ({cls.courseCode})</span>
+                                            <span className="room">📍 {cls.roomNumber}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </>
+                ) : (
+                    <div className="action-section" style={{ marginTop: '2rem' }}>
+                        <FacilityBooking />
+                    </div>
+                )}
 
                 {/* Notice Board */}
-                <NoticeBoard role="FACULTY" />
+                <div style={{ marginTop: '2rem' }}>
+                    <NoticeBoard role="FACULTY" />
+                </div>
             </div>
         </div>
     );
