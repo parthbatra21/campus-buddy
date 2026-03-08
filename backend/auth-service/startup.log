@@ -475,3 +475,594 @@ Hibernate:
         users u1_0 
     where
         u1_0.email=?
+2026-03-05T02:14:17.368+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h5m40s887ms).
+2026-03-05T03:09:36.548+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=55m19s182ms).
+2026-03-05T04:25:46.445+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h16m9s897ms).
+2026-03-05T05:44:14.815+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h18m28s370ms).
+2026-03-05T07:02:28.806+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h18m13s991ms).
+2026-03-05T08:14:40.297+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h12m11s491ms).
+2026-03-05T09:01:00.275+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46m19s978ms).
+2026-03-05T10:06:18.297+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h5m18s22ms).
+2026-03-05T10:42:32.486+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=36m14s188ms).
+2026-03-05T11:11:15.883+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=28m43s397ms).
+2026-03-05T11:31:18.200+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m2s303ms).
+2026-03-05T11:56:58.771+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m40s470ms).
+2026-03-05T12:12:26.381+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m27s611ms).
+2026-03-05T13:20:34.738+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m8s136ms).
+2026-03-05T14:03:12.069+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=42m37s339ms).
+2026-03-05T14:24:01.909+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m49s840ms).
+2026-03-05T15:06:12.182+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=42m10s273ms).
+2026-03-05T15:46:31.858+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m49s524ms).
+2026-03-05T16:05:34.382+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m32s479ms).
+2026-03-05T16:27:02.672+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m58s301ms).
+2026-03-05T16:29:13.616+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m40s918ms).
+2026-03-05T16:33:11.665+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m58s49ms).
+2026-03-05T16:54:26.208+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=21m14s543ms).
+2026-03-05T16:55:23.545+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=57s337ms).
+2026-03-05T17:22:40.371+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=26m46s820ms).
+2026-03-05T17:29:10.375+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m30s4ms).
+2026-03-05T17:40:17.707+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m37s326ms).
+2026-03-05T17:55:21.102+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m3s395ms).
+2026-03-05T18:07:26.015+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m4s913ms).
+2026-03-05T18:22:56.030+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m30s15ms).
+2026-03-05T18:30:51.860+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m55s830ms).
+2026-03-05T18:32:41.513+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m19s646ms).
+2026-03-05T18:35:00.434+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m44s577ms).
+2026-03-05T18:51:50.808+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m50s374ms).
+2026-03-05T18:52:45.648+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=54s840ms).
+2026-03-05T18:54:05.349+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m19s701ms).
+2026-03-05T18:55:24.970+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m19s621ms).
+2026-03-05T19:12:20.598+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m25s624ms).
+2026-03-05T19:34:36.209+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m44s731ms).
+2026-03-05T19:54:39.460+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m3s251ms).
+2026-03-05T20:05:57.996+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m18s536ms).
+2026-03-05T20:07:52.840+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=54s843ms).
+2026-03-05T20:10:03.488+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m10s648ms).
+2026-03-05T20:14:33.185+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m29s697ms).
+2026-03-05T20:46:52.504+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=32m19s318ms).
+2026-03-05T21:03:45.298+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m52s795ms).
+2026-03-05T21:52:02.975+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48m17s677ms).
+2026-03-05T22:14:24.193+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=22m21s218ms).
+2026-03-05T22:48:21.771+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=33m57s578ms).
+2026-03-05T22:57:35.620+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m13s849ms).
+2026-03-05T23:28:02.305+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=29m56s681ms).
+2026-03-06T00:16:33.300+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48m30s995ms).
+2026-03-06T00:35:53.751+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=19m20s451ms).
+2026-03-06T01:08:10.301+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=32m16s550ms).
+2026-03-06T01:19:19.611+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m9s310ms).
+2026-03-06T01:39:17.143+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=19m27s518ms).
+2026-03-06T01:48:26.719+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m9s575ms).
+2026-03-06T02:53:49.573+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m52s655ms).
+2026-03-06T04:33:55.450+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h40m5s878ms).
+2026-03-06T05:27:47.513+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=53m52s62ms).
+2026-03-06T06:40:07.181+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h12m19s669ms).
+2026-03-06T07:58:10.295+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h18m3s114ms).
+2026-03-06T08:59:13.906+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h1m3s611ms).
+2026-03-06T10:16:29.365+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h17m15s459ms).
+2026-03-06T10:28:13.136+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m43s771ms).
+2026-03-06T10:32:23.714+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m10s578ms).
+2026-03-06T10:44:07.355+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m43s641ms).
+2026-03-06T10:58:20.005+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=14m12s650ms).
+2026-03-06T11:30:07.208+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=28m17s186ms).
+2026-03-06T11:53:42.086+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=23m34s881ms).
+2026-03-06T12:09:37.424+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m15s169ms).
+2026-03-06T12:36:00.940+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m53s448ms).
+2026-03-06T12:56:21.114+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m20s175ms).
+2026-03-06T13:05:05.080+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m43s966ms).
+2026-03-06T13:40:05.999+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=35m919ms).
+2026-03-06T13:58:35.793+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m29s793ms).
+2026-03-06T14:03:31.611+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m55s819ms).
+2026-03-06T14:47:08.127+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=43m36s516ms).
+2026-03-06T15:21:34.542+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=34m26s415ms).
+2026-03-06T16:02:23.981+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=40m49s438ms).
+2026-03-06T16:22:43.526+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m19s546ms).
+2026-03-06T16:38:38.214+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m54s688ms).
+2026-03-06T16:54:13.866+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m35s652ms).
+2026-03-06T17:15:11.704+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m57s837ms).
+2026-03-06T17:18:26.123+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m14s420ms).
+2026-03-06T17:40:59.526+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=22m33s402ms).
+2026-03-06T18:20:09.992+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=39m10s467ms).
+2026-03-06T18:41:33.815+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m49s353ms).
+2026-03-06T19:25:32.759+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=43m58s945ms).
+2026-03-06T19:36:01.589+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m28s829ms).
+2026-03-06T20:02:05.554+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=26m3s966ms).
+2026-03-06T20:18:05.449+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Retrograde clock change detected (housekeeper delta=29s853ms), soft-evicting connections from pool.
+2026-03-06T20:34:52.109+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m16s540ms).
+2026-03-06T21:12:21.423+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m29s49ms).
+2026-03-06T22:02:21.260+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m59s486ms).
+2026-03-06T22:58:54.936+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m3s421ms).
+2026-03-06T23:27:11.239+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=28m16s303ms).
+2026-03-06T23:44:04.468+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m53s229ms).
+2026-03-07T00:09:51.419+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=25m46s951ms).
+2026-03-07T02:28:11.837+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=47m49s759ms).
+2026-03-07T03:32:28.943+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h4m17s106ms).
+2026-03-07T04:38:06.329+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h5m37s386ms).
+2026-03-07T04:58:59.384+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m53s55ms).
+2026-03-07T05:45:34.448+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46m35s64ms).
+2026-03-07T05:52:19.930+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m45s482ms).
+2026-03-07T05:58:11.530+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m51s600ms).
+2026-03-07T07:19:54.522+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h21m42s992ms).
+2026-03-07T07:36:16.865+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m22s343ms).
+2026-03-07T07:39:37.236+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m20s371ms).
+2026-03-07T08:37:13.521+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=57m36s285ms).
+2026-03-07T09:21:20.818+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=44m7s297ms).
+2026-03-07T09:26:16.543+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m55s724ms).
+2026-03-07T09:39:08.256+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m51s640ms).
+2026-03-07T10:04:50.124+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=25m41s869ms).
+2026-03-07T10:21:56.388+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m6s264ms).
+2026-03-07T10:25:22.831+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m26s443ms).
+2026-03-07T10:39:16.158+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=13m53s327ms).
+2026-03-07T10:49:06.316+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m50s158ms).
+2026-03-07T11:17:15.852+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=28m9s536ms).
+2026-03-07T11:18:25.957+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m10s105ms).
+2026-03-07T11:27:45.377+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m19s420ms).
+2026-03-07T12:10:25.710+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=24m35s415ms).
+2026-03-07T12:12:45.278+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m19s570ms).
+2026-03-07T12:17:39.691+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m54s411ms).
+2026-03-07T12:29:59.529+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m19s840ms).
+2026-03-07T12:30:46.064+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46s535ms).
+2026-03-07T12:33:14.804+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m28s740ms).
+2026-03-07T12:34:03.823+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=49s16ms).
+2026-03-07T12:36:50.900+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=47s59ms).
+2026-03-07T12:38:36.866+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m45s967ms).
+2026-03-07T12:40:13.491+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m36s624ms).
+2026-03-07T12:42:33.073+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m19s583ms).
+2026-03-07T12:43:41.919+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m8s846ms).
+2026-03-07T12:46:20.973+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m39s54ms).
+2026-03-07T12:47:12.718+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51s745ms).
+2026-03-07T12:56:09.704+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m56s986ms).
+2026-03-07T13:02:47.904+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m38s199ms).
+2026-03-07T13:28:02.131+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m14s121ms).
+2026-03-07T14:07:56.476+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m50s602ms).
+2026-03-07T14:46:12.074+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m45s529ms).
+2026-03-07T14:47:23.053+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m10s980ms).
+2026-03-07T14:50:37.340+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m14s286ms).
+2026-03-07T15:10:15.091+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m37s705ms).
+2026-03-07T16:42:05.256+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=32m49s900ms).
+2026-03-07T17:25:35.711+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=43m30s455ms).
+2026-03-07T18:26:51.242+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h1m15s531ms).
+2026-03-07T19:15:47.528+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48m56s285ms).
+2026-03-07T19:34:51.486+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=19m3s959ms).
+2026-03-07T19:52:55.766+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m4s280ms).
+2026-03-07T20:20:04.252+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=27m8s486ms).
+2026-03-07T20:46:24.060+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=26m19s808ms).
+2026-03-07T21:11:00.201+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=24m36s141ms).
+2026-03-07T21:47:34.773+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=36m34s572ms).
+2026-03-07T22:27:05.440+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=39m30s667ms).
+2026-03-07T22:44:51.473+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m46s33ms).
+2026-03-07T23:02:39.472+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m47s999ms).
+2026-03-07T23:03:32.589+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=53s117ms).
+2026-03-07T23:10:45.792+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m13s203ms).
+2026-03-07T23:14:09.464+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m23s669ms).
+2026-03-08T00:05:32.398+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=52s677ms).
+2026-03-08T00:20:19.341+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=14m46s943ms).
+2026-03-08T01:28:29.119+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h7m39s790ms).
+2026-03-08T02:22:10.124+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=53m41s5ms).
+2026-03-08T02:58:46.542+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=36m36s418ms).
+2026-03-08T03:39:27.035+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=40m40s493ms).
+2026-03-08T03:46:50.831+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m23s796ms).
+2026-03-08T03:53:10.644+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m19s813ms).
+2026-03-08T04:54:47.455+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h1m36s811ms).
+2026-03-08T05:36:08.822+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=41m21s367ms).
+2026-03-08T07:01:51.072+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h25m42s250ms).
+2026-03-08T07:09:30.841+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m39s768ms).
+2026-03-08T07:37:05.555+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=27m34s715ms).
+2026-03-08T08:10:55.463+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=33m49s908ms).
+2026-03-08T09:00:12.481+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=49m17s18ms).
+2026-03-08T09:51:05.503+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m52s923ms).
+2026-03-08T10:39:33.245+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48m27s741ms).
+2026-03-08T11:19:16.232+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=39m42s989ms).
+2026-03-08T11:32:59.794+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=13m43s562ms).
+2026-03-08T11:41:29.668+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m29s874ms).
+2026-03-08T12:12:51.181+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=31m21s513ms).
+2026-03-08T12:28:22.318+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m31s137ms).
+2026-03-08T12:33:57.351+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m35s33ms).
+2026-03-08T13:25:19.321+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51m21s970ms).
+2026-03-08T13:38:55.421+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=13m36s100ms).
+2026-03-08T13:59:59.442+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=21m4s21ms).
+2026-03-08T14:25:18.900+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=25m19s458ms).
+2026-03-08T14:39:55.757+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=14m36s857ms).
+2026-03-08T14:56:56.858+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m1s101ms).
+2026-03-08T14:59:54.851+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m57s976ms).
+2026-03-08T15:05:48.532+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m53s681ms).
+2026-03-08T15:07:55.618+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m7s87ms).
+2026-03-08T15:21:51.330+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m25s639ms).
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:23:21.304+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-3] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:23:21.316+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-3] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: student@example.com
+2026-03-08T15:23:21.320+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-3] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:23:21.335+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-5] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:23:21.336+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-5] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: student@example.com
+2026-03-08T15:23:21.338+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-5] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:25:38.940+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-8] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:25:38.941+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-8] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: faculty@example.com
+2026-03-08T15:25:38.943+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-8] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:25:38.952+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-7] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:25:38.953+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-7] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: faculty@example.com
+2026-03-08T15:25:38.954+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-7] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:33:43.458+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-1] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:33:43.459+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-1] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: student@example.com
+2026-03-08T15:33:43.461+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-1] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:33:43.471+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:33:43.472+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: student@example.com
+2026-03-08T15:33:43.474+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:35:02.346+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-5] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:35:02.352+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-5] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: student@example.com
+2026-03-08T15:35:02.354+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-5] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:35:02.425+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-4] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:35:02.428+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-4] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: student@example.com
+2026-03-08T15:35:02.430+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-4] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:35:13.433+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-8] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:35:13.433+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-8] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: faculty@example.com
+2026-03-08T15:35:13.433+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-8] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:35:13.444+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-7] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:35:13.445+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-7] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: faculty@example.com
+2026-03-08T15:35:13.445+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-7] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:38:12.013+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-1] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:38:12.016+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-1] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: student@example.com
+2026-03-08T15:38:12.019+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-1] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:38:12.034+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:38:12.035+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: student@example.com
+2026-03-08T15:38:12.036+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:38:36.497+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-3] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:38:36.506+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-3] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: student@example.com
+2026-03-08T15:38:36.509+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-3] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:38:36.954+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-5] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T15:38:36.955+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-5] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: student@example.com
+2026-03-08T15:38:36.956+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-5] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T15:46:30.286+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m8s843ms).
+2026-03-08T16:03:20.262+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m49s977ms).
+2026-03-08T16:48:15.257+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=44m54s995ms).
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T16:55:12.434+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-8] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T16:55:12.436+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-8] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: student@example.com
+2026-03-08T16:55:12.437+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-8] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T16:55:12.457+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-7] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T16:55:12.458+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-7] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: student@example.com
+2026-03-08T16:55:12.458+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-7] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T16:56:32.058+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-1] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T16:56:32.059+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-1] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: faculty@example.com
+2026-03-08T16:56:32.059+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-1] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T16:56:32.067+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Processing request for /auth/me
+2026-03-08T16:56:32.068+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Extracted email: faculty@example.com
+2026-03-08T16:56:32.068+05:30  INFO 44065 --- [auth-service] [nio-8081-exec-2] c.c.a.security.JwtAuthenticationFilter   : Auth Service: Token valid? true
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password_hash,
+        u1_0.role,
+        u1_0.student_id,
+        u1_0.updated_at 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-03-08T17:22:25.551+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m10s224ms).
+2026-03-08T17:40:02.933+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s758ms).
+2026-03-08T17:56:12.653+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m39s686ms).
+2026-03-08T18:08:07.322+05:30  WARN 44065 --- [auth-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m54s670ms).

@@ -528,3 +528,831 @@ Hibernate:
         a1_0.student_email=? 
     order by
         a1_0.lecture_date desc
+2026-03-05T02:14:17.839+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h5m40s893ms).
+2026-03-05T03:09:37.025+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=55m19s188ms).
+2026-03-05T04:25:46.924+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h16m9s899ms).
+2026-03-05T05:44:15.294+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h18m28s370ms).
+2026-03-05T07:13:32.910+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h29m17s616ms).
+2026-03-05T08:31:25.144+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h17m52s234ms).
+2026-03-05T09:01:00.880+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=29m35s736ms).
+2026-03-05T10:06:18.908+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h5m18s28ms).
+2026-03-05T10:42:33.099+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=36m14s190ms).
+2026-03-05T11:11:16.491+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=28m43s392ms).
+2026-03-05T11:31:18.803+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m2s303ms).
+2026-03-05T11:56:59.381+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m40s474ms).
+2026-03-05T12:12:26.991+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m27s609ms).
+2026-03-05T13:29:02.119+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=26m34s853ms).
+2026-03-05T14:03:12.743+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=34m10s625ms).
+2026-03-05T14:24:02.577+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m49s834ms).
+2026-03-05T15:06:12.845+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=42m10s268ms).
+2026-03-05T15:46:32.558+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m49s520ms).
+2026-03-05T16:05:35.064+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m32s468ms).
+2026-03-05T16:27:03.356+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m58s302ms).
+2026-03-05T16:29:14.289+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m40s915ms).
+2026-03-05T16:33:12.340+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m58s51ms).
+2026-03-05T16:54:26.878+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=21m14s537ms).
+2026-03-05T16:55:24.224+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=57s346ms).
+2026-03-05T17:22:41.045+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=26m46s812ms).
+2026-03-05T17:29:11.047+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m30s2ms).
+2026-03-05T17:40:18.384+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m37s332ms).
+2026-03-05T17:55:21.779+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m3s394ms).
+2026-03-05T18:07:26.698+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m4s920ms).
+2026-03-05T18:22:56.715+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m30s17ms).
+2026-03-05T18:30:52.540+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m55s825ms).
+2026-03-05T18:32:42.198+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m19s647ms).
+2026-03-05T18:35:01.107+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m44s573ms).
+2026-03-05T18:51:51.484+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m50s377ms).
+2026-03-05T18:52:46.327+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=54s843ms).
+2026-03-05T18:54:06.032+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m19s705ms).
+2026-03-05T18:55:25.654+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m19s622ms).
+2026-03-05T19:12:21.288+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m25s627ms).
+2026-03-05T19:34:36.909+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m44s733ms).
+2026-03-05T19:54:40.167+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m3s259ms).
+2026-03-05T20:05:58.703+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m18s535ms).
+2026-03-05T20:07:53.564+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=54s852ms).
+2026-03-05T20:10:04.208+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m10s644ms).
+2026-03-05T20:14:33.910+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m29s702ms).
+2026-03-05T20:46:53.222+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=32m19s312ms).
+2026-03-05T21:03:46.019+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m52s797ms).
+2026-03-05T21:52:03.688+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48m17s669ms).
+2026-03-05T22:14:24.909+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=22m21s220ms).
+2026-03-05T22:48:22.492+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=33m57s583ms).
+2026-03-05T22:57:36.346+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m13s853ms).
+2026-03-05T23:28:03.023+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=29m56s671ms).
+2026-03-06T00:16:34.024+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48m31s2ms).
+2026-03-06T00:35:54.478+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=19m20s454ms).
+2026-03-06T01:08:11.026+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=32m16s547ms).
+2026-03-06T01:19:20.335+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m9s310ms).
+2026-03-06T01:39:17.865+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=19m27s518ms).
+2026-03-06T01:48:27.441+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m9s575ms).
+2026-03-06T02:53:50.307+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m52s656ms).
+2026-03-06T04:33:56.184+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h40m5s878ms).
+2026-03-06T05:27:48.247+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=53m52s63ms).
+2026-03-06T06:40:07.909+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h12m19s661ms).
+2026-03-06T07:58:11.022+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h18m3s114ms).
+2026-03-06T08:59:14.636+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h1m3s614ms).
+2026-03-06T10:16:30.099+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h17m15s463ms).
+2026-03-06T10:28:13.863+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m43s764ms).
+2026-03-06T10:32:24.434+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m10s571ms).
+2026-03-06T10:44:08.067+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m43s633ms).
+2026-03-06T10:58:20.715+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=14m12s647ms).
+2026-03-06T11:30:07.913+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=28m17s185ms).
+2026-03-06T11:53:42.789+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=23m34s877ms).
+2026-03-06T12:09:38.123+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m15s167ms).
+2026-03-06T12:36:01.642+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m53s443ms).
+2026-03-06T12:56:21.821+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m20s180ms).
+2026-03-06T13:05:05.778+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m43s957ms).
+2026-03-06T13:40:06.698+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=35m920ms).
+2026-03-06T13:58:36.500+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m29s801ms).
+2026-03-06T14:03:32.318+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m55s819ms).
+2026-03-06T14:47:08.835+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=43m36s517ms).
+2026-03-06T15:21:35.244+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=34m26s409ms).
+2026-03-06T16:02:24.693+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=40m49s448ms).
+2026-03-06T16:38:04.883+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=35m40s191ms).
+2026-03-06T16:54:14.666+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m35s647ms).
+2026-03-06T17:15:12.508+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m57s841ms).
+2026-03-06T17:18:26.916+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m14s409ms).
+2026-03-06T17:41:00.325+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=22m33s409ms).
+2026-03-06T18:20:10.795+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=39m10s470ms).
+2026-03-06T18:41:34.623+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m49s353ms).
+2026-03-06T19:25:33.576+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=43m58s954ms).
+2026-03-06T19:36:02.404+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m28s827ms).
+2026-03-06T20:02:06.370+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=26m3s967ms).
+2026-03-06T20:18:06.283+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Retrograde clock change detected (housekeeper delta=29s851ms), soft-evicting connections from pool.
+2026-03-06T20:34:52.935+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m16s535ms).
+2026-03-06T21:12:22.274+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m29s47ms).
+2026-03-06T22:02:22.121+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m59s487ms).
+2026-03-06T22:58:55.816+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m3s420ms).
+2026-03-06T23:27:12.117+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=28m16s301ms).
+2026-03-06T23:44:05.352+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m53s234ms).
+2026-03-07T00:09:52.306+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=25m46s954ms).
+2026-03-07T02:28:12.625+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=47m49s689ms).
+2026-03-07T03:32:29.809+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h4m17s184ms).
+2026-03-07T04:38:07.197+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h5m37s388ms).
+2026-03-07T04:59:00.252+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m53s55ms).
+2026-03-07T05:45:35.305+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46m35s53ms).
+2026-03-07T05:52:20.789+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m45s484ms).
+2026-03-07T05:58:12.386+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m51s597ms).
+2026-03-07T07:19:55.345+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h21m42s959ms).
+2026-03-07T07:36:17.613+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m22s268ms).
+2026-03-07T07:39:37.983+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m20s370ms).
+2026-03-07T08:37:14.268+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=57m36s285ms).
+2026-03-07T09:21:21.555+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=44m7s287ms).
+2026-03-07T09:26:17.277+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m55s722ms).
+2026-03-07T09:39:08.999+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m51s642ms).
+2026-03-07T10:19:51.467+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=40m42s469ms).
+2026-03-07T10:21:57.224+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m5s757ms).
+2026-03-07T10:29:00.460+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m3s235ms).
+2026-03-07T10:39:16.995+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m16s536ms).
+2026-03-07T10:49:07.154+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m50s159ms).
+2026-03-07T11:17:16.689+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=28m9s535ms).
+2026-03-07T11:18:26.797+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m10s108ms).
+2026-03-07T11:27:46.210+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m19s412ms).
+2026-03-07T12:10:26.517+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=24m35s406ms).
+2026-03-07T12:12:46.074+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m19s558ms).
+2026-03-07T12:17:40.484+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m54s410ms).
+2026-03-07T12:30:00.314+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m19s830ms).
+2026-03-07T12:31:59.187+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m58s873ms).
+2026-03-07T12:33:15.573+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m16s386ms).
+2026-03-07T12:34:04.588+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=49s14ms).
+2026-03-07T12:36:51.661+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=47s52ms).
+2026-03-07T12:38:49.129+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m57s468ms).
+2026-03-07T12:40:14.294+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m25s165ms).
+2026-03-07T12:42:33.873+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m19s579ms).
+2026-03-07T12:43:42.718+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m8s845ms).
+2026-03-07T12:46:21.763+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m39s45ms).
+2026-03-07T12:47:13.507+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51s744ms).
+2026-03-07T12:56:10.495+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m56s988ms).
+2026-03-07T13:02:48.700+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m38s204ms).
+2026-03-07T13:28:02.948+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m14s121ms).
+2026-03-07T14:07:57.279+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m50s603ms).
+2026-03-07T14:46:12.901+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m45s528ms).
+2026-03-07T14:47:23.886+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m10s986ms).
+2026-03-07T14:50:38.171+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m14s285ms).
+2026-03-07T15:10:15.938+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m37s705ms).
+2026-03-07T16:42:06.119+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=32m49s899ms).
+2026-03-07T17:25:36.567+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=43m30s448ms).
+2026-03-07T18:26:52.107+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h1m15s540ms).
+2026-03-07T19:15:48.390+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48m56s282ms).
+2026-03-07T19:34:52.346+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=19m3s957ms).
+2026-03-07T19:52:56.618+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m4s271ms).
+2026-03-07T20:20:05.105+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=27m8s488ms).
+2026-03-07T20:46:24.924+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=26m19s819ms).
+2026-03-07T21:11:01.069+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=24m36s145ms).
+2026-03-07T21:47:35.643+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=36m34s574ms).
+2026-03-07T22:27:06.307+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=39m30s664ms).
+2026-03-07T22:44:52.243+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m45s936ms).
+2026-03-07T23:02:40.236+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m47s993ms).
+2026-03-07T23:03:33.345+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=53s109ms).
+2026-03-07T23:10:54.631+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m21s286ms).
+2026-03-07T23:14:10.232+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m15s599ms).
+2026-03-08T00:05:33.318+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=52s668ms).
+2026-03-08T00:20:20.260+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=14m46s943ms).
+2026-03-08T01:28:30.036+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h7m39s785ms).
+2026-03-08T02:22:11.045+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=53m41s10ms).
+2026-03-08T02:58:47.469+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=36m36s424ms).
+2026-03-08T03:39:27.960+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=40m40s490ms).
+2026-03-08T03:46:51.742+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m23s783ms).
+2026-03-08T03:53:11.561+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m19s819ms).
+2026-03-08T04:54:48.381+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h1m36s820ms).
+2026-03-08T05:52:24.436+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=57m36s55ms).
+2026-03-08T07:01:51.988+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h9m27s552ms).
+2026-03-08T07:09:31.759+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m39s771ms).
+2026-03-08T07:37:06.470+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=27m34s710ms).
+2026-03-08T08:23:05.409+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=45m58s940ms).
+2026-03-08T09:00:13.397+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=37m7s988ms).
+2026-03-08T09:51:06.398+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m52s918ms).
+2026-03-08T10:42:01.305+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=50m54s907ms).
+2026-03-08T11:19:17.120+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=37m15s814ms).
+2026-03-08T11:33:27.303+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=14m10s184ms).
+2026-03-08T11:41:30.563+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m3s260ms).
+2026-03-08T12:12:52.077+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=31m21s514ms).
+2026-03-08T12:28:23.213+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m31s136ms).
+2026-03-08T12:33:58.249+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m35s36ms).
+2026-03-08T13:25:20.217+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51m21s968ms).
+2026-03-08T13:38:56.313+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=13m36s96ms).
+2026-03-08T14:00:00.336+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=21m4s23ms).
+2026-03-08T14:25:19.753+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=25m19s417ms).
+2026-03-08T14:39:56.524+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=14m36s771ms).
+2026-03-08T14:56:57.627+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m1s103ms).
+2026-03-08T14:59:55.625+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m57s983ms).
+2026-03-08T15:05:49.314+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m53s689ms).
+2026-03-08T15:07:56.403+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m7s88ms).
+2026-03-08T15:21:52.120+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m25s647ms).
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+2026-03-08T15:46:31.063+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m8s838ms).
+2026-03-08T16:03:21.047+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m49s986ms).
+2026-03-08T16:48:16.040+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=44m54s993ms).
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.course_code,
+        a1_0.lecture_date,
+        a1_0.marked_at,
+        a1_0.qr_session_id,
+        a1_0.status,
+        a1_0.student_email 
+    from
+        attendance a1_0 
+    where
+        a1_0.student_email=? 
+    order by
+        a1_0.lecture_date desc
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.course_code,
+        t1_0.course_name,
+        t1_0.day_of_week,
+        t1_0.end_time,
+        t1_0.faculty_email,
+        t1_0.room_number,
+        t1_0.start_time 
+    from
+        timetable t1_0 
+    order by
+        t1_0.day_of_week,
+        t1_0.start_time
+2026-03-08T17:22:25.612+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m9s82ms).
+2026-03-08T17:40:03.006+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s758ms).
+2026-03-08T17:56:12.724+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m39s683ms).
+2026-03-08T18:08:07.390+05:30  WARN 44067 --- [academic-service] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m54s666ms).

@@ -144,12 +144,12 @@ function Attendance() {
             </div>
 
             {error && (
-                <div style={{ padding: '1rem', background: '#fee2e2', color: '#b91c1c', borderRadius: '12px', marginBottom: '1.5rem', fontWeight: 600, border: '1px solid #fca5a5' }}>
+                <div style={{ padding: '1rem', background: 'var(--error-bg)', color: 'var(--error)', borderRadius: '12px', marginBottom: '1.5rem', fontWeight: 600, border: '1px solid #fca5a5' }}>
                     <span style={{ marginRight: '0.5rem' }}>⚠️</span> {error}
                 </div>
             )}
             {success && (
-                <div style={{ padding: '1rem', background: '#d1fae5', color: '#047857', borderRadius: '12px', marginBottom: '1.5rem', fontWeight: 600, border: '1px solid #6ee7b7' }}>
+                <div style={{ padding: '1rem', background: 'var(--success-light)', color: 'var(--success-dark)', borderRadius: '12px', marginBottom: '1.5rem', fontWeight: 600, border: '1px solid #6ee7b7' }}>
                     <span style={{ marginRight: '0.5rem' }}>✅</span> {success}
                 </div>
             )}
@@ -180,7 +180,7 @@ function Attendance() {
                                 <div style={{ border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
                                     <div style={{ overflowX: 'auto' }}>
                                         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-                                            <thead style={{ background: '#f8fafc', color: '#64748b', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                            <thead style={{ background: 'var(--bg-secondary)', color: 'var(--text-secondary)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                                                 <tr>
                                                     <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Student Email</th>
                                                     <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Course</th>
@@ -193,12 +193,12 @@ function Attendance() {
                                                 {courseAttendance.map((record) => (
                                                     <tr key={record.id} style={{ borderBottom: '1px solid #f1f5f9', background: 'white' }}>
                                                         <td style={{ padding: '1rem 1.5rem', fontWeight: 500 }}>{record.studentEmail}</td>
-                                                        <td style={{ padding: '1rem 1.5rem', color: '#64748b' }}>{record.courseCode}</td>
+                                                        <td style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)' }}>{record.courseCode}</td>
                                                         <td style={{ padding: '1rem 1.5rem' }}>{formatDate(record.lectureDate)}</td>
                                                         <td style={{ padding: '1rem 1.5rem' }}>
                                                             <span className={`history-status ${record.status.toLowerCase()}`}>{record.status}</span>
                                                         </td>
-                                                        <td style={{ padding: '1rem 1.5rem', color: '#94a3b8', fontSize: '0.9rem' }}>{formatDateTime(record.markedAt)}</td>
+                                                        <td style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{formatDateTime(record.markedAt)}</td>
                                                     </tr>
                                                 ))}
                                             </tbody>
@@ -222,11 +222,11 @@ function Attendance() {
                                     style={{ flex: 1, minWidth: '200px' }}
                                     required
                                 />
-                                <button type="submit" disabled={loading} className="btn" style={{ background: 'white', color: '#4f46e5', border: '1px solid #c7d2fe' }}>
+                                <button type="submit" disabled={loading} className="btn" style={{ background: 'white', color: 'var(--primary)', border: '1px solid #c7d2fe' }}>
                                     {loading ? 'Creating...' : 'Create Session'}
                                 </button>
                             </form>
-                            <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#64748b' }}>Use the Overview tab for an interactive QR code display.</p>
+                            <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Use the Overview tab for an interactive QR code display.</p>
                         </div>
                     </div>
                 </div>
@@ -243,7 +243,7 @@ function Attendance() {
                                 <div style={{ border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
                                     <div style={{ overflowX: 'auto' }}>
                                         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-                                            <thead style={{ background: '#f8fafc', color: '#64748b', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                            <thead style={{ background: 'var(--bg-secondary)', color: 'var(--text-secondary)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                                                 <tr>
                                                     <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Course</th>
                                                     <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Date</th>
@@ -254,12 +254,12 @@ function Attendance() {
                                             <tbody>
                                                 {studentAttendance.map((record) => (
                                                     <tr key={record.id} style={{ borderBottom: '1px solid #f1f5f9', background: 'white', transition: 'background 0.2s' }}>
-                                                        <td style={{ padding: '1rem 1.5rem', fontWeight: 600, color: '#0f172a' }}>{record.courseCode}</td>
-                                                        <td style={{ padding: '1rem 1.5rem', color: '#475569' }}>{formatDate(record.lectureDate)}</td>
+                                                        <td style={{ padding: '1rem 1.5rem', fontWeight: 600, color: 'var(--text-primary)' }}>{record.courseCode}</td>
+                                                        <td style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)' }}>{formatDate(record.lectureDate)}</td>
                                                         <td style={{ padding: '1rem 1.5rem' }}>
                                                             <span className={`history-status ${record.status.toLowerCase()}`}>{record.status}</span>
                                                         </td>
-                                                        <td style={{ padding: '1rem 1.5rem', color: '#94a3b8', fontSize: '0.9rem' }}>{formatDateTime(record.markedAt)}</td>
+                                                        <td style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{formatDateTime(record.markedAt)}</td>
                                                     </tr>
                                                 ))}
                                             </tbody>

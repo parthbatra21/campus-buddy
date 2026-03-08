@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { academicAPI } from '../services/api';
 import '../pages/Dashboard.css';
 
@@ -7,6 +8,14 @@ function NoticeBoard({ role }) {
     const [loading, setLoading] = useState(true);
     const [showArchived, setShowArchived] = useState(false);
     const [priorityFilter, setPriorityFilter] = useState('ALL');
+    const [showModal, setShowModal] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    const [newNotice, setNewNotice] = useState({
+        title: '',
+        content: '',
+        priority: 'LOW',
+        category: 'GENERAL'
+    });
 
     useEffect(() => {
         fetchNotices();
@@ -39,10 +48,10 @@ function NoticeBoard({ role }) {
 
     const getPriorityColor = (priority) => {
         switch (priority) {
-            case 'HIGH': return '#ef4444'; // Red
+            case 'HIGH': return 'var(--error)'; // Red
             case 'MEDIUM': return '#f59e0b'; // Amber
-            case 'LOW': return '#10b981'; // Green
-            default: return '#6b7280';
+            case 'LOW': return 'var(--success)'; // Green
+            default: return 'var(--text-secondary)';
         }
     };
 
@@ -58,15 +67,15 @@ function NoticeBoard({ role }) {
 
         switch (category) {
             case 'EXAM':
-                return <span style={{ ...style, background: '#FEE2E2', color: '#991B1B' }}>🎓 Exam</span>;
+                return <span style={{ ...style, background: 'var(--error-bg)', color: 'var(--error)' }}>🎓 Exam</span>;
             case 'ALERT':
                 return <span style={{ ...style, background: '#FEF3C7', color: '#92400E' }}>⚠️ Alert</span>;
             case 'EVENT':
-                return <span style={{ ...style, background: '#DBEAFE', color: '#1E40AF' }}>🎉 Event</span>;
+                return <span style={{ ...style, background: 'var(--primary-light)', color: 'var(--primary)' }}>🎉 Event</span>;
             case 'SPORTS':
-                return <span style={{ ...style, background: '#D1FAE5', color: '#065F46' }}>🏀 Sports</span>;
+                return <span style={{ ...style, background: 'var(--success-light)', color: 'var(--success-dark)' }}>🏀 Sports</span>;
             default:
-                return <span style={{ ...style, background: '#F3F4F6', color: '#374151' }}>📢 General</span>;
+                return <span style={{ ...style, background: 'var(--bg-secondary)', color: 'var(--text-secondary)' }}>📢 General</span>;
         }
     };
 
@@ -74,6 +83,21 @@ function NoticeBoard({ role }) {
     const filteredNotices = notices.filter(notice =>
         priorityFilter === 'ALL' || notice.priority === priorityFilter
     );
+
+    const handleCreateNotice = async (e) => {
+        e.preventDefault();
+        setSubmitting(true);
+        try {
+            await academicAPI.createNotice(newNotice);
+            setShowModal(false);
+            setNewNotice({ title: '', content: '', priority: 'LOW', category: 'GENERAL' });
+            fetchNotices();
+        } catch (error) {
+            alert("Failed to create notice: " + (error.response?.data?.error || "Unknown error"));
+        } finally {
+            setSubmitting(false);
+        }
+    };
 
     return (
         <div className="section-card notice-board-section">
@@ -85,7 +109,7 @@ function NoticeBoard({ role }) {
                         value={priorityFilter}
                         onChange={(e) => setPriorityFilter(e.target.value)}
                         className="filter-select"
-                        style={{ padding: '4px', borderRadius: '4px', border: '1px solid #e2e8f0', fontSize: '0.8rem' }}
+                        style={{ padding: '4px', borderRadius: '4px', border: '1px solid var(--border-color)', fontSize: '0.8rem' }}
                     >
                         <option value="ALL">All Priorities</option>
                         <option value="HIGH">High</option>
@@ -103,13 +127,13 @@ function NoticeBoard({ role }) {
                     </label>
 
                     {role === 'FACULTY' && (
-                        <button className="action-btn small">Post New</button>
+                        <button className="btn btn-primary" onClick={() => setShowModal(true)}>Post New</button>
                     )}
                 </div>
             </div>
 
             {loading ? (
-                <div style={{ textAlign: 'center', padding: '2rem', color: '#9ca3af' }}>
+                <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>
                     Loading updates...
                 </div>
             ) : filteredNotices.length === 0 ? (
@@ -121,7 +145,7 @@ function NoticeBoard({ role }) {
                             <div className="notice-header">
                                 {getCategoryBadge(notice.category)}
                                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                                    <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>{new Date(notice.createdAt).toLocaleDateString()}</span>
+                                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{new Date(notice.createdAt).toLocaleDateString()}</span>
                                     {role === 'FACULTY' && !notice.archived && (
                                         <button
                                             onClick={() => handleArchive(notice.id)}
@@ -135,12 +159,54 @@ function NoticeBoard({ role }) {
                             </div>
                             <h4 className="notice-title">{notice.title}</h4>
                             <p className="notice-content">{notice.content}</p>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#6b7280', marginTop: '0.5rem', borderTop: '1px solid #f3f4f6', paddingTop: '0.5rem' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.5rem', borderTop: '1px solid var(--border-color)', paddingTop: '0.5rem' }}>
                                 <span>By: {notice.postedBy}</span>
                             </div>
                         </div>
                     ))}
                 </div>
+            )}
+
+            {showModal && createPortal(
+                <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(4px)', zIndex: 9999, display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={(e) => { if (e.target === e.currentTarget) setShowModal(false) }}>
+                    <div className="section-card fade-in" style={{ width: '90%', maxWidth: '500px', background: 'var(--card-bg)', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)', margin: 'auto' }}>
+                        <h3 style={{ marginTop: 0, marginBottom: '1.5rem', fontSize: '1.5rem', color: 'var(--text-primary)' }}>Create New Notice</h3>
+                        <form onSubmit={handleCreateNotice}>
+                            <div style={{ marginBottom: '1.25rem' }}>
+                                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--text-primary)' }}>Title</label>
+                                <input type="text" className="input-field" required value={newNotice.title} onChange={e => setNewNotice({ ...newNotice, title: e.target.value })} style={{ width: '100%', background: '#fff' }} />
+                            </div>
+                            <div style={{ marginBottom: '1.25rem' }}>
+                                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--text-primary)' }}>Content</label>
+                                <textarea className="input-field" required rows="4" value={newNotice.content} onChange={e => setNewNotice({ ...newNotice, content: e.target.value })} style={{ width: '100%', background: '#fff', resize: 'vertical' }}></textarea>
+                            </div>
+                            <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+                                <div style={{ flex: 1 }}>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--text-primary)' }}>Priority</label>
+                                    <select className="input-field" value={newNotice.priority} onChange={e => setNewNotice({ ...newNotice, priority: e.target.value })} style={{ width: '100%', background: '#fff' }}>
+                                        <option value="LOW">Low</option>
+                                        <option value="MEDIUM">Medium</option>
+                                        <option value="HIGH">High</option>
+                                    </select>
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: 'var(--text-primary)' }}>Category</label>
+                                    <select className="input-field" value={newNotice.category} onChange={e => setNewNotice({ ...newNotice, category: e.target.value })} style={{ width: '100%', background: '#fff' }}>
+                                        <option value="GENERAL">General</option>
+                                        <option value="EVENT">Event</option>
+                                        <option value="EXAM">Exam</option>
+                                        <option value="ALERT">Alert</option>
+                                        <option value="SPORTS">Sports</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+                                <button type="button" className="btn" style={{ padding: '0.75rem 1.5rem', background: '#fff', border: '1px solid var(--border-color)', color: 'var(--text-primary)', borderRadius: 'var(--radius)', fontWeight: 600 }} onClick={() => setShowModal(false)}>Cancel</button>
+                                <button type="submit" className="btn btn-primary" disabled={submitting} style={{ padding: '0.75rem 1.5rem', borderRadius: 'var(--radius)' }}>{submitting ? 'Posting...' : 'Post Notice'}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>, document.body
             )}
         </div>
     );

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import { academicAPI } from '../services/api';
 import NoticeBoard from '../components/NoticeBoard';
-import ChangePasswordModal from '../components/ChangePasswordModal';
+import MainLayout from '../components/layout/MainLayout';
 import FacilityBooking from '../components/FacilityBooking';
 import Attendance from './Attendance';
 import './Dashboard.css';
@@ -13,9 +13,9 @@ function StudentDashboard({ user, handleLogout }) {
     const [scanResult, setScanResult] = useState(null);
     const [showScanner, setShowScanner] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [showPasswordModal, setShowPasswordModal] = useState(false);
+
     const [activeTab, setActiveTab] = useState('dashboard');
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
 
     useEffect(() => {
         fetchData();
@@ -116,254 +116,192 @@ function StudentDashboard({ user, handleLogout }) {
     const nextClass = getNextClass();
 
     return (
-        <div className="dashboard-wrapper">
-            {showPasswordModal && <ChangePasswordModal onClose={() => setShowPasswordModal(false)} />}
-
-            {/* Mobile Topbar */}
-            <div className="mobile-topbar">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ fontSize: '1.5rem' }}>🎓</span>
-                    <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800 }}>Campus Buddy</h2>
-                </div>
-                <button
-                    className="btn btn-primary"
-                    style={{ padding: '0.5rem' }}
-                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                >
-                    ☰
-                </button>
-            </div>
-
-            {/* Sidebar Navigation */}
-            <aside className={`dashboard-sidebar ${isSidebarOpen ? 'open' : ''}`}>
-                <div className="sidebar-brand">
-                    <span style={{ fontSize: '2rem' }}>🎓</span>
-                    <h2 style={{ margin: 0, fontSize: '1.5rem', color: '#0f172a', fontWeight: 800 }}>Campus Buddy</h2>
-                </div>
-
-                <nav className="sidebar-nav">
-                    <button
-                        className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
-                        onClick={() => { setActiveTab('dashboard'); setIsSidebarOpen(false); }}
-                    >
-                        <span className="nav-icon">📊</span> Overview
-                    </button>
-                    <button
-                        className={`nav-item ${activeTab === 'facilities' ? 'active' : ''}`}
-                        onClick={() => { setActiveTab('facilities'); setIsSidebarOpen(false); }}
-                    >
-                        <span className="nav-icon">🏢</span> Facility Booking
-                    </button>
-                    <button
-                        className={`nav-item ${activeTab === 'academics' ? 'active' : ''}`}
-                        onClick={() => { setActiveTab('academics'); setIsSidebarOpen(false); }}
-                    >
-                        <span className="nav-icon">📝</span> Academics
-                    </button>
-                </nav>
-
-                <div className="sidebar-footer">
-                    <div style={{ marginBottom: '1rem', padding: '0 0.5rem' }}>
-                        <p style={{ margin: 0, fontSize: '0.8rem', color: '#64748b', fontWeight: 600, textTransform: 'uppercase' }}>Logged in as</p>
-                        <p style={{ margin: 0, fontSize: '0.95rem', color: '#0f172a', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis' }}>{user.email}</p>
-                        <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.75rem', color: '#10b981', fontWeight: 800, background: '#d1fae5', display: 'inline-block', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>STUDENT</p>
+        <MainLayout
+            user={user}
+            handleLogout={handleLogout}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+        >
+            {activeTab === 'dashboard' ? (
+                <>
+                    <div className="page-header">
+                        <h1>Welcome back, {user.email.split('@')[0]} 👋</h1>
+                        <p>Here's what's happening today on campus.</p>
                     </div>
 
-                    <button onClick={() => setShowPasswordModal(true)} className="nav-item">
-                        <span className="nav-icon">🔐</span> Settings
-                    </button>
-                    <button onClick={handleLogout} className="nav-item danger">
-                        <span className="nav-icon">🚪</span> Logout
-                    </button>
-                </div>
-            </aside>
-
-            {/* Main Content Area */}
-            <main className="dashboard-main" onClick={() => isSidebarOpen && setIsSidebarOpen(false)}>
-
-                {activeTab === 'dashboard' ? (
-                    <>
-                        <div className="page-header">
-                            <h1>Welcome back, {user.email.split('@')[0]} 👋</h1>
-                            <p>Here's what's happening today on campus.</p>
+                    {/* Stats Widgets */}
+                    <div className="stats-overview">
+                        <div className="stat-card">
+                            <div className="stat-header">
+                                <span className="stat-title">Attendance</span>
+                                <div className="stat-icon" style={{ color: '#4f46e5' }}>📊</div>
+                            </div>
+                            <p className="stat-value">{attendancePercentage}%</p>
+                            <p className="stat-desc">
+                                <span className={`stat-trend ${attendancePercentage >= 75 ? 'positive' : 'negative'}`}>
+                                    {attendancePercentage >= 75 ? 'Good Standing' : 'Needs Improvement'}
+                                </span>
+                            </p>
                         </div>
 
-                        {/* Stats Widgets */}
-                        <div className="stats-overview">
-                            <div className="stat-card">
-                                <div className="stat-header">
-                                    <span className="stat-title">Attendance</span>
-                                    <div className="stat-icon" style={{ color: '#4f46e5' }}>📊</div>
+                        <div className="stat-card">
+                            <div className="stat-header">
+                                <span className="stat-title">Next Class</span>
+                                <div className="stat-icon" style={{ color: '#ec4899' }}>🕒</div>
+                            </div>
+                            {nextClass ? (
+                                <>
+                                    <p className="stat-value">{nextClass.code}</p>
+                                    <p className="stat-desc">at {nextClass.time} • Room {nextClass.room}</p>
+                                </>
+                            ) : (
+                                <>
+                                    <p className="stat-value" style={{ fontSize: '1.75rem', color: '#64748b' }}>Done for today</p>
+                                    <p className="stat-desc">Relax! ☕</p>
+                                </>
+                            )}
+                        </div>
+
+                        <div className="stat-card">
+                            <div className="stat-header">
+                                <span className="stat-title">Assignments</span>
+                                <div className="stat-icon" style={{ color: '#f59e0b' }}>📝</div>
+                            </div>
+                            <p className="stat-value">3</p>
+                            <p className="stat-desc">1 Due Tomorrow</p>
+                        </div>
+
+                        <div className="stat-card">
+                            <div className="stat-header">
+                                <span className="stat-title">CGPA</span>
+                                <div className="stat-icon" style={{ color: '#10b981' }}>🎓</div>
+                            </div>
+                            <p className="stat-value">8.9</p>
+                            <p className="stat-desc">Last Semester</p>
+                        </div>
+                    </div>
+
+                    {/* Two Column Grid */}
+                    <div className="dashboard-grid">
+
+                        {/* Left Column (Wider) */}
+                        <div className="dashboard-column">
+                            <div className="section-card">
+                                <div className="section-header">
+                                    <h3><span style={{ fontSize: '1.75rem' }}>⚡</span> Quick Actions</h3>
                                 </div>
-                                <p className="stat-value">{attendancePercentage}%</p>
-                                <p className="stat-desc">
-                                    <span className={`stat-trend ${attendancePercentage >= 75 ? 'positive' : 'negative'}`}>
-                                        {attendancePercentage >= 75 ? 'Good Standing' : 'Needs Improvement'}
-                                    </span>
-                                </p>
+                                <div className="quick-actions-btns">
+                                    <button className="action-card-btn" onClick={() => { setShowScanner(!showScanner); setScanResult(null); }}>
+                                        <span className="action-icon">📷</span>
+                                        <span className="action-label">{showScanner ? "Close Scanner" : "Scan QR"}</span>
+                                    </button>
+                                    <button className="action-card-btn" onClick={() => setActiveTab('facilities')}>
+                                        <span className="action-icon">🏢</span>
+                                        <span className="action-label">Book a Room</span>
+                                    </button>
+                                </div>
+
+                                {showScanner && (
+                                    <div style={{ marginTop: '2rem' }}>
+                                        <div id="reader" style={{ border: '2px solid var(--border-color)', borderRadius: '16px', overflow: 'hidden' }}></div>
+                                    </div>
+                                )}
+
+                                {scanResult && (
+                                    <div style={{ marginTop: '1.5rem', padding: '1rem', borderRadius: '12px', fontWeight: 600, background: scanResult.success ? 'var(--success-light)' : 'var(--error-bg)', color: scanResult.success ? 'var(--success-dark)' : '#b91c1c' }}>
+                                        {scanResult.success || scanResult.error}
+                                    </div>
+                                )}
+
+                                <div style={{ marginTop: '2.5rem', paddingTop: '2rem', borderTop: '1px dashed var(--border-color)' }}>
+                                    <h4 style={{ margin: '0 0 1rem 0', color: 'var(--text-secondary)' }}>Or Enter Session Code Manually</h4>
+                                    <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                                        <input type="text" placeholder="6-DIGIT CODE" maxLength="6" id="manual-code-input" className="input-field" style={{ width: '150px', letterSpacing: '0.1em', textAlign: 'center', fontWeight: 'bold' }} />
+                                        <select id="manual-course-select" className="input-field" style={{ flex: 1, minWidth: '150px' }}>
+                                            <option value="">Select Course...</option>
+                                            {timetable.length > 0 ?
+                                                [...new Set(timetable.map(t => t.courseCode))].map(c => <option key={c} value={c}>{c}</option>)
+                                                : <option value="CS101">CS101 - Fallback</option>
+                                            }
+                                        </select>
+                                        <button className="btn btn-primary" onClick={async () => {
+                                            const code = document.getElementById('manual-code-input').value;
+                                            const course = document.getElementById('manual-course-select').value;
+                                            if (!code || !course) return alert("Please enter code and course.");
+                                            if (!navigator.geolocation) return alert("Geolocation not supported.");
+                                            navigator.geolocation.getCurrentPosition(async (pos) => {
+                                                try {
+                                                    const response = await academicAPI.markAttendance({
+                                                        sessionCode: code, courseCode: course,
+                                                        latitude: pos.coords.latitude, longitude: pos.coords.longitude
+                                                    });
+                                                    alert("Attendance Marked Successfully!");
+                                                    fetchData();
+                                                } catch (e) {
+                                                    alert(e.response?.data?.error || "Failed to mark attendance");
+                                                }
+                                            }, () => alert("Location access required."));
+                                        }}>Submit</button>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div className="stat-card">
-                                <div className="stat-header">
-                                    <span className="stat-title">Next Class</span>
-                                    <div className="stat-icon" style={{ color: '#ec4899' }}>🕒</div>
+                            <div className="section-card">
+                                <div className="section-header">
+                                    <h3><span style={{ fontSize: '1.75rem' }}>📅</span> Today's Schedule</h3>
                                 </div>
-                                {nextClass ? (
-                                    <>
-                                        <p className="stat-value">{nextClass.code}</p>
-                                        <p className="stat-desc">at {nextClass.time} • Room {nextClass.room}</p>
-                                    </>
+                                {timetable.length === 0 ? (
+                                    <p className="empty-state">No classes scheduled today. 🎉</p>
                                 ) : (
-                                    <>
-                                        <p className="stat-value" style={{ fontSize: '1.75rem', color: '#64748b' }}>Done for today</p>
-                                        <p className="stat-desc">Relax! ☕</p>
-                                    </>
+                                    <div className="timetable-list">
+                                        {timetable.map((cls) => (
+                                            <div key={cls.id} className="timetable-item">
+                                                <div className="course-info">
+                                                    <span className="course-name">{cls.courseName}</span>
+                                                    <span className="course-meta">{cls.courseCode} • Room {cls.roomNumber}</span>
+                                                </div>
+                                                <div className="time-block">
+                                                    <span className="time-range">{cls.startTime?.substring(0, 5)} - {cls.endTime?.substring(0, 5)}</span>
+                                                    <span className="time-day">{cls.dayOfWeek}</span>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 )}
                             </div>
-
-                            <div className="stat-card">
-                                <div className="stat-header">
-                                    <span className="stat-title">Assignments</span>
-                                    <div className="stat-icon" style={{ color: '#f59e0b' }}>📝</div>
-                                </div>
-                                <p className="stat-value">3</p>
-                                <p className="stat-desc">1 Due Tomorrow</p>
-                            </div>
-
-                            <div className="stat-card">
-                                <div className="stat-header">
-                                    <span className="stat-title">CGPA</span>
-                                    <div className="stat-icon" style={{ color: '#10b981' }}>🎓</div>
-                                </div>
-                                <p className="stat-value">8.9</p>
-                                <p className="stat-desc">Last Semester</p>
-                            </div>
                         </div>
 
-                        {/* Two Column Grid */}
-                        <div className="dashboard-grid">
+                        {/* Right Column (Narrower) */}
+                        <div className="dashboard-column">
+                            <NoticeBoard role={user.role} />
 
-                            {/* Left Column (Wider) */}
-                            <div className="dashboard-column">
-                                <div className="section-card">
-                                    <div className="section-header">
-                                        <h3><span style={{ fontSize: '1.75rem' }}>⚡</span> Quick Actions</h3>
-                                    </div>
-                                    <div className="quick-actions-btns">
-                                        <button className="action-card-btn" onClick={() => { setShowScanner(!showScanner); setScanResult(null); }}>
-                                            <span className="action-icon">📷</span>
-                                            <span className="action-label">{showScanner ? "Close Scanner" : "Scan QR"}</span>
-                                        </button>
-                                        <button className="action-card-btn" onClick={() => setActiveTab('facilities')}>
-                                            <span className="action-icon">🏢</span>
-                                            <span className="action-label">Book a Room</span>
-                                        </button>
-                                    </div>
-
-                                    {showScanner && (
-                                        <div style={{ marginTop: '2rem' }}>
-                                            <div id="reader" style={{ border: '2px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}></div>
-                                        </div>
-                                    )}
-
-                                    {scanResult && (
-                                        <div style={{ marginTop: '1.5rem', padding: '1rem', borderRadius: '12px', fontWeight: 600, background: scanResult.success ? '#d1fae5' : '#fee2e2', color: scanResult.success ? '#047857' : '#b91c1c' }}>
-                                            {scanResult.success || scanResult.error}
-                                        </div>
-                                    )}
-
-                                    <div style={{ marginTop: '2.5rem', paddingTop: '2rem', borderTop: '1px dashed #cbd5e1' }}>
-                                        <h4 style={{ margin: '0 0 1rem 0', color: '#475569' }}>Or Enter Session Code Manually</h4>
-                                        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                                            <input type="text" placeholder="6-DIGIT CODE" maxLength="6" id="manual-code-input" className="input-field" style={{ width: '150px', letterSpacing: '0.1em', textAlign: 'center', fontWeight: 'bold' }} />
-                                            <select id="manual-course-select" className="input-field" style={{ flex: 1, minWidth: '150px' }}>
-                                                <option value="">Select Course...</option>
-                                                {timetable.length > 0 ?
-                                                    [...new Set(timetable.map(t => t.courseCode))].map(c => <option key={c} value={c}>{c}</option>)
-                                                    : <option value="CS101">CS101 - Fallback</option>
-                                                }
-                                            </select>
-                                            <button className="btn btn-primary" onClick={async () => {
-                                                const code = document.getElementById('manual-code-input').value;
-                                                const course = document.getElementById('manual-course-select').value;
-                                                if (!code || !course) return alert("Please enter code and course.");
-                                                if (!navigator.geolocation) return alert("Geolocation not supported.");
-                                                navigator.geolocation.getCurrentPosition(async (pos) => {
-                                                    try {
-                                                        const response = await academicAPI.markAttendance({
-                                                            sessionCode: code, courseCode: course,
-                                                            latitude: pos.coords.latitude, longitude: pos.coords.longitude
-                                                        });
-                                                        alert("Attendance Marked Successfully!");
-                                                        fetchData();
-                                                    } catch (e) {
-                                                        alert(e.response?.data?.error || "Failed to mark attendance");
-                                                    }
-                                                }, () => alert("Location access required."));
-                                            }}>Submit</button>
-                                        </div>
-                                    </div>
+                            <div className="section-card hidden lg:block" style={{ marginTop: '0', flex: 1 }}>
+                                <div className="section-header" style={{ marginBottom: '1.5rem' }}>
+                                    <h3><span style={{ fontSize: '1.75rem' }}>✅</span> Recent History</h3>
                                 </div>
-
-                                <div className="section-card">
-                                    <div className="section-header">
-                                        <h3><span style={{ fontSize: '1.75rem' }}>📅</span> Today's Schedule</h3>
-                                    </div>
-                                    {timetable.length === 0 ? (
-                                        <p className="empty-state">No classes scheduled today. 🎉</p>
-                                    ) : (
-                                        <div className="timetable-list">
-                                            {timetable.map((cls) => (
-                                                <div key={cls.id} className="timetable-item">
-                                                    <div className="course-info">
-                                                        <span className="course-name">{cls.courseName}</span>
-                                                        <span className="course-meta">{cls.courseCode} • Room {cls.roomNumber}</span>
-                                                    </div>
-                                                    <div className="time-block">
-                                                        <span className="time-range">{cls.startTime?.substring(0, 5)} - {cls.endTime?.substring(0, 5)}</span>
-                                                        <span className="time-day">{cls.dayOfWeek}</span>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-
-                            {/* Right Column (Narrower) */}
-                            <div className="dashboard-column">
-                                <NoticeBoard role={user.role} />
-
-                                <div className="section-card hidden lg:block" style={{ marginTop: '0', flex: 1 }}>
-                                    <div className="section-header" style={{ marginBottom: '1.5rem' }}>
-                                        <h3><span style={{ fontSize: '1.75rem' }}>✅</span> Recent History</h3>
-                                    </div>
-                                    <ul className="history-list">
-                                        {attendanceHistory.slice(0, 6).map((record) => (
-                                            <li key={record.id} className="history-item">
-                                                <span>{record.courseCode}</span>
-                                                <span className={`history-status ${record.status.toLowerCase()}`}>{record.status}</span>
-                                            </li>
-                                        ))}
-                                        {attendanceHistory.length === 0 && <p className="empty-state">No records found.</p>}
-                                    </ul>
-                                </div>
+                                <ul className="history-list">
+                                    {attendanceHistory.slice(0, 6).map((record) => (
+                                        <li key={record.id} className="history-item">
+                                            <span>{record.courseCode}</span>
+                                            <span className={`history-status ${record.status.toLowerCase()}`}>{record.status}</span>
+                                        </li>
+                                    ))}
+                                    {attendanceHistory.length === 0 && <p className="empty-state">No records found.</p>}
+                                </ul>
                             </div>
                         </div>
-                    </>
-                ) : activeTab === 'facilities' ? (
-                    // Facility Booking Tab
-                    <div style={{ animation: 'fadeIn 0.3s ease-out' }}>
-                        <FacilityBooking />
                     </div>
-                ) : (
-                    // Academics Tab (Full Attendance/Grades)
-                    <div style={{ animation: 'fadeIn 0.3s ease-out' }}>
-                        <Attendance />
-                    </div>
-                )}
-            </main>
-        </div>
+                </>
+            ) : activeTab === 'facilities' ? (
+                <div className="fade-in">
+                    <FacilityBooking />
+                </div>
+            ) : (
+                <div className="fade-in">
+                    <Attendance />
+                </div>
+            )}
+        </MainLayout>
     );
 }
 

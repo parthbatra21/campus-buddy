@@ -27,40 +27,43 @@ Before you begin, ensure you have the following installed:
 
 ## ⚙️ Database Setup
 
-You need to create two PostgreSQL databases before running the backend. The `campus-service` uses an in-memory H2 database, so no setup is required for it.
+The backend uses PostgreSQL for all services when running in Docker.
 
-1.  Open your terminal or a database tool (like pgAdmin or DBeaver).
+### Manual Setup (Without Docker)
+If you prefer to run services manually, you need to create three PostgreSQL databases:
+
+1.  Open your terminal or a database tool (like pgAdmin).
 2.  Run the following SQL commands:
 
 ```sql
 CREATE DATABASE campus_buddy_auth;
 CREATE DATABASE campus_buddy_academic;
+CREATE DATABASE campus_buddy_campus;
 ```
 
-> **Note**: The application assumes the default PostgreSQL user is `postgres` with no password or `parth` with no password based on configuration.
-> Check `backend/*/src/main/resources/application.yaml` if you need to update `spring.datasource.username` and `spring.datasource.password` to match your local setup.
+> **Note**: The application assumes the default PostgreSQL user is `parth` with no password by default (configurable via env vars).
 
-## 🐳 Running with Docker (Recommended)
+## 🐳 Running with Docker (Highly Recommended)
 
-The easiest way to run Campus Buddy is using Docker. This will set up all services and databases automatically.
+The easiest and most reliable way to run Campus Buddy is using Docker. This will set up all microservices and three PostgreSQL databases automatically with persistence.
 
 ### Prerequisites
 *   **Docker Desktop**: [Download](https://www.docker.com/products/docker-desktop/)
 
 ### Quick Start
 1.  Open your terminal in the root directory.
-2.  Run the following command:
+2.  Build and start all containers:
     ```bash
     docker-compose up --build -d
     ```
-3.  Access the application:
-    *   **Frontend**: [http://localhost](http://localhost)
+3.  **Access the application**:
+    *   **Frontend**: [http://localhost](http://localhost) (Production-ready Nginx build)
     *   **BFF Service API**: [http://localhost:8080](http://localhost:8080)
 
-4.  To stop the application:
-    ```bash
-    docker-compose down
-    ```
+4.  **Useful Commands**:
+    *   View all logs: `docker-compose logs -f`
+    *   Stop application: `docker-compose down`
+    *   Remove all data: `docker-compose down -v`
 
 ## 🏃‍♂️ How to Run (Manual Setup)
 

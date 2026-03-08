@@ -66,7 +66,7 @@ function Signup() {
                     <p>Join Campus Buddy today</p>
                 </div>
 
-                {error && <div className="error-message">{error}</div>}
+                {error && <div className="error-message">⚠️ {error}</div>}
 
                 {/* Role Toggle */}
                 <div className="role-toggle">

@@ -49,6 +49,7 @@ public class FacilityController {
                         .build())
                 // Alternative safer URI building:
                 // .uri(campusServiceUrl + "/facilities/bookings?userEmail=" + userEmail)
+                .header(HttpHeaders.AUTHORIZATION, authHeader)
                 .retrieve()
                 .toEntity(String.class)
                 .map(entity -> ResponseEntity.status(entity.getStatusCode())

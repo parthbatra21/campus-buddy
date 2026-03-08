@@ -50,8 +50,8 @@ function Login() {
                     <p>Login to your account</p>
                 </div>
 
-                {successMessage && <div className="error-message" style={{ backgroundColor: '#ECFDF5', color: '#047857', borderColor: '#A7F3D0' }}>{successMessage}</div>}
-                {error && <div className="error-message">{error}</div>}
+                {successMessage && <div className="success-message">✅ {successMessage}</div>}
+                {error && <div className="error-message">⚠️ {error}</div>}
 
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">

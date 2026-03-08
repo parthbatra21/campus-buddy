@@ -14,7 +14,7 @@ services:
     networks:
       - campus-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U parth -d campus_buddy_auth"]
+      test: [ "CMD-SHELL", "pg_isready -U parth -d campus_buddy_auth" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -33,7 +33,26 @@ services:
     networks:
       - campus-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U parth -d campus_buddy_academic"]
+      test: [ "CMD-SHELL", "pg_isready -U parth -d campus_buddy_academic" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres-campus:
+    image: postgres:16-alpine
+    container_name: campus-buddy-postgres-campus
+    environment:
+      POSTGRES_DB: campus_buddy_campus
+      POSTGRES_USER: parth
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_campus_data:/var/lib/postgresql/data
+    networks:
+      - campus-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U parth -d campus_buddy_campus" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -77,7 +96,20 @@ services:
     ports:
       - "8083:8083"
     environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-campus:5432/campus_buddy_campus
+      SPRING_DATASOURCE_USERNAME: parth
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
       JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
+    depends_on:
+      postgres-campus:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8083/actuator/health" ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
     networks:
       - campus-network
 
@@ -116,3 +148,4 @@ networks:
 volumes:
   postgres_auth_data:
   postgres_academic_data:
+  postgres_campus_data:
