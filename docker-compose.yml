@@ -135,7 +135,7 @@ services:
     build: ./frontend/campus-buddy-ui
     container_name: campus-buddy-frontend
     ports:
-      - "80:80"
+      - "8088:80"
     depends_on:
       - bff-service
     networks:

@@ -277,3 +277,16 @@ This generated password is for development use only. Your security configuration
 2026-03-08T16:56:32.093+05:30 DEBUG 72594 --- [bff-service] [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Found 'Content-Type:application/json' in response
 2026-03-08T16:56:32.093+05:30 DEBUG 72594 --- [bff-service] [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing ["[]"]
 2026-03-08T16:56:32.094+05:30 DEBUG 72594 --- [bff-service] [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  18:48 h
+[INFO] Finished at: 2026-03-09T11:42:43+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:4.0.2:run (default-cli) on project bff-service: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
