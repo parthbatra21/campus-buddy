@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
 import { academicAPI } from '../services/api';
+import Card from '../components/ui/Card';
+import Button from '../components/ui/Button';
+import Input from '../components/ui/Input';
+import Badge from '../components/ui/Badge';
+import Table from '../components/ui/Table';
 
 function Attendance() {
     const [role, setRole] = useState('');
@@ -42,7 +47,6 @@ function Attendance() {
         setSuccess('');
         setLoading(true);
 
-        // Geolocation boilerplate (same as dashboard, but simplified for manual test if they want)
         if (!navigator.geolocation) {
             setError("Geolocation is not supported by your browser.");
             setLoading(false);
@@ -137,97 +141,82 @@ function Attendance() {
     };
 
     return (
-        <div style={{ animation: 'fadeIn 0.4s ease-out' }}>
+        <div className="fade-in">
             <div className="page-header" style={{ marginBottom: '2rem' }}>
-                <h1>📝 Academic Records</h1>
+                <h1>Academic Records</h1>
                 <p>Manage and view comprehensive attendance and grades.</p>
             </div>
 
             {error && (
-                <div style={{ padding: '1rem', background: 'var(--error-bg)', color: 'var(--error)', borderRadius: '12px', marginBottom: '1.5rem', fontWeight: 600, border: '1px solid #fca5a5' }}>
-                    <span style={{ marginRight: '0.5rem' }}>⚠️</span> {error}
-                </div>
+                <Card style={{ marginBottom: '1.5rem', background: 'var(--error-bg)', borderColor: 'transparent', color: 'var(--error-text)' }}>
+                    <strong>Error: </strong> {error}
+                </Card>
             )}
             {success && (
-                <div style={{ padding: '1rem', background: 'var(--success-light)', color: 'var(--success-dark)', borderRadius: '12px', marginBottom: '1.5rem', fontWeight: 600, border: '1px solid #6ee7b7' }}>
-                    <span style={{ marginRight: '0.5rem' }}>✅</span> {success}
-                </div>
+                <Card style={{ marginBottom: '1.5rem', background: 'var(--success-bg)', borderColor: 'transparent', color: 'var(--success-text)' }}>
+                    <strong>Success: </strong> {success}
+                </Card>
             )}
 
             {role === 'FACULTY' && (
                 <div className="dashboard-grid" style={{ gridTemplateColumns: '1fr' }}>
                     <div className="dashboard-column">
-                        <div className="section-card">
-                            <div className="section-header">
-                                <h3>📊 View Course Attendance</h3>
-                            </div>
-                            <form onSubmit={handleViewCourseAttendance} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
-                                <input
-                                    type="text"
-                                    value={facultyCourseCode}
-                                    onChange={(e) => setFacultyCourseCode(e.target.value)}
-                                    placeholder="Enter Course Code (e.g., CS101)"
-                                    className="input-field"
-                                    style={{ flex: 1, minWidth: '200px' }}
-                                    required
-                                />
-                                <button type="submit" disabled={loading} className="btn btn-primary">
-                                    {loading ? 'Loading...' : 'View Records'}
-                                </button>
+                        <Card title="View Course Attendance">
+                            <form onSubmit={handleViewCourseAttendance} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'flex-end', marginBottom: courseAttendance.length > 0 ? '2rem' : '0' }}>
+                                <div style={{ flex: 1, minWidth: '200px' }}>
+                                    <Input
+                                        label="Course Code"
+                                        type="text"
+                                        value={facultyCourseCode}
+                                        onChange={(e) => setFacultyCourseCode(e.target.value)}
+                                        placeholder="e.g., CS101"
+                                        required
+                                    />
+                                </div>
+                                <Button type="submit" variant="primary" isLoading={loading}>
+                                    View Records
+                                </Button>
                             </form>
 
                             {courseAttendance.length > 0 && (
-                                <div style={{ border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
-                                    <div style={{ overflowX: 'auto' }}>
-                                        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-                                            <thead style={{ background: 'var(--bg-secondary)', color: 'var(--text-secondary)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                                <tr>
-                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Student Email</th>
-                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Course</th>
-                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Date</th>
-                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Status</th>
-                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Marked At</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {courseAttendance.map((record) => (
-                                                    <tr key={record.id} style={{ borderBottom: '1px solid #f1f5f9', background: 'white' }}>
-                                                        <td style={{ padding: '1rem 1.5rem', fontWeight: 500 }}>{record.studentEmail}</td>
-                                                        <td style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)' }}>{record.courseCode}</td>
-                                                        <td style={{ padding: '1rem 1.5rem' }}>{formatDate(record.lectureDate)}</td>
-                                                        <td style={{ padding: '1rem 1.5rem' }}>
-                                                            <span className={`history-status ${record.status.toLowerCase()}`}>{record.status}</span>
-                                                        </td>
-                                                        <td style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{formatDateTime(record.markedAt)}</td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-                        <div className="section-card">
-                            <div className="section-header">
-                                <h3>🚀 Quick Generate Session</h3>
-                            </div>
-                            <form onSubmit={handleCreateSession} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                                <input
-                                    type="text"
-                                    value={courseCode}
-                                    onChange={(e) => setCourseCode(e.target.value)}
-                                    placeholder="Enter Course Code (e.g., CS101)"
-                                    className="input-field"
-                                    style={{ flex: 1, minWidth: '200px' }}
-                                    required
+                                <Table 
+                                    columns={[
+                                        { header: "Student Email", accessor: "studentEmail" },
+                                        { header: "Course", accessor: "courseCode" },
+                                        { header: "Date", accessor: "lectureDate", render: (row) => formatDate(row.lectureDate) },
+                                        { header: "Status", accessor: "status", render: (row) => (
+                                            <Badge variant={row.status === 'PRESENT' ? 'success' : 'error'}>
+                                                {row.status}
+                                            </Badge>
+                                        )},
+                                        { header: "Marked At", accessor: "markedAt", render: (row) => <span style={{ color: 'var(--text-secondary)' }}>{formatDateTime(row.markedAt)}</span> }
+                                    ]}
+                                    data={courseAttendance}
+                                    keyExtractor={(row) => row.id}
                                 />
-                                <button type="submit" disabled={loading} className="btn" style={{ background: 'white', color: 'var(--primary)', border: '1px solid #c7d2fe' }}>
-                                    {loading ? 'Creating...' : 'Create Session'}
-                                </button>
+                            )}
+                        </Card>
+
+                        <Card title="Quick Generate Session">
+                            <form onSubmit={handleCreateSession} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+                                <div style={{ flex: 1, minWidth: '200px' }}>
+                                    <Input
+                                        label="Course Code"
+                                        type="text"
+                                        value={courseCode}
+                                        onChange={(e) => setCourseCode(e.target.value)}
+                                        placeholder="e.g., CS101"
+                                        required
+                                    />
+                                </div>
+                                <Button type="submit" variant="secondary" isLoading={loading}>
+                                    Create Session
+                                </Button>
                             </form>
-                            <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Use the Overview tab for an interactive QR code display.</p>
-                        </div>
+                            <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+                                Use the Overview tab for an interactive QR code display.
+                            </p>
+                        </Card>
                     </div>
                 </div>
             )}
@@ -235,71 +224,53 @@ function Attendance() {
             {role === 'STUDENT' && (
                 <div className="dashboard-grid" style={{ gridTemplateColumns: '1fr' }}>
                     <div className="dashboard-column">
-                        <div className="section-card">
-                            <div className="section-header">
-                                <h3>📚 My Attendance History</h3>
-                            </div>
-                            {studentAttendance.length > 0 ? (
-                                <div style={{ border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden' }}>
-                                    <div style={{ overflowX: 'auto' }}>
-                                        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-                                            <thead style={{ background: 'var(--bg-secondary)', color: 'var(--text-secondary)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                                <tr>
-                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Course</th>
-                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Date</th>
-                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Status</th>
-                                                    <th style={{ padding: '1rem 1.5rem', borderBottom: '2px solid #e2e8f0' }}>Marked At</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {studentAttendance.map((record) => (
-                                                    <tr key={record.id} style={{ borderBottom: '1px solid #f1f5f9', background: 'white', transition: 'background 0.2s' }}>
-                                                        <td style={{ padding: '1rem 1.5rem', fontWeight: 600, color: 'var(--text-primary)' }}>{record.courseCode}</td>
-                                                        <td style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)' }}>{formatDate(record.lectureDate)}</td>
-                                                        <td style={{ padding: '1rem 1.5rem' }}>
-                                                            <span className={`history-status ${record.status.toLowerCase()}`}>{record.status}</span>
-                                                        </td>
-                                                        <td style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{formatDateTime(record.markedAt)}</td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            ) : (
-                                <p className="empty-state" style={{ margin: 0 }}>No attendance records found yet.</p>
-                            )}
-                        </div>
+                        <Card title="My Attendance History" noPadding={true}>
+                            <Table 
+                                columns={[
+                                    { header: "Course", accessor: "courseCode", cellStyle: { fontWeight: 600 } },
+                                    { header: "Date", accessor: "lectureDate", render: (row) => formatDate(row.lectureDate) },
+                                    { header: "Status", accessor: "status", render: (row) => (
+                                        <Badge variant={row.status === 'PRESENT' ? 'success' : 'error'}>
+                                            {row.status}
+                                        </Badge>
+                                    )},
+                                    { header: "Marked At", accessor: "markedAt", render: (row) => <span style={{ color: 'var(--text-secondary)' }}>{formatDateTime(row.markedAt)}</span> }
+                                ]}
+                                data={studentAttendance}
+                                keyExtractor={(row) => row.id}
+                                emptyMessage="No attendance records found yet."
+                            />
+                        </Card>
 
-                        <div className="section-card" style={{ background: 'linear-gradient(135deg, rgba(238,242,255,0.5) 0%, rgba(224,231,255,0.5) 100%)' }}>
-                            <div className="section-header">
-                                <h3>📝 Manual Code Entry</h3>
-                            </div>
-                            <form onSubmit={handleMarkAttendance} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                                <input
-                                    type="text"
-                                    value={sessionId}
-                                    onChange={(e) => setSessionId(e.target.value)}
-                                    placeholder="6-Digit Session Code"
-                                    className="input-field"
-                                    maxLength="6"
-                                    style={{ width: '180px', letterSpacing: '0.1em', textAlign: 'center', fontWeight: 'bold' }}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    value={studentCourseCode}
-                                    onChange={(e) => setStudentCourseCode(e.target.value)}
-                                    placeholder="Course Code"
-                                    className="input-field"
-                                    style={{ flex: 1, minWidth: '150px' }}
-                                    required
-                                />
-                                <button type="submit" disabled={loading} className="btn btn-primary">
-                                    {loading ? 'Marking...' : 'Mark Attendance'}
-                                </button>
+                        <Card title="Manual Code Entry">
+                            <form onSubmit={handleMarkAttendance} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+                                <div style={{ width: '180px' }}>
+                                    <Input
+                                        label="Session Code"
+                                        type="text"
+                                        value={sessionId}
+                                        onChange={(e) => setSessionId(e.target.value)}
+                                        placeholder="6-DIGIT"
+                                        maxLength="6"
+                                        style={{ letterSpacing: '0.1em', fontWeight: 'bold' }}
+                                        required
+                                    />
+                                </div>
+                                <div style={{ flex: 1, minWidth: '150px' }}>
+                                    <Input
+                                        label="Course Code"
+                                        type="text"
+                                        value={studentCourseCode}
+                                        onChange={(e) => setStudentCourseCode(e.target.value)}
+                                        placeholder="e.g., CS101"
+                                        required
+                                    />
+                                </div>
+                                <Button type="submit" variant="primary" isLoading={loading}>
+                                    Mark Attendance
+                                </Button>
                             </form>
-                        </div>
+                        </Card>
                     </div>
                 </div>
             )}

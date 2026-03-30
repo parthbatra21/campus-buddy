@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { campusAPI } from '../services/api';
+import Card from './ui/Card';
+import Badge from './ui/Badge';
+import Button from './ui/Button';
+import Input from './ui/Input';
+import Select from './ui/Select';
 import './FacilityBooking.css';
 
 const FacilityBooking = () => {
@@ -20,25 +25,38 @@ const FacilityBooking = () => {
         clubName: '',
     });
 
-    const currentUser = JSON.parse(localStorage.getItem('user'));
+    const currentUser = (() => {
+        try {
+            const stored = localStorage.getItem('user');
+            if (stored) return JSON.parse(stored);
+        } catch (e) { /* ignore parse errors */ }
+        const email = localStorage.getItem('email');
+        const role = localStorage.getItem('role');
+        return email ? { email, role } : null;
+    })();
 
     useEffect(() => {
         fetchData();
     }, []);
 
     const fetchData = async () => {
+        if (!currentUser?.email) {
+            setError('User session not found. Please log in again.');
+            setLoading(false);
+            return;
+        }
         try {
             setLoading(true);
             const [facRes, bookRes] = await Promise.all([
                 campusAPI.getFacilities(),
                 campusAPI.getMyBookings(currentUser.email),
             ]);
-            setFacilities(facRes.data);
-            setBookings(bookRes.data);
+            setFacilities(facRes.data || []);
+            setBookings(bookRes.data || []);
             setError(null);
         } catch (err) {
             console.error('Error fetching facility data:', err);
-            setError('Failed to load facilities or bookings.');
+            setError(err.response?.data?.error || 'Failed to load facilities or bookings.');
         } finally {
             setLoading(false);
         }
@@ -62,7 +80,7 @@ const FacilityBooking = () => {
             const payload = {
                 facilityId: parseInt(formData.facilityId),
                 date: formData.date,
-                startTime: formData.startTime + ':00', // Ensure HH:mm:ss if backend expects it
+                startTime: formData.startTime + ':00',
                 endTime: formData.endTime + ':00',
                 purpose: formData.purpose,
                 clubName: formData.clubName || null,
@@ -70,7 +88,6 @@ const FacilityBooking = () => {
 
             await campusAPI.createBooking(currentUser.email, payload);
 
-            // Reset form and modal
             setShowModal(false);
             setFormData({
                 facilityId: '',
@@ -81,11 +98,10 @@ const FacilityBooking = () => {
                 clubName: '',
             });
 
-            // Refresh bookings
             fetchData();
         } catch (err) {
             console.error('Booking submission error:', err);
-            setError(err.response?.data?.error || err.response?.data?.message || err.response?.data || 'Failed to submit booking request. The facility might already be booked for this time.');
+            setError(err.response?.data?.error || err.response?.data?.message || err.response?.data || 'Failed to submit booking request.');
         } finally {
             setSubmitting(false);
         }
@@ -96,191 +112,179 @@ const FacilityBooking = () => {
         return fac ? fac.name : 'Unknown Facility';
     };
 
-    const getStatusClass = (status) => {
-        switch (status) {
-            case 'APPROVED': return 'fb-status-approved';
-            case 'REJECTED': return 'fb-status-rejected';
-            case 'PENDING': return 'fb-status-pending';
-            default: return 'fb-status-default';
-        }
-    };
-
-    const getStatusIcon = (status) => {
-        switch (status) {
-            case 'APPROVED': return '✓ ';
-            case 'REJECTED': return '✕ ';
-            case 'PENDING': return '⧗ ';
-            default: return '';
-        }
-    };
-
-    // Get minimum date (today) for the date picker
     const today = new Date().toISOString().split('T')[0];
 
     return (
-        <div className="fb-container">
-            <div className="fb-decor-blob"></div>
-
-            <div className="fb-header">
-                <div className="fb-header-info">
-                    <h2 className="fb-title">
-                        <span className="fb-title-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="fb-svg-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                            </svg>
-                        </span>
-                        Facility Bookings
-                    </h2>
-                    <p className="fb-subtitle">Reserve spaces across campus for your events and club activities.</p>
+        <div className="fade-in">
+            <div className="page-header" style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+                <div>
+                    <h1>Facility Bookings</h1>
+                    <p>Reserve spaces across campus for your events and club activities.</p>
                 </div>
-                <button className="fb-btn-primary fb-new-booking-btn" onClick={() => setShowModal(true)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="fb-svg-icon-small" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
-                    </svg>
-                    New Booking
-                </button>
+                <Button variant="primary" onClick={() => setShowModal(true)}>
+                    + New Booking
+                </Button>
             </div>
 
-            <div className="fb-content">
-                {error && !showModal && (
-                    <div className="fb-error-banner">
-                        <span className="fb-error-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </span>
-                        {error}
-                    </div>
-                )}
+            {error && !showModal && (
+                <Card style={{ marginBottom: '1.5rem', background: 'var(--error-bg)', borderColor: 'transparent', color: 'var(--error-text)' }}>
+                    <strong>Error: </strong> {error}
+                </Card>
+            )}
 
-                {loading ? (
-                    <div className="fb-loader-container">
-                        <div className="fb-spinner"></div>
-                    </div>
-                ) : bookings.length === 0 ? (
-                    <div className="fb-empty-state">
-                        <div className="fb-empty-icon-wrap">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="fb-empty-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                        </div>
-                        <h3>No active bookings</h3>
-                        <p>Ready to host your next event? Request a facility booking right now and organize it within minutes.</p>
-                    </div>
-                ) : (
-                    <div className="fb-grid">
-                        {bookings.map((booking) => (
-                            <div key={booking.id} className="fb-card">
-                                <div className="fb-card-top">
-                                    <h3 className="fb-card-facility">{getFacilityName(booking.facilityId)}</h3>
-                                    <span className={`fb-status-badge ${getStatusClass(booking.status)}`}>
-                                        {getStatusIcon(booking.status)}{booking.status}
-                                    </span>
+            {loading ? (
+                <Card style={{ textAlign: 'center', padding: '3rem' }}>
+                    <p style={{ color: 'var(--text-secondary)' }}>Loading your bookings...</p>
+                </Card>
+            ) : bookings.length === 0 ? (
+                <Card style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+                    <div style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.5 }}>🏢</div>
+                    <h3 style={{ margin: '0 0 0.5rem 0' }}>No active bookings</h3>
+                    <p style={{ color: 'var(--text-secondary)', margin: 0, maxWidth: '400px', display: 'inline-block' }}>Ready to host your next event? Request a facility booking right now and organize it within minutes.</p>
+                </Card>
+            ) : (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem' }}>
+                    {bookings.map((booking) => (
+                        <Card key={booking.id} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                                <h3 style={{ margin: 0, fontSize: '1.125rem', fontWeight: 700 }}>{getFacilityName(booking.facilityId)}</h3>
+                                <Badge variant={booking.status === 'APPROVED' ? 'success' : booking.status === 'REJECTED' ? 'error' : 'warning'}>
+                                    {booking.status}
+                                </Badge>
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <span>📅</span> {new Date(booking.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}
                                 </div>
-
-                                <div className="fb-card-middle">
-                                    <div className="fb-info-row">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="fb-info-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
-                                        {new Date(booking.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}
-                                    </div>
-                                    <div className="fb-info-row">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="fb-info-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        {booking.startTime?.substring(0, 5)} &mdash; {booking.endTime?.substring(0, 5)}
-                                    </div>
-                                </div>
-
-                                <div className="fb-card-bottom">
-                                    <p className="fb-card-purpose">
-                                        <strong>Purpose:</strong> {booking.purpose}
-                                    </p>
-                                    {booking.clubName && (
-                                        <div className="fb-club-tag">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="fb-club-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                            </svg>
-                                            {booking.clubName}
-                                        </div>
-                                    )}
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <span>🕒</span> {booking.startTime?.substring(0, 5)} - {booking.endTime?.substring(0, 5)}
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                )}
-            </div>
+
+                            <div style={{ marginTop: '0.5rem', paddingTop: '1rem', borderTop: '1px solid var(--border-default)' }}>
+                                <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.875rem' }}>
+                                    <strong style={{ color: 'var(--text-primary)' }}>Purpose:</strong> {booking.purpose}
+                                </p>
+                                {booking.clubName && (
+                                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--bg-secondary)', padding: '0.25rem 0.75rem', borderRadius: 'var(--radius-sm)', fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+                                        👥 {booking.clubName}
+                                    </div>
+                                )}
+                            </div>
+                        </Card>
+                    ))}
+                </div>
+            )}
 
             {showModal && createPortal(
-                <div className="fb-modal-overlay" onClick={(e) => { if (e.target.className === 'fb-modal-overlay' && !submitting) setShowModal(false); }}>
-                    <div className="fb-modal">
-                        <div className="fb-modal-header">
-                            <div className="fb-modal-title-wrap">
-                                <div className="fb-modal-icon-bg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="fb-modal-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 className="fb-modal-title">New Booking Request</h3>
-                                    <p className="fb-modal-subtitle">Fill out the details to reserve a facility.</p>
-                                </div>
-                            </div>
+                <div style={{
+                    position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                    background: 'var(--overlay)', zIndex: 100,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.5rem'
+                }} onClick={(e) => { if (e.target === e.currentTarget && !submitting) setShowModal(false); }}>
+                    <div className="fade-in" style={{
+                        background: 'var(--bg-app)', width: '100%', maxWidth: '500px',
+                        borderRadius: 'var(--radius-xl)', padding: '2rem',
+                        boxShadow: 'var(--shadow-lg)', border: '1px solid var(--border-default)',
+                        maxHeight: '90vh', overflowY: 'auto'
+                    }}>
+                        <div style={{ marginBottom: '1.5rem' }}>
+                            <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.5rem' }}>New Booking Request</h3>
+                            <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Fill out the details to reserve a facility.</p>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="fb-modal-form">
+                        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                             {error && (
-                                <div className="fb-error-banner fb-empty-state-small">
-                                    <span className="fb-error-icon">⚠️</span> {error}
-                                </div>
+                                <Card style={{ background: 'var(--error-bg)', borderColor: 'transparent', color: 'var(--error-text)', padding: '1rem' }}>
+                                    {error}
+                                </Card>
                             )}
 
-                            <div className="fb-form-group">
-                                <label>Facility <span className="fb-required">*</span></label>
-                                <select name="facilityId" required value={formData.facilityId} onChange={handleChange} className="fb-input">
-                                    <option value="" disabled>Choose a space...</option>
-                                    {facilities.map((fac) => (
-                                        <option key={fac.id} value={fac.id}>
-                                            {fac.name} &mdash; Capacity: {fac.capacity}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+                            <Select
+                                label="Facility"
+                                name="facilityId"
+                                value={formData.facilityId}
+                                onChange={handleChange}
+                                required
+                                options={[
+                                    { value: "", label: "Choose a space...", disabled: true },
+                                    ...facilities.map(fac => ({ value: fac.id, label: `${fac.name} — Capacity: ${fac.capacity}` }))
+                                ]}
+                            />
 
-                            <div className="fb-form-group">
-                                <label>Date <span className="fb-required">*</span></label>
-                                <input type="date" name="date" required min={today} value={formData.date} onChange={handleChange} className="fb-input" />
-                            </div>
+                            <Input
+                                type="date"
+                                label="Date"
+                                name="date"
+                                min={today}
+                                value={formData.date}
+                                onChange={handleChange}
+                                required
+                            />
 
-                            <div className="fb-form-row">
-                                <div className="fb-form-group">
-                                    <label>Start Time <span className="fb-required">*</span></label>
-                                    <input type="time" name="startTime" required value={formData.startTime} onChange={handleChange} className="fb-input" />
+                            <div style={{ display: 'flex', gap: '1rem' }}>
+                                <div style={{ flex: 1 }}>
+                                    <Input
+                                        type="time"
+                                        label="Start Time"
+                                        name="startTime"
+                                        value={formData.startTime}
+                                        onChange={handleChange}
+                                        required
+                                    />
                                 </div>
-                                <div className="fb-form-group">
-                                    <label>End Time <span className="fb-required">*</span></label>
-                                    <input type="time" name="endTime" required value={formData.endTime} onChange={handleChange} className="fb-input" />
+                                <div style={{ flex: 1 }}>
+                                    <Input
+                                        type="time"
+                                        label="End Time"
+                                        name="endTime"
+                                        value={formData.endTime}
+                                        onChange={handleChange}
+                                        required
+                                    />
                                 </div>
                             </div>
 
-                            <div className="fb-form-group">
-                                <label>Club Name <span className="fb-optional">(Optional)</span></label>
-                                <input type="text" name="clubName" placeholder="e.g., Coding Club" value={formData.clubName} onChange={handleChange} className="fb-input" />
+                            <Input
+                                type="text"
+                                label="Club Name (Optional)"
+                                name="clubName"
+                                placeholder="e.g., Coding Club"
+                                value={formData.clubName}
+                                onChange={handleChange}
+                            />
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
+                                <label style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)' }}>Purpose of Booking</label>
+                                <textarea
+                                    name="purpose"
+                                    rows="3"
+                                    required
+                                    placeholder="Briefly describe what you'll be doing..."
+                                    value={formData.purpose}
+                                    onChange={handleChange}
+                                    style={{
+                                        padding: '0.625rem 0.875rem',
+                                        border: '1px solid var(--border-default)',
+                                        borderRadius: 'var(--radius-md)',
+                                        background: 'var(--bg-app)',
+                                        fontSize: '0.875rem',
+                                        color: 'var(--text-primary)',
+                                        fontFamily: 'inherit',
+                                        outline: 'none',
+                                        resize: 'vertical'
+                                    }}
+                                />
                             </div>
 
-                            <div className="fb-form-group">
-                                <label>Purpose of Booking <span className="fb-required">*</span></label>
-                                <textarea name="purpose" rows="3" required placeholder="Briefly describe what you'll be doing..." value={formData.purpose} onChange={handleChange} className="fb-input fb-textarea"></textarea>
-                            </div>
-
-                            <div className="fb-modal-actions">
-                                <button type="button" disabled={submitting} onClick={() => setShowModal(false)} className="fb-btn-secondary">
+                            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>
+                                <Button type="button" variant="outline" onClick={() => setShowModal(false)} disabled={submitting}>
                                     Cancel
-                                </button>
-                                <button type="submit" disabled={submitting} className={`fb-btn-primary ${submitting ? 'fb-btn-loading' : ''}`}>
-                                    {submitting ? 'Processing...' : 'Submit Request'}
-                                </button>
+                                </Button>
+                                <Button type="submit" variant="primary" isLoading={submitting}>
+                                    Submit Request
+                                </Button>
                             </div>
                         </form>
                     </div>
