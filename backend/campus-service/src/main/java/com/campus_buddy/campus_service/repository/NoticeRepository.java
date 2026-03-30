@@ -8,5 +8,11 @@ import java.util.List;
 
 @Repository
 public interface NoticeRepository extends JpaRepository<Notice, Long> {
-    List<Notice> findByIsArchivedOrderByPriorityAscCreatedAtDesc(boolean isArchived);
+
+    /**
+     * Find notices by archived status, ordered by creation date (newest first).
+     * Priority sorting is handled in application code using a deterministic map
+     * (since STRING enum ordering is alphabetical, not semantic).
+     */
+    List<Notice> findByArchivedOrderByCreatedAtDesc(boolean archived);
 }

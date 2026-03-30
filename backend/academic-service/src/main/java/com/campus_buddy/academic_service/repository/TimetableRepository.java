@@ -10,4 +10,10 @@ import java.util.List;
 public interface TimetableRepository extends JpaRepository<Timetable, Long> {
     List<Timetable> findByOrderByDayOfWeekAscStartTimeAsc();
     List<Timetable> findByFacultyEmail(String facultyEmail);
+
+    /**
+     * Find timetable entries for a specific room on a specific day.
+     * Used for overlap/conflict detection when adding new entries.
+     */
+    List<Timetable> findByDayOfWeekAndRoomNumber(String dayOfWeek, String roomNumber);
 }

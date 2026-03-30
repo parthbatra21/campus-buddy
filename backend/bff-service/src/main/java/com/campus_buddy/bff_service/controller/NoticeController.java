@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -22,15 +23,21 @@ public class NoticeController {
     }
 
     @GetMapping
-    public ResponseEntity<String> getAllNotices(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader) {
+    public ResponseEntity<String> getAllNotices(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader,
+            @RequestParam(defaultValue = "false") boolean archived) {
         return webClient.get()
-                .uri(campusServiceUrl + "/notices")
+                .uri(campusServiceUrl + "/notices?archived=" + archived)
                 .header(HttpHeaders.AUTHORIZATION, authHeader)
                 .retrieve()
                 .toEntity(String.class)
                 .map(entity -> ResponseEntity.status(entity.getStatusCode())
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(entity.getBody()))
+                .onErrorResume(WebClientResponseException.class, e ->
+                    Mono.just(ResponseEntity.status(e.getStatusCode())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(e.getResponseBodyAsString())))
                 .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to fetch notices\"}")))
                 .block();
     }
@@ -49,7 +56,35 @@ public class NoticeController {
                 .map(entity -> ResponseEntity.status(entity.getStatusCode())
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(entity.getBody()))
+                .onErrorResume(WebClientResponseException.class, e ->
+                    Mono.just(ResponseEntity.status(e.getStatusCode())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(e.getResponseBodyAsString())))
                 .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to create notice\"}")))
+                .block();
+    }
+
+    /**
+     * Archive a notice (Faculty/Admin only).
+     * PUT /api/campus/notices/{id}/archive -> Campus Service PUT /notices/{id}/archive
+     */
+    @PutMapping("/{id}/archive")
+    public ResponseEntity<String> archiveNotice(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader,
+            @PathVariable Long id) {
+        return webClient.put()
+                .uri(campusServiceUrl + "/notices/" + id + "/archive")
+                .header(HttpHeaders.AUTHORIZATION, authHeader)
+                .retrieve()
+                .toEntity(String.class)
+                .map(entity -> ResponseEntity.status(entity.getStatusCode())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(entity.getBody()))
+                .onErrorResume(WebClientResponseException.class, e ->
+                    Mono.just(ResponseEntity.status(e.getStatusCode())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(e.getResponseBodyAsString())))
+                .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to archive notice\"}")))
                 .block();
     }
 }

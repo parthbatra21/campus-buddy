@@ -26,4 +26,13 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
      * @return List of attendance records ordered by date (newest first)
      */
     List<Attendance> findByCourseCodeOrderByLectureDateDesc(String courseCode);
+
+    /**
+     * Check if a student has already marked attendance for a specific session.
+     * This is the primary idempotency check — one student, one attendance per session.
+     * @param studentEmail Student's email
+     * @param qrSessionId The attendance session ID
+     * @return true if attendance already exists
+     */
+    boolean existsByStudentEmailAndQrSessionId(String studentEmail, String qrSessionId);
 }

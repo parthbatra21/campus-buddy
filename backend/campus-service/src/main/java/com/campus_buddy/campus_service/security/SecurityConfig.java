@@ -30,8 +30,9 @@ public class SecurityConfig {
                 // Disable CSRF (stateless JWT API)
                 .csrf(AbstractHttpConfigurer::disable)
                 
-                // All endpoints require authentication
+                // All endpoints require authentication except health check
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/actuator/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 

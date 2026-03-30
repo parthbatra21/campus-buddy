@@ -28,10 +28,11 @@ function Login() {
             const response = await authAPI.login(email, password);
             const { token, email: userEmail, role } = response.data;
 
-            // Store JWT token
+            // Store JWT token and user data
             localStorage.setItem('token', token);
             localStorage.setItem('email', userEmail);
             localStorage.setItem('role', role);
+            localStorage.setItem('user', JSON.stringify({ email: userEmail, role }));
 
             // Redirect to dashboard
             navigate('/dashboard');

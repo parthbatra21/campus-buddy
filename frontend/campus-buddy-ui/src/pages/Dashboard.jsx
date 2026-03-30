@@ -18,6 +18,9 @@ function Dashboard() {
         try {
             const response = await authAPI.getCurrentUser();
             setUser(response.data);
+            // Ensure user object is in localStorage for components like FacilityBooking
+            localStorage.setItem('user', JSON.stringify(response.data));
+            localStorage.setItem('role', response.data.role);
         } catch (error) {
             console.error('Failed to fetch user data:', error);
             // If unauthorized, redirect to login
@@ -33,6 +36,7 @@ function Dashboard() {
         localStorage.removeItem('token');
         localStorage.removeItem('email');
         localStorage.removeItem('role');
+        localStorage.removeItem('user');
         navigate('/');
     };
 

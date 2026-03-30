@@ -17,3 +17,4 @@ public class Facility {
     private String description;
     private Integer capacity;
 }
+ 

@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -31,6 +32,10 @@ public class FacilityController {
                 .map(entity -> ResponseEntity.status(entity.getStatusCode())
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(entity.getBody()))
+                .onErrorResume(WebClientResponseException.class, e ->
+                    Mono.just(ResponseEntity.status(e.getStatusCode())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(e.getResponseBodyAsString())))
                 .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to fetch facilities\"}")))
                 .block();
     }
@@ -40,21 +45,17 @@ public class FacilityController {
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader,
             @RequestParam String userEmail) {
         return webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .scheme("http") // or however it's configured, assuming campusServiceUrl has scheme
-                        .host(campusServiceUrl.replace("http://", "").split(":")[0])
-                        .port(campusServiceUrl.split(":")[2])
-                        .path("/facilities/bookings")
-                        .queryParam("userEmail", userEmail)
-                        .build())
-                // Alternative safer URI building:
-                // .uri(campusServiceUrl + "/facilities/bookings?userEmail=" + userEmail)
+                .uri(campusServiceUrl + "/facilities/bookings?userEmail=" + userEmail)
                 .header(HttpHeaders.AUTHORIZATION, authHeader)
                 .retrieve()
                 .toEntity(String.class)
                 .map(entity -> ResponseEntity.status(entity.getStatusCode())
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(entity.getBody()))
+                .onErrorResume(WebClientResponseException.class, e ->
+                    Mono.just(ResponseEntity.status(e.getStatusCode())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(e.getResponseBodyAsString())))
                 .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to fetch bookings\"}")))
                 .block();
     }
@@ -74,6 +75,10 @@ public class FacilityController {
                 .map(entity -> ResponseEntity.status(entity.getStatusCode())
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(entity.getBody()))
+                .onErrorResume(WebClientResponseException.class, e ->
+                    Mono.just(ResponseEntity.status(e.getStatusCode())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(e.getResponseBodyAsString())))
                 .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to create booking: " + e.getMessage() + "\"}")))
                 .block();
     }

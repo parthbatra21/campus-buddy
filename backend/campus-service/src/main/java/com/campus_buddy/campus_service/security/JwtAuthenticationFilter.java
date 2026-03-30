@@ -55,6 +55,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     var role = jwtService.extractRole(jwt);
                     var authority = new SimpleGrantedAuthority("ROLE_" + role.name());
                     
+                    logger.debug("JWT for user " + userEmail + " extracted role: " + role.name());
+                    
                     // Create authentication token
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             userEmail,
@@ -66,6 +68,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     
                     // Set authentication in security context
                     SecurityContextHolder.getContext().setAuthentication(authToken);
+                    logger.info("Successfully authenticated user: " + userEmail + " with roles: " + authToken.getAuthorities());
                 }
             }
         } catch (Exception e) {

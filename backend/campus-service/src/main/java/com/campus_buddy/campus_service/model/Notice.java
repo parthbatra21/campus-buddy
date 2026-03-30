@@ -27,7 +27,7 @@ public class Notice {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private NoticeCategory category; // IMPORTANT, EVENT, GENERAL
+    private NoticeCategory category; // IMPORTANT, EVENT, GENERAL, EXAM, ALERT, SPORTS
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -37,7 +37,7 @@ public class Notice {
     private String postedBy; // Faculty/Admin email
 
     @Column(nullable = false)
-    private boolean isArchived = false;
+    private Boolean archived = false;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
