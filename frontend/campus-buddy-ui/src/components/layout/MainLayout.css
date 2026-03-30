@@ -2,16 +2,14 @@
 .dashboard-wrapper {
     display: flex;
     min-height: 100vh;
-    background: transparent;
+    background: var(--bg-app);
 }
 
 /* Sidebar */
 .dashboard-sidebar {
-    width: 280px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-right: 1px solid var(--border-color);
+    width: 260px;
+    background: var(--bg-surface);
+    border-right: 1px solid var(--border-default);
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -23,11 +21,25 @@
 }
 
 .sidebar-brand {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    border-bottom: 1px solid var(--border-color);
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--border-default);
+}
+
+.brand-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--primary);
+}
+
+.brand-name {
+    margin: 0;
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: -0.01em;
 }
 
 .sidebar-nav {
@@ -35,18 +47,18 @@
     padding: 1.5rem 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.25rem;
     overflow-y: auto;
 }
 
 .nav-item {
-    padding: 0.85rem 1.25rem;
-    border-radius: var(--radius);
+    padding: 0.625rem 0.875rem;
+    border-radius: var(--radius-sm);
     color: var(--text-secondary);
-    font-weight: 600;
+    font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
     cursor: pointer;
     transition: all 0.2s;
     border: none;
@@ -54,20 +66,18 @@
     width: 100%;
     text-align: left;
     font-family: inherit;
-    font-size: 0.95rem;
+    font-size: 0.875rem;
 }
 
 .nav-item:hover {
     background: var(--bg-secondary);
     color: var(--text-primary);
-    transform: translateX(4px);
 }
 
 .nav-item.active {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
-    color: white;
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
-    transform: translateX(4px);
+    background: var(--primary-light);
+    color: var(--primary-hover);
+    font-weight: 600;
 }
 
 .nav-item.danger {
@@ -76,89 +86,92 @@
 
 .nav-item.danger:hover {
     background: var(--error-bg);
-    color: #b91c1c;
+    color: var(--error-text);
 }
 
 .nav-icon {
-    font-size: 1.25rem;
-    width: 24px;
-    text-align: center;
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
+}
+
+.nav-item.active .nav-icon {
+    opacity: 1;
+    color: var(--primary-hover);
 }
 
 .sidebar-footer {
-    padding: 1.5rem;
-    border-top: 1px solid var(--border-color);
-    background: rgba(255, 255, 255, 0.5);
+    padding: 1.5rem 1rem;
+    border-top: 1px solid var(--border-default);
+    background: var(--bg-surface);
 }
 
 /* User Info Box */
 .user-info-box {
     margin-bottom: 1rem;
-    padding: 0 0.5rem;
+    padding: 0 0.875rem;
 }
 
 .user-info-label {
-    margin: 0;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
+    margin: 0 0 0.25rem 0;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
     font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .user-info-email {
-    margin: 0;
-    font-size: 0.95rem;
+    margin: 0 0 0.5rem 0;
+    font-size: 0.875rem;
     color: var(--text-primary);
-    font-weight: 700;
+    font-weight: 600;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .user-info-role {
-    margin: 0.5rem 0 0 0;
-    font-size: 0.75rem;
-    font-weight: 800;
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    border-radius: 6px;
-    text-transform: uppercase;
+    display: inline-flex;
+    margin: 0;
 }
 
-.user-info-role.student {
-    color: var(--success-dark);
-    background: var(--success-light);
-}
-
-.user-info-role.faculty {
-    color: var(--primary);
-    background: var(--primary-light);
+/* Topbar for Desktop (Optional right-side actions if needed) 
+   We typically rely on the sidebar, but here is a simple fixed header for content if desired. */
+.dashboard-topbar {
+    display: none; /* Hidden by default in desktop */
 }
 
 /* Main Content Area */
 .dashboard-main {
     flex: 1;
-    margin-left: 280px;
-    padding: 2.5rem;
+    margin-left: 260px;
+    padding: 2rem;
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
-    max-width: 1600px;
-    width: calc(100% - 280px);
+    gap: 2rem;
+    max-width: 1200px; /* Constrain max width for ultra-wide screens */
+    width: calc(100% - 260px);
 }
 
 /* Mobile Topbar */
 .mobile-topbar {
     display: none;
     padding: 1rem 1.5rem;
-    background: white;
-    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-default);
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 40;
+}
+
+.mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 @media (max-width: 1024px) {
@@ -168,7 +181,7 @@
 
     .dashboard-sidebar.open {
         transform: translateX(0);
-        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--shadow-lg);
     }
 
     .dashboard-main {
