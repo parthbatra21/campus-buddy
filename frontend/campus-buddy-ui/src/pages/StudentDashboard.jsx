@@ -1,10 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import { academicAPI } from '../services/api';
 import NoticeBoard from '../components/NoticeBoard';
 import MainLayout from '../components/layout/MainLayout';
 import FacilityBooking from '../components/FacilityBooking';
 import Attendance from './Attendance';
+import Card from '../components/ui/Card';
+import Button from '../components/ui/Button';
+import Badge from '../components/ui/Badge';
+import Input from '../components/ui/Input';
+import Select from '../components/ui/Select';
+import Table from '../components/ui/Table';
 import './Dashboard.css';
 
 function StudentDashboard({ user, handleLogout }) {
@@ -13,9 +19,17 @@ function StudentDashboard({ user, handleLogout }) {
     const [scanResult, setScanResult] = useState(null);
     const [showScanner, setShowScanner] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [fetchError, setFetchError] = useState(null);
+    
+    // Manual Input State
+    const [manualCode, setManualCode] = useState('');
+    const [manualCourse, setManualCourse] = useState('');
 
     const [activeTab, setActiveTab] = useState('dashboard');
 
+    // Calendar day ordering (not alphabetical)
+    const DAY_ORDER = { MONDAY: 1, TUESDAY: 2, WEDNESDAY: 3, THURSDAY: 4, FRIDAY: 5, SATURDAY: 6, SUNDAY: 7 };
+    const DAYS = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
 
     useEffect(() => {
         fetchData();
@@ -43,14 +57,24 @@ function StudentDashboard({ user, handleLogout }) {
                 academicAPI.getTimetable(),
                 academicAPI.getStudentAttendance()
             ]);
-            setTimetable(timetableRes.data);
-            setAttendanceHistory(attendanceRes.data);
+            setTimetable(timetableRes.data || []);
+            setAttendanceHistory(attendanceRes.data || []);
+            setFetchError(null);
         } catch (error) {
             console.error("Failed to fetch data", error);
+            setFetchError('Failed to load dashboard data.');
         } finally {
             setLoading(false);
         }
     };
+
+    // Filter and sort timetable for today
+    const todayStr = DAYS[new Date().getDay()];
+    const todaySchedule = useMemo(() => {
+        return timetable
+            .filter(t => (t.dayOfWeek || '').toUpperCase() === todayStr)
+            .sort((a, b) => (a.startTime || '').localeCompare(b.startTime || ''));
+    }, [timetable, todayStr]);
 
     const onScanSuccess = async (decodedText, decodedResult) => {
         setShowScanner(false);
@@ -92,6 +116,33 @@ function StudentDashboard({ user, handleLogout }) {
         // console.warn(`Code scan error = ${error}`);
     };
 
+    const handleManualSubmit = async () => {
+        if (!manualCode || !manualCourse) {
+            alert("Please enter code and select course.");
+            return;
+        }
+        if (!navigator.geolocation) {
+            alert("Geolocation not supported.");
+            return;
+        }
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+            try {
+                const response = await academicAPI.markAttendance({
+                    sessionCode: manualCode, 
+                    courseCode: manualCourse,
+                    latitude: pos.coords.latitude, 
+                    longitude: pos.coords.longitude
+                });
+                alert("Attendance Marked Successfully!");
+                setManualCode('');
+                setManualCourse('');
+                fetchData();
+            } catch (e) {
+                alert(e.response?.data?.error || "Failed to mark attendance");
+            }
+        }, () => alert("Location access required."));
+    }
+
     // Calculate generic stats
     const totalClasses = attendanceHistory.length;
     const presentClasses = attendanceHistory.filter(r => r.status === 'PRESENT').length;
@@ -99,14 +150,12 @@ function StudentDashboard({ user, handleLogout }) {
 
     const getNextClass = () => {
         const now = new Date();
-        const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
-        const today = days[now.getDay()];
         const currentTime = now.toTimeString().split(' ')[0];
-        const upcoming = timetable.find(t => t.dayOfWeek === today && t.startTime > currentTime);
+        const upcoming = todaySchedule.find(t => t.startTime > currentTime);
         if (upcoming) {
             return {
                 code: upcoming.courseCode,
-                time: upcoming.startTime.substring(0, 5),
+                time: (upcoming.startTime || '').substring(0, 5),
                 room: upcoming.roomNumber
             };
         }
@@ -123,62 +172,64 @@ function StudentDashboard({ user, handleLogout }) {
             setActiveTab={setActiveTab}
         >
             {activeTab === 'dashboard' ? (
-                <>
-                    <div className="page-header">
-                        <h1>Welcome back, {user.email.split('@')[0]} 👋</h1>
-                        <p>Here's what's happening today on campus.</p>
+                <div className="fade-in">
+                    <div className="page-header" style={{ marginBottom: '2rem' }}>
+                        <h1>Overview</h1>
+                        <p>Welcome back, {user.email.split('@')[0]}. Here's what's happening today.</p>
                     </div>
 
                     {/* Stats Widgets */}
                     <div className="stats-overview">
-                        <div className="stat-card">
+                        <Card noPadding={false}>
                             <div className="stat-header">
-                                <span className="stat-title">Attendance</span>
-                                <div className="stat-icon" style={{ color: '#4f46e5' }}>📊</div>
+                                <span className="stat-desc" style={{ marginTop: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Attendance</span>
+                                <div className="stat-icon" style={{ color: 'var(--primary)' }}>📊</div>
                             </div>
                             <p className="stat-value">{attendancePercentage}%</p>
-                            <p className="stat-desc">
-                                <span className={`stat-trend ${attendancePercentage >= 75 ? 'positive' : 'negative'}`}>
+                            <div style={{ marginTop: '0.5rem' }}>
+                                <Badge variant={attendancePercentage >= 75 ? 'success' : 'error'}>
                                     {attendancePercentage >= 75 ? 'Good Standing' : 'Needs Improvement'}
-                                </span>
-                            </p>
-                        </div>
+                                </Badge>
+                            </div>
+                        </Card>
 
-                        <div className="stat-card">
+                        <Card noPadding={false}>
                             <div className="stat-header">
-                                <span className="stat-title">Next Class</span>
-                                <div className="stat-icon" style={{ color: '#ec4899' }}>🕒</div>
+                                <span className="stat-desc" style={{ marginTop: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Next Class</span>
+                                <div className="stat-icon" style={{ color: 'var(--warning)' }}>🕒</div>
                             </div>
                             {nextClass ? (
                                 <>
                                     <p className="stat-value">{nextClass.code}</p>
-                                    <p className="stat-desc">at {nextClass.time} • Room {nextClass.room}</p>
+                                    <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+                                        at {nextClass.time} • Room {nextClass.room}
+                                    </span>
                                 </>
                             ) : (
                                 <>
-                                    <p className="stat-value" style={{ fontSize: '1.75rem', color: '#64748b' }}>Done for today</p>
-                                    <p className="stat-desc">Relax! ☕</p>
+                                    <p className="stat-value" style={{ color: 'var(--text-tertiary)' }}>Done</p>
+                                    <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>No more classes today</span>
                                 </>
                             )}
-                        </div>
+                        </Card>
 
-                        <div className="stat-card">
+                        <Card noPadding={false}>
                             <div className="stat-header">
-                                <span className="stat-title">Assignments</span>
-                                <div className="stat-icon" style={{ color: '#f59e0b' }}>📝</div>
+                                <span className="stat-desc" style={{ marginTop: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Assignments</span>
+                                <div className="stat-icon" style={{ color: 'var(--info)' }}>📝</div>
                             </div>
                             <p className="stat-value">3</p>
-                            <p className="stat-desc">1 Due Tomorrow</p>
-                        </div>
+                            <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>1 Due Tomorrow</span>
+                        </Card>
 
-                        <div className="stat-card">
+                        <Card noPadding={false}>
                             <div className="stat-header">
-                                <span className="stat-title">CGPA</span>
-                                <div className="stat-icon" style={{ color: '#10b981' }}>🎓</div>
+                                <span className="stat-desc" style={{ marginTop: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>CGPA</span>
+                                <div className="stat-icon" style={{ color: 'var(--success)' }}>🎓</div>
                             </div>
                             <p className="stat-value">8.9</p>
-                            <p className="stat-desc">Last Semester</p>
-                        </div>
+                            <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Last Semester</span>
+                        </Card>
                     </div>
 
                     {/* Two Column Grid */}
@@ -186,10 +237,7 @@ function StudentDashboard({ user, handleLogout }) {
 
                         {/* Left Column (Wider) */}
                         <div className="dashboard-column">
-                            <div className="section-card">
-                                <div className="section-header">
-                                    <h3><span style={{ fontSize: '1.75rem' }}>⚡</span> Quick Actions</h3>
-                                </div>
+                            <Card title="Quick Actions">
                                 <div className="quick-actions-btns">
                                     <button className="action-card-btn" onClick={() => { setShowScanner(!showScanner); setScanResult(null); }}>
                                         <span className="action-icon">📷</span>
@@ -202,96 +250,89 @@ function StudentDashboard({ user, handleLogout }) {
                                 </div>
 
                                 {showScanner && (
-                                    <div style={{ marginTop: '2rem' }}>
-                                        <div id="reader" style={{ border: '2px solid var(--border-color)', borderRadius: '16px', overflow: 'hidden' }}></div>
+                                    <div style={{ marginTop: '1.5rem' }}>
+                                        <div id="reader" style={{ border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}></div>
                                     </div>
                                 )}
 
                                 {scanResult && (
-                                    <div style={{ marginTop: '1.5rem', padding: '1rem', borderRadius: '12px', fontWeight: 600, background: scanResult.success ? 'var(--success-light)' : 'var(--error-bg)', color: scanResult.success ? 'var(--success-dark)' : '#b91c1c' }}>
-                                        {scanResult.success || scanResult.error}
+                                    <div style={{ marginTop: '1.5rem' }}>
+                                        <Card style={{ background: scanResult.success ? 'var(--success-bg)' : 'var(--error-bg)', borderColor: 'transparent', color: scanResult.success ? 'var(--success-text)' : 'var(--error-text)' }}>
+                                            <strong>{scanResult.success ? "Success: " : "Error: "}</strong> {scanResult.success || scanResult.error}
+                                        </Card>
                                     </div>
                                 )}
 
-                                <div style={{ marginTop: '2.5rem', paddingTop: '2rem', borderTop: '1px dashed var(--border-color)' }}>
-                                    <h4 style={{ margin: '0 0 1rem 0', color: 'var(--text-secondary)' }}>Or Enter Session Code Manually</h4>
-                                    <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                                        <input type="text" placeholder="6-DIGIT CODE" maxLength="6" id="manual-code-input" className="input-field" style={{ width: '150px', letterSpacing: '0.1em', textAlign: 'center', fontWeight: 'bold' }} />
-                                        <select id="manual-course-select" className="input-field" style={{ flex: 1, minWidth: '150px' }}>
-                                            <option value="">Select Course...</option>
-                                            {timetable.length > 0 ?
-                                                [...new Set(timetable.map(t => t.courseCode))].map(c => <option key={c} value={c}>{c}</option>)
-                                                : <option value="CS101">CS101 - Fallback</option>
-                                            }
-                                        </select>
-                                        <button className="btn btn-primary" onClick={async () => {
-                                            const code = document.getElementById('manual-code-input').value;
-                                            const course = document.getElementById('manual-course-select').value;
-                                            if (!code || !course) return alert("Please enter code and course.");
-                                            if (!navigator.geolocation) return alert("Geolocation not supported.");
-                                            navigator.geolocation.getCurrentPosition(async (pos) => {
-                                                try {
-                                                    const response = await academicAPI.markAttendance({
-                                                        sessionCode: code, courseCode: course,
-                                                        latitude: pos.coords.latitude, longitude: pos.coords.longitude
-                                                    });
-                                                    alert("Attendance Marked Successfully!");
-                                                    fetchData();
-                                                } catch (e) {
-                                                    alert(e.response?.data?.error || "Failed to mark attendance");
-                                                }
-                                            }, () => alert("Location access required."));
-                                        }}>Submit</button>
+                                <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-default)' }}>
+                                    <h4 style={{ margin: '0 0 1rem 0' }}>Or Enter Code Manually</h4>
+                                    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+                                        <div style={{ flex: '1', minWidth: '120px' }}>
+                                            <Input 
+                                                label="Session Code" 
+                                                placeholder="6-DIGIT" 
+                                                maxLength="6" 
+                                                value={manualCode}
+                                                onChange={(e) => setManualCode(e.target.value)}
+                                                style={{ letterSpacing: '0.1em', fontWeight: 'bold' }} 
+                                            />
+                                        </div>
+                                        <div style={{ flex: '2', minWidth: '150px' }}>
+                                            <Select 
+                                                label="Course Code"
+                                                value={manualCourse}
+                                                onChange={(e) => setManualCourse(e.target.value)}
+                                                options={[
+                                                    { value: "", label: "Select course..." },
+                                                    ...(timetable.length > 0 
+                                                        ? [...new Set(timetable.map(t => t.courseCode))].map(c => ({ value: c, label: c }))
+                                                        : [{ value: "CS101", label: "CS101 - Fallback" }])
+                                                ]}
+                                            />
+                                        </div>
+                                        <Button variant="primary" onClick={handleManualSubmit}>Submit</Button>
                                     </div>
                                 </div>
-                            </div>
+                            </Card>
 
-                            <div className="section-card">
-                                <div className="section-header">
-                                    <h3><span style={{ fontSize: '1.75rem' }}>📅</span> Today's Schedule</h3>
-                                </div>
-                                {timetable.length === 0 ? (
-                                    <p className="empty-state">No classes scheduled today. 🎉</p>
-                                ) : (
-                                    <div className="timetable-list">
-                                        {timetable.map((cls) => (
-                                            <div key={cls.id} className="timetable-item">
-                                                <div className="course-info">
-                                                    <span className="course-name">{cls.courseName}</span>
-                                                    <span className="course-meta">{cls.courseCode} • Room {cls.roomNumber}</span>
-                                                </div>
-                                                <div className="time-block">
-                                                    <span className="time-range">{cls.startTime?.substring(0, 5)} - {cls.endTime?.substring(0, 5)}</span>
-                                                    <span className="time-day">{cls.dayOfWeek}</span>
-                                                </div>
+                            <Card title="Today's Schedule" noPadding={true}>
+                                <Table 
+                                    columns={[
+                                        { header: "Time", accessor: "time", width: "120px", render: (row) => <strong>{row.startTime?.substring(0, 5)} - {row.endTime?.substring(0, 5)}</strong> },
+                                        { header: "Course", accessor: "courseName", render: (row) => (
+                                            <div>
+                                                <div style={{ fontWeight: 600 }}>{row.courseName}</div>
+                                                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{row.courseCode}</div>
                                             </div>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
+                                        )},
+                                        { header: "Room", accessor: "roomNumber" }
+                                    ]}
+                                    data={todaySchedule}
+                                    keyExtractor={(row) => row.id}
+                                    emptyMessage="No classes scheduled for today."
+                                />
+                            </Card>
                         </div>
 
                         {/* Right Column (Narrower) */}
                         <div className="dashboard-column">
                             <NoticeBoard role={user.role} />
 
-                            <div className="section-card hidden lg:block" style={{ marginTop: '0', flex: 1 }}>
-                                <div className="section-header" style={{ marginBottom: '1.5rem' }}>
-                                    <h3><span style={{ fontSize: '1.75rem' }}>✅</span> Recent History</h3>
-                                </div>
+                            <Card title="Recent Attendance" className="hidden lg:block">
                                 <ul className="history-list">
                                     {attendanceHistory.slice(0, 6).map((record) => (
                                         <li key={record.id} className="history-item">
-                                            <span>{record.courseCode}</span>
-                                            <span className={`history-status ${record.status.toLowerCase()}`}>{record.status}</span>
+                                            <span style={{ fontWeight: 600 }}>{record.courseCode}</span>
+                                            <Badge variant={record.status === 'PRESENT' ? 'success' : 'error'}>
+                                                {record.status}
+                                            </Badge>
                                         </li>
                                     ))}
                                     {attendanceHistory.length === 0 && <p className="empty-state">No records found.</p>}
                                 </ul>
-                            </div>
+                            </Card>
                         </div>
                     </div>
-                </>
+                </div>
             ) : activeTab === 'facilities' ? (
                 <div className="fade-in">
                     <FacilityBooking />
