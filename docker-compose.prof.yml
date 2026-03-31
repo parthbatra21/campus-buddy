@@ -1,0 +1,142 @@
+# This file is designed to run the application using pre-built images from GHCR.
+# Command: docker-compose -f docker-compose.prof.yml up -d
+
+services:
+  # Databases
+  postgres-auth:
+    image: postgres:16-alpine
+    container_name: campus-buddy-postgres-auth
+    environment:
+      POSTGRES_DB: campus_buddy_auth
+      POSTGRES_USER: parth
+      POSTGRES_PASSWORD: password
+    networks:
+      - campus-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U parth -d campus_buddy_auth" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres-academic:
+    image: postgres:16-alpine
+    container_name: campus-buddy-postgres-academic
+    environment:
+      POSTGRES_DB: campus_buddy_academic
+      POSTGRES_USER: parth
+      POSTGRES_PASSWORD: password
+    networks:
+      - campus-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U parth -d campus_buddy_academic" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres-campus:
+    image: postgres:16-alpine
+    container_name: campus-buddy-postgres-campus
+    environment:
+      POSTGRES_DB: campus_buddy_campus
+      POSTGRES_USER: parth
+      POSTGRES_PASSWORD: password
+    networks:
+      - campus-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U parth -d campus_buddy_campus" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend Services (Pulling from GHCR)
+  auth-service:
+    image: ghcr.io/parthbatra21/campus-buddy-auth-service:latest
+    container_name: campus-buddy-auth-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-auth:5432/campus_buddy_auth
+      SPRING_DATASOURCE_USERNAME: parth
+      SPRING_DATASOURCE_PASSWORD: password
+      JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
+    depends_on:
+      postgres-auth:
+        condition: service_healthy
+    networks:
+      - campus-network
+    restart: always
+
+  academic-service:
+    image: ghcr.io/parthbatra21/campus-buddy-academic-service:latest
+    container_name: campus-buddy-academic-service
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-academic:5432/campus_buddy_academic
+      SPRING_DATASOURCE_USERNAME: parth
+      SPRING_DATASOURCE_PASSWORD: password
+      JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
+    depends_on:
+      postgres-academic:
+        condition: service_healthy
+    networks:
+      - campus-network
+    restart: always
+
+  campus-service:
+    image: ghcr.io/parthbatra21/campus-buddy-campus-service:latest
+    container_name: campus-buddy-campus-service
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-campus:5432/campus_buddy_campus
+      SPRING_DATASOURCE_USERNAME: parth
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+      JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
+    depends_on:
+      postgres-campus:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8083/actuator/health" ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    networks:
+      - campus-network
+    restart: always
+
+  bff-service:
+    image: ghcr.io/parthbatra21/campus-buddy-bff-service:latest
+    container_name: campus-buddy-bff-service
+    ports:
+      - "8080:8080"
+    environment:
+      JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
+      SERVICES_AUTH_URL: http://auth-service:8081
+      SERVICES_ACADEMIC_URL: http://academic-service:8082
+      SERVICES_CAMPUS_URL: http://campus-service:8083
+    depends_on:
+      - auth-service
+      - academic-service
+      - campus-service
+    networks:
+      - campus-network
+    restart: always
+
+  # Frontend
+  frontend:
+    image: ghcr.io/parthbatra21/campus-buddy-frontend:latest
+    container_name: campus-buddy-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - bff-service
+    networks:
+      - campus-network
+    restart: always
+
+networks:
+  campus-network:
+    driver: bridge
