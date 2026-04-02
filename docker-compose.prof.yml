@@ -1,52 +1,46 @@
-# This file is designed to run the application using pre-built images from GHCR.
+# Campus Buddy - Professor's Handover Compose File (Single-File Edition)
 # Command: docker-compose -f docker-compose.prof.yml up -d
 
 services:
-  # Databases
-  postgres-auth:
+  # Unified Database
+  postgres:
     image: postgres:16-alpine
-    container_name: campus-buddy-postgres-auth
+    container_name: campus-buddy-postgres
     environment:
       POSTGRES_DB: campus_buddy_auth
       POSTGRES_USER: parth
       POSTGRES_PASSWORD: password
     networks:
       - campus-network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          memory: 512M
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U parth -d campus_buddy_auth" ]
+      test: [ "CMD-SHELL", "pg_isready -U parth" ]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  postgres-academic:
+  # One-time DB Setup (Creates additional databases)
+  db-init:
     image: postgres:16-alpine
-    container_name: campus-buddy-postgres-academic
+    container_name: campus-buddy-db-init
     environment:
-      POSTGRES_DB: campus_buddy_academic
-      POSTGRES_USER: parth
-      POSTGRES_PASSWORD: password
+      PGPASSWORD: password
+    depends_on:
+      postgres:
+        condition: service_healthy
     networks:
       - campus-network
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U parth -d campus_buddy_academic" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  postgres-campus:
-    image: postgres:16-alpine
-    container_name: campus-buddy-postgres-campus
-    environment:
-      POSTGRES_DB: campus_buddy_campus
-      POSTGRES_USER: parth
-      POSTGRES_PASSWORD: password
-    networks:
-      - campus-network
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U parth -d campus_buddy_campus" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    command: >
+      sh -c "
+      psql -h postgres -U parth -d campus_buddy_auth -c 'CREATE DATABASE campus_buddy_academic;' || true;
+      psql -h postgres -U parth -d campus_buddy_auth -c 'CREATE DATABASE campus_buddy_campus;' || true;
+      echo 'Databases initialized successfully.'
+      "
 
   # Backend Services (Pulling from GHCR)
   auth-service:
@@ -55,15 +49,19 @@ services:
     ports:
       - "8081:8081"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-auth:5432/campus_buddy_auth
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/campus_buddy_auth
       SPRING_DATASOURCE_USERNAME: parth
       SPRING_DATASOURCE_PASSWORD: password
       JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
     depends_on:
-      postgres-auth:
-        condition: service_healthy
+      db-init:
+        condition: service_completed_successfully
     networks:
       - campus-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
     restart: always
 
   academic-service:
@@ -72,15 +70,19 @@ services:
     ports:
       - "8082:8082"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-academic:5432/campus_buddy_academic
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/campus_buddy_academic
       SPRING_DATASOURCE_USERNAME: parth
       SPRING_DATASOURCE_PASSWORD: password
       JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
     depends_on:
-      postgres-academic:
-        condition: service_healthy
+      db-init:
+        condition: service_completed_successfully
     networks:
       - campus-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
     restart: always
 
   campus-service:
@@ -89,15 +91,15 @@ services:
     ports:
       - "8083:8083"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-campus:5432/campus_buddy_campus
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/campus_buddy_campus
       SPRING_DATASOURCE_USERNAME: parth
       SPRING_DATASOURCE_PASSWORD: password
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
       JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
     depends_on:
-      postgres-campus:
-        condition: service_healthy
+      db-init:
+        condition: service_completed_successfully
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8083/actuator/health" ]
       interval: 15s
@@ -105,6 +107,10 @@ services:
       retries: 5
     networks:
       - campus-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
     restart: always
 
   bff-service:
@@ -123,6 +129,10 @@ services:
       - campus-service
     networks:
       - campus-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
     restart: always
 
   # Frontend
@@ -135,8 +145,15 @@ services:
       - bff-service
     networks:
       - campus-network
+    deploy:
+      resources:
+        limits:
+          memory: 128M
     restart: always
 
 networks:
   campus-network:
     driver: bridge
+
+volumes:
+  postgres_data:

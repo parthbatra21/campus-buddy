@@ -1,58 +1,25 @@
 services:
-  # Databases
-  postgres-auth:
+  # Unitied Database
+  postgres:
     image: postgres:16-alpine
-    container_name: campus-buddy-postgres-auth
+    container_name: campus-buddy-postgres
     environment:
-      POSTGRES_DB: campus_buddy_auth
+      POSTGRES_DB: campus_buddy_auth # Primary DB
       POSTGRES_USER: parth
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
     volumes:
-      - postgres_auth_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     networks:
       - campus-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U parth -d campus_buddy_auth" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  postgres-academic:
-    image: postgres:16-alpine
-    container_name: campus-buddy-postgres-academic
-    environment:
-      POSTGRES_DB: campus_buddy_academic
-      POSTGRES_USER: parth
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5433:5432"
-    volumes:
-      - postgres_academic_data:/var/lib/postgresql/data
-    networks:
-      - campus-network
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U parth -d campus_buddy_academic" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  postgres-campus:
-    image: postgres:16-alpine
-    container_name: campus-buddy-postgres-campus
-    environment:
-      POSTGRES_DB: campus_buddy_campus
-      POSTGRES_USER: parth
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5434:5432"
-    volumes:
-      - postgres_campus_data:/var/lib/postgresql/data
-    networks:
-      - campus-network
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U parth -d campus_buddy_campus" ]
+      test: [ "CMD-SHELL", "pg_ready -U parth" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -64,15 +31,19 @@ services:
     ports:
       - "8081:8081"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-auth:5432/campus_buddy_auth
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/campus_buddy_auth
       SPRING_DATASOURCE_USERNAME: parth
       SPRING_DATASOURCE_PASSWORD: password
       JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
     depends_on:
-      postgres-auth:
+      postgres:
         condition: service_healthy
     networks:
       - campus-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
 
   academic-service:
     build: ./backend/academic-service
@@ -80,15 +51,19 @@ services:
     ports:
       - "8082:8082"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-academic:5432/campus_buddy_academic
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/campus_buddy_academic
       SPRING_DATASOURCE_USERNAME: parth
       SPRING_DATASOURCE_PASSWORD: password
       JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
     depends_on:
-      postgres-academic:
+      postgres:
         condition: service_healthy
     networks:
       - campus-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
 
   campus-service:
     build: ./backend/campus-service
@@ -96,14 +71,14 @@ services:
     ports:
       - "8083:8083"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-campus:5432/campus_buddy_campus
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/campus_buddy_campus
       SPRING_DATASOURCE_USERNAME: parth
       SPRING_DATASOURCE_PASSWORD: password
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
       JWT_SECRET: campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security
     depends_on:
-      postgres-campus:
+      postgres:
         condition: service_healthy
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8083/actuator/health" ]
@@ -112,6 +87,10 @@ services:
       retries: 5
     networks:
       - campus-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
 
   bff-service:
     build: ./backend/bff-service
@@ -129,6 +108,10 @@ services:
       - campus-service
     networks:
       - campus-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
 
   # Frontend
   frontend:
@@ -140,12 +123,14 @@ services:
       - bff-service
     networks:
       - campus-network
+    deploy:
+      resources:
+        limits:
+          memory: 128M
 
 networks:
   campus-network:
     driver: bridge
 
 volumes:
-  postgres_auth_data:
-  postgres_academic_data:
-  postgres_campus_data:
+  postgres_data:
