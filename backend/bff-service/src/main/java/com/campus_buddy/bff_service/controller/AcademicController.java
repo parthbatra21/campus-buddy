@@ -5,8 +5,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import lombok.RequiredArgsConstructor;
 
 /**
  * BFF Academic Controller - Proxies academic requests to Academic Service
@@ -14,16 +16,13 @@ import reactor.core.publisher.Mono;
  */
 @RestController
 @RequestMapping("/api/academic")
+@RequiredArgsConstructor
 public class AcademicController {
 
-    private final WebClient webClient;
+    private final RestTemplate restTemplate;
 
-    @Value("${services.academic.url}")
+    @Value("${services.academic.url:http://academic-service:8082}")
     private String academicServiceUrl;
-
-    public AcademicController(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.build();
-    }
 
     /**
      * Proxy test request to Academic Service
@@ -31,118 +30,80 @@ public class AcademicController {
      */
     @GetMapping("/test")
     public ResponseEntity<String> test(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader) {
-        return webClient.get()
-                .uri(academicServiceUrl + "/test")
-                .header(HttpHeaders.AUTHORIZATION, authHeader)
-                .retrieve()
-                .toEntity(String.class)
-                .map(entity -> ResponseEntity.status(entity.getStatusCode())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(entity.getBody()))
-                .onErrorResume(org.springframework.web.reactive.function.client.WebClientResponseException.class, e -> 
-                    Mono.just(ResponseEntity.status(e.getStatusCode())
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .body(e.getResponseBodyAsString())))
-                .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Academic service unavailable\"}")))
-                .block();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, authHeader);
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        return restTemplate.exchange(
+                academicServiceUrl + "/test",
+                HttpMethod.GET,
+                entity,
+                String.class
+        );
     }
 
-    /**
-     * Proxy session creation request to Academic Service (Faculty only)
-     * POST /api/academic/attendance/session -> Academic Service POST /attendance/session
-     */
     @PostMapping("/attendance/session")
     public ResponseEntity<String> createSession(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader,
             @RequestBody String requestBody) {
-        return webClient.post()
-                .uri(academicServiceUrl + "/attendance/session")
-                .header(HttpHeaders.AUTHORIZATION, authHeader)
-                .header(HttpHeaders.CONTENT_TYPE, "application/json")
-                .bodyValue(requestBody)
-                .retrieve()
-                .toEntity(String.class)
-                .map(entity -> ResponseEntity.status(entity.getStatusCode())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(entity.getBody()))
-                .onErrorResume(org.springframework.web.reactive.function.client.WebClientResponseException.class, e -> 
-                    Mono.just(ResponseEntity.status(e.getStatusCode())
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .body(e.getResponseBodyAsString())))
-                .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to create session\"}")))
-                .block();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, authHeader);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
+
+        return restTemplate.exchange(
+                academicServiceUrl + "/attendance/session",
+                HttpMethod.POST,
+                entity,
+                String.class
+        );
     }
 
-    /**
-     * Proxy mark attendance request to Academic Service (Student only)
-     * POST /api/academic/attendance/mark -> Academic Service POST /attendance/mark
-     */
     @PostMapping("/attendance/mark")
     public ResponseEntity<String> markAttendance(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader,
             @RequestBody String requestBody) {
-        return webClient.post()
-                .uri(academicServiceUrl + "/attendance/mark")
-                .header(HttpHeaders.AUTHORIZATION, authHeader)
-                .header(HttpHeaders.CONTENT_TYPE, "application/json")
-                .bodyValue(requestBody)
-                .retrieve()
-                .toEntity(String.class)
-                .map(entity -> ResponseEntity.status(entity.getStatusCode())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(entity.getBody()))
-                .onErrorResume(org.springframework.web.reactive.function.client.WebClientResponseException.class, e -> 
-                    Mono.just(ResponseEntity.status(e.getStatusCode())
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .body(e.getResponseBodyAsString())))
-                .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to mark attendance\"}")))
-                .block();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, authHeader);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
+
+        return restTemplate.exchange(
+                academicServiceUrl + "/attendance/mark",
+                HttpMethod.POST,
+                entity,
+                String.class
+        );
     }
 
-    /**
-     * Proxy student attendance view request to Academic Service
-     * GET /api/academic/attendance/student -> Academic Service GET /attendance/student
-     */
     @GetMapping("/attendance/student")
     public ResponseEntity<String> getStudentAttendance(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader) {
-        return webClient.get()
-                .uri(academicServiceUrl + "/attendance/student")
-                .header(HttpHeaders.AUTHORIZATION, authHeader)
-                .retrieve()
-                .toEntity(String.class)
-                .map(entity -> ResponseEntity.status(entity.getStatusCode())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(entity.getBody()))
-                .onErrorResume(org.springframework.web.reactive.function.client.WebClientResponseException.class, e -> 
-                    Mono.just(ResponseEntity.status(e.getStatusCode())
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .body(e.getResponseBodyAsString())))
-                .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to fetch attendance\"}")))
-                .block();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, authHeader);
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        return restTemplate.exchange(
+                academicServiceUrl + "/attendance/student",
+                HttpMethod.GET,
+                entity,
+                String.class
+        );
     }
 
-    /**
-     * Proxy faculty course attendance view request to Academic Service (Faculty only)
-     * GET /api/academic/attendance/faculty/{courseCode} -> Academic Service GET /attendance/faculty/{courseCode}
-     */
     @GetMapping("/attendance/faculty/{courseCode}")
     public ResponseEntity<String> getCourseAttendance(
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader,
             @PathVariable String courseCode) {
-        return webClient.get()
-                .uri(academicServiceUrl + "/attendance/faculty/" + courseCode)
-                .header(HttpHeaders.AUTHORIZATION, authHeader)
-                .retrieve()
-                .toEntity(String.class)
-                .map(entity -> ResponseEntity.status(entity.getStatusCode())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(entity.getBody()))
-                .onErrorResume(org.springframework.web.reactive.function.client.WebClientResponseException.class, e -> 
-                    Mono.just(ResponseEntity.status(e.getStatusCode())
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .body(e.getResponseBodyAsString())))
-                .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to fetch course attendance\"}")))
-                .block();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, authHeader);
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        return restTemplate.exchange(
+                academicServiceUrl + "/attendance/faculty/" + courseCode,
+                HttpMethod.GET,
+                entity,
+                String.class
+        );
     }
 }

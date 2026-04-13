@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 /**
  * Response DTO for attendance records
@@ -21,5 +21,6 @@ public class AttendanceResponse {
     private String courseCode;
     private LocalDate lectureDate;
     private String status;
-    private LocalDateTime markedAt;
+    private Instant markedAt;
+    private String verificationType;
 }

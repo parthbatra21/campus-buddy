@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { authAPI } from '../services/api';
-import './AuthLayout.css';
+import '../styles/AuthLayout.css';
 
 function Signup() {
     const [role, setRole] = useState('STUDENT'); // Default role

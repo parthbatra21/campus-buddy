@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,8 +50,8 @@ class AttendanceServiceTest {
         validSession.setSessionCode("ABC123");
         validSession.setCourseCode("CS101");
         validSession.setCreatedBy(facultyEmail);
-        validSession.setExpiryTime(LocalDateTime.now().plusMinutes(5));
-        validSession.setCreatedAt(LocalDateTime.now());
+        validSession.setExpiryTime(Instant.now().plusSeconds(300));
+        validSession.setCreatedAt(Instant.now());
         validSession.setLatitude(28.6139);
         validSession.setLongitude(77.2090);
         validSession.setAllowedRadius(100.0);
@@ -78,7 +78,7 @@ class AttendanceServiceTest {
         savedSession.setId("new-session-id");
         savedSession.setSessionCode("XYZ789");
         savedSession.setCourseCode("CS101");
-        savedSession.setExpiryTime(LocalDateTime.now().plusMinutes(10));
+        savedSession.setExpiryTime(Instant.now().plusSeconds(600));
         savedSession.setCreatedBy(facultyEmail);
 
         when(sessionRepository.save(any(AttendanceSession.class))).thenReturn(savedSession);
@@ -97,7 +97,7 @@ class AttendanceServiceTest {
     @Test
     @DisplayName("Mark attendance — valid scan succeeds")
     void markAttendance_validScan_shouldSucceed() {
-        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(LocalDateTime.class)))
+        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(Instant.class)))
                 .thenReturn(Optional.of(validSession));
         when(attendanceRepository.existsByStudentEmailAndQrSessionId(studentEmail, "session-123"))
                 .thenReturn(false);
@@ -117,7 +117,7 @@ class AttendanceServiceTest {
     @Test
     @DisplayName("Mark attendance — duplicate attempt returns error")
     void markAttendance_duplicateAttempt_shouldThrowIllegalState() {
-        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(LocalDateTime.class)))
+        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(Instant.class)))
                 .thenReturn(Optional.of(validSession));
         when(attendanceRepository.existsByStudentEmailAndQrSessionId(studentEmail, "session-123"))
                 .thenReturn(true);
@@ -134,9 +134,9 @@ class AttendanceServiceTest {
     void markAttendance_expiredSession_shouldThrowIllegalArgument() {
         // Session found by query (edge case: found just before expiry)
         // but by the time we re-check, it's expired
-        validSession.setExpiryTime(LocalDateTime.now().minusSeconds(1));
+        validSession.setExpiryTime(Instant.now().minusSeconds(1));
 
-        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(LocalDateTime.class)))
+        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(Instant.class)))
                 .thenReturn(Optional.of(validSession));
 
         assertThatThrownBy(() -> attendanceService.markAttendance(validRequest, studentEmail))
@@ -149,7 +149,7 @@ class AttendanceServiceTest {
     @Test
     @DisplayName("Mark attendance — invalid session code returns error")
     void markAttendance_invalidSessionCode_shouldThrowIllegalArgument() {
-        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(LocalDateTime.class)))
+        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(Instant.class)))
                 .thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> attendanceService.markAttendance(validRequest, studentEmail))
@@ -174,7 +174,7 @@ class AttendanceServiceTest {
     void markAttendance_courseCodeMismatch_shouldThrowIllegalArgument() {
         validRequest.setCourseCode("CS999"); // Wrong course
 
-        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(LocalDateTime.class)))
+        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(Instant.class)))
                 .thenReturn(Optional.of(validSession));
 
         assertThatThrownBy(() -> attendanceService.markAttendance(validRequest, studentEmail))
@@ -191,7 +191,7 @@ class AttendanceServiceTest {
         validRequest.setLatitude(19.0760); // Mumbai latitude
         validRequest.setLongitude(72.8777); // Mumbai longitude
 
-        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(LocalDateTime.class)))
+        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(Instant.class)))
                 .thenReturn(Optional.of(validSession));
 
         assertThatThrownBy(() -> attendanceService.markAttendance(validRequest, studentEmail))
@@ -207,7 +207,7 @@ class AttendanceServiceTest {
         validRequest.setLatitude(null);
         validRequest.setLongitude(null);
 
-        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(LocalDateTime.class)))
+        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(Instant.class)))
                 .thenReturn(Optional.of(validSession));
 
         assertThatThrownBy(() -> attendanceService.markAttendance(validRequest, studentEmail))
@@ -223,7 +223,7 @@ class AttendanceServiceTest {
         validRequest.setLatitude(null);
         validRequest.setLongitude(null);
 
-        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(LocalDateTime.class)))
+        when(sessionRepository.findBySessionCodeAndExpiryTimeAfter(eq("ABC123"), any(Instant.class)))
                 .thenReturn(Optional.of(validSession));
         when(attendanceRepository.existsByStudentEmailAndQrSessionId(studentEmail, "session-123"))
                 .thenReturn(false);
@@ -247,7 +247,7 @@ class AttendanceServiceTest {
         idRequest.setLatitude(28.6139);
         idRequest.setLongitude(77.2090);
 
-        when(sessionRepository.findByIdAndExpiryTimeAfter(eq("session-123"), any(LocalDateTime.class)))
+        when(sessionRepository.findByIdAndExpiryTimeAfter(eq("session-123"), any(Instant.class)))
                 .thenReturn(Optional.of(validSession));
         when(attendanceRepository.existsByStudentEmailAndQrSessionId(studentEmail, "session-123"))
                 .thenReturn(false);
@@ -258,7 +258,7 @@ class AttendanceServiceTest {
         AttendanceResponse response = attendanceService.markAttendance(idRequest, studentEmail);
 
         assertThat(response).isNotNull();
-        verify(sessionRepository).findByIdAndExpiryTimeAfter(eq("session-123"), any(LocalDateTime.class));
+        verify(sessionRepository).findByIdAndExpiryTimeAfter(eq("session-123"), any(Instant.class));
     }
 
     // ─── Helper ─────────────────────────────────────────────────────
@@ -271,7 +271,7 @@ class AttendanceServiceTest {
         attendance.setQrSessionId("session-123");
         attendance.setLectureDate(LocalDate.now());
         attendance.setStatus("PRESENT");
-        attendance.setMarkedAt(LocalDateTime.now());
+        attendance.setMarkedAt(Instant.now());
         return attendance;
     }
 }

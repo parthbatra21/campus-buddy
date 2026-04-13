@@ -3,7 +3,7 @@ spring:
     name: academic-service
   
   datasource:
-    url: jdbc:postgresql://localhost:5432/campus_buddy_academic
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/neondb?currentSchema=academic}
     username: ${DB_USERNAME:parth}
     password: ${DB_PASSWORD:}
     driver-class-name: org.postgresql.Driver

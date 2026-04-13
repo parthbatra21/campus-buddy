@@ -21,4 +21,8 @@ public class MarkAttendanceRequest {
 
     private Double latitude;
     private Double longitude;
+
+    private String faceImageBase64;
+    private Boolean livenessVerified;
+    private Long timestamp; // For dynamic QR validation
 }

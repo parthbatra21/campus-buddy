@@ -4,7 +4,7 @@ import com.campus_buddy.academic_service.model.AttendanceSession;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Optional;
 
 /**
@@ -20,7 +20,7 @@ public interface AttendanceSessionRepository extends JpaRepository<AttendanceSes
      * @param currentTime Current timestamp
      * @return Optional session if valid and not expired
      */
-    Optional<AttendanceSession> findByIdAndExpiryTimeAfter(String id, LocalDateTime currentTime);
+    Optional<AttendanceSession> findByIdAndExpiryTimeAfter(String id, Instant currentTime);
 
-    Optional<AttendanceSession> findBySessionCodeAndExpiryTimeAfter(String sessionCode, LocalDateTime currentTime);
+    Optional<AttendanceSession> findBySessionCodeAndExpiryTimeAfter(String sessionCode, Instant currentTime);
 }

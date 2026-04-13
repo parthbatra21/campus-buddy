@@ -61,7 +61,8 @@ public class AttendanceController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (!hasRole(auth, "ROLE_STUDENT")) {
-            return errorResponse(HttpStatus.FORBIDDEN, "Access denied. Only students can mark attendance.");
+            log.warn("Access denied for user {}. Required: ROLE_STUDENT, Found: {}", auth.getName(), auth.getAuthorities());
+            return errorResponse(HttpStatus.FORBIDDEN, "Access denied. Required: Student role. Found: " + auth.getAuthorities());
         }
 
         try {

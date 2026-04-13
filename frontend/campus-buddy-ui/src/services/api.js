@@ -3,9 +3,7 @@ import axios from 'axios';
 // Base URL = BFF Service
 // In Docker (Nginx), this will be relative '/api'
 // In local dev, it falls back to 'http://localhost:8080/api'
-const baseURL = import.meta.env.PROD
-  ? '/api'
-  : 'http://localhost:8080/api';
+const baseURL = import.meta.env.VITE_API_URL || '/api';
 
 const api = axios.create({
   baseURL,
@@ -53,20 +51,12 @@ export const academicAPI = {
   // Timetable
   getTimetable: () => api.get('/academic/timetable'),
   addClass: (timetableData) => api.post('/academic/timetable', timetableData),
-
-  // Notices
-  getNotices: (archived = false) => api.get('/campus/notices', { params: { archived } }),
-  createNotice: (noticeData) => api.post('/campus/notices', noticeData),
-  archiveNotice: (id) => api.put(`/campus/notices/${id}/archive`),
 };
 
-// Campus API (Alias for clarity if needed)
-export const campusAPI = {
-  ...academicAPI,
-  // Facilities
-  getFacilities: () => api.get('/campus/facilities'),
-  getMyBookings: (userEmail) => api.get(`/campus/facilities/bookings?userEmail=${userEmail}`),
-  createBooking: (userEmail, bookingData) => api.post(`/campus/facilities/bookings?userEmail=${userEmail}`, bookingData),
+export const copilotAPI = {
+  ask: (message) => api.post('/copilot/ask', { message }),
+  sendImage: (image, prompt) => api.post('/copilot/image', { image, prompt }),
+  getImageStatus: (taskId) => api.get(`/copilot/image/status/${taskId}`),
 };
 
 export default api;

@@ -1,23 +1,40 @@
+server:
+  port: 8080
+
+services:
+  auth:
+    url: ${SERVICES_AUTH_URL:http://localhost:8081}
+  academic:
+    url: ${SERVICES_ACADEMIC_URL:http://localhost:8082}
+  notices:
+    url: ${SERVICES_NOTICES_URL:http://localhost:8083}
+  bookings:
+    url: ${SERVICES_BOOKINGS_URL:http://localhost:8084}
+
+jwt:
+  secret: ${JWT_SECRET:campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security}
+
+# Gemini AI Configuration
+gemini:
+  api-key: ${GEMINI_API_KEY:}
+  model: ${GEMINI_MODEL:gemini-2.0-flash}
+  embedding-model: ${GEMINI_EMBEDDING_MODEL:text-embedding-004}
+  api-base: https://generativelanguage.googleapis.com/v1beta
+
+# pgvector Store
+vectorstore:
+  url: ${VECTORSTORE_URL:jdbc:postgresql://localhost:5432/neondb?currentSchema=vectors}
+  username: ${VECTORSTORE_USERNAME:parth}
+  password: ${VECTORSTORE_PASSWORD:password}
+
+# Enable async support
 spring:
-  application:
-    name: bff-service
+  task:
+    execution:
+      pool:
+        core-size: 4
+        max-size: 8
 
 logging:
   level:
-    root: INFO
-    org.springframework.web: DEBUG
-    com.campus_buddy: DEBUG
-
-# JWT Configuration (MUST MATCH Auth Service)
-jwt:
-  secret: ${JWT_SECRET:campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security}
-  expiration: 86400000  # 24 hours
-
-# Microservice URLs
-services:
-  auth:
-    url: http://localhost:8081
-  academic:
-    url: http://localhost:8082
-  campus:
-    url: http://localhost:8083
+    com.campus_buddy.bff_service: DEBUG

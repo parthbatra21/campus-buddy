@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 /**
  * Attendance Entity - tracks individual attendance records
@@ -42,12 +42,18 @@ public class Attendance {
     private String qrSessionId;
 
     @Column(nullable = false)
-    private LocalDateTime markedAt;
+    private Instant markedAt;
+
+    @Column(columnDefinition = "TEXT")
+    private String faceImageBase64; // Liveness-verified face snapshot
+
+    @Column(nullable = false)
+    private String verificationType = "QR_ONLY"; // Defaults to QR_ONLY
 
     @PrePersist
     protected void onCreate() {
         if (this.markedAt == null) {
-            this.markedAt = LocalDateTime.now();
+            this.markedAt = Instant.now();
         }
         if (this.lectureDate == null) {
             this.lectureDate = LocalDate.now();

@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 /**
  * AttendanceSession Entity - represents a faculty-generated attendance window
@@ -29,13 +29,13 @@ public class AttendanceSession {
     private String sessionCode; // 6-digit code for accessibility
 
     @Column(nullable = false)
-    private LocalDateTime expiryTime;
+    private Instant expiryTime;
 
     @Column(nullable = false)
     private String createdBy; // Faculty email
 
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private Instant createdAt;
 
     // Geolocation fields
     private Double latitude;
@@ -45,11 +45,11 @@ public class AttendanceSession {
     @PrePersist
     protected void onCreate() {
         if (createdAt == null) {
-            createdAt = LocalDateTime.now();
+            createdAt = Instant.now();
         }
         if (expiryTime == null) {
             // Default 10-minute expiry window
-            expiryTime = LocalDateTime.now().plusMinutes(10);
+            expiryTime = Instant.now().plusSeconds(600);
         }
     }
 }

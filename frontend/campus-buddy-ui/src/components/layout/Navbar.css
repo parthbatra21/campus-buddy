@@ -1,0 +1,222 @@
+.navbar {
+  height: var(--navbar-height);
+  background: white;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .navbar-container { padding: 0 1.5rem; }
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.logo-icon {
+  background: var(--color-primary);
+  color: white;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.brand-name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: 1.125rem;
+  white-space: nowrap;
+}
+
+.navbar-links {
+  display: none;
+  gap: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+  .navbar-links { display: flex; }
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+  background: var(--color-surface);
+}
+
+.nav-link.active {
+  color: var(--color-primary-light);
+  background: #eff6ff;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.notification-bell {
+  position: relative;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+}
+
+.unread-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: var(--color-danger);
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.user-profile {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .user-profile { display: flex; }
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.avatar.faculty { background: var(--color-primary-light); }
+.avatar.student { background: var(--color-success); }
+
+.role-pill {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-danger);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.logout-btn:hover {
+  background: var(--color-danger-bg);
+}
+
+.hamburger {
+  display: block;
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+  .hamburger { display: none; }
+}
+
+/* Mobile Drawer Styles... omitted for brevity or added if needed */
+.mobile-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 100;
+}
+
+.mobile-drawer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 280px;
+  background: white;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.close-btn {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+}
+
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.drawer-link {
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.drawer-link.active {
+  background: #eff6ff;
+  color: var(--color-primary-light);
+}
+
+.drawer-link.logout {
+    border: none;
+    text-align: left;
+    margin-top: 2rem;
+    color: var(--color-danger);
+    background: var(--color-danger-bg);
+}

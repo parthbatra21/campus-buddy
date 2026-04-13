@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { authAPI } from '../services/api';
-import './AuthLayout.css';
+import { useAuth } from '../hooks/useAuth';
+import '../styles/AuthLayout.css';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -18,6 +18,8 @@ function Login() {
         }
     }, [location]);
 
+    const { login } = useAuth();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -25,19 +27,10 @@ function Login() {
         setLoading(true);
 
         try {
-            const response = await authAPI.login(email, password);
-            const { token, email: userEmail, role } = response.data;
-
-            // Store JWT token and user data
-            localStorage.setItem('token', token);
-            localStorage.setItem('email', userEmail);
-            localStorage.setItem('role', role);
-            localStorage.setItem('user', JSON.stringify({ email: userEmail, role }));
-
-            // Redirect to dashboard
+            await login(email, password);
             navigate('/dashboard');
         } catch (err) {
-            setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
+            setError(err.message || 'Login failed. Please check your credentials.');
         } finally {
             setLoading(false);
         }

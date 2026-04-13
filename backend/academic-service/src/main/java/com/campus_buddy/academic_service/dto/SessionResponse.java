@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 /**
  * Response DTO for session creation
@@ -18,6 +18,6 @@ public class SessionResponse {
     private String sessionId;
     private String sessionCode;
     private String courseCode;
-    private LocalDateTime expiryTime;
+    private Instant expiryTime;
     private String createdBy;
 }

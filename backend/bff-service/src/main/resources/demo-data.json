@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Database Management Systems (DBMS)",
+    "content": "Comprehensive notes covering relational algebra, SQL, normalization (1NF to BCNF), transaction management, and concurrency control. Includes PYQs from 2022 and 2023.",
+    "source": "MUJ Toppers",
+    "url": "https://mujtoppers.in/cse/dbms"
+  },
+  {
+    "title": "Operating Systems - Core Concepts",
+    "content": "Detailed guide on processes, threads, CPU scheduling algorithms, deadlocks, and memory management (paging and segmentation).",
+    "source": "MUJ Toppers",
+    "url": "https://mujtoppers.in/cse/os"
+  },
+  {
+    "title": "Data Structures and Algorithms",
+    "content": "Array, Linked List, Stack, Queue, Trees (Binary, AVL, Red-Black), Graphs (BFS, DFS, Dijkstra, Prim, Kruskal), and Hashing.",
+    "source": "MUJ Toppers",
+    "url": "https://mujtoppers.in/cse/dsa"
+  },
+  {
+    "title": "Computer Networks: A Top-Down Approach",
+    "content": "Kurose & Ross textbook. Covers application layer (HTTP, DNS), transport layer (TCP/UDP), network layer (IP, routing), and link layer.",
+    "source": "MUJ Library OPAC",
+    "url": "https://library.jaipur.manipal.edu/book/cn-kurose"
+  },
+  {
+    "title": "Database System Concepts (Silberschatz)",
+    "content": "Classic textbook by Abraham Silberschatz, Henry F. Korth, and S. Sudarshan. Excellent reference for deep theoretical DBMS concepts.",
+    "source": "MUJ Library OPAC",
+    "url": "https://library.jaipur.manipal.edu/book/dbms-silberschatz"
+  },
+  {
+    "title": "Modern Operating Systems (Tanenbaum)",
+    "content": "Andrew S. Tanenbaum's book providing a comprehensive look at OS architecture, interprocess communication, and file systems.",
+    "source": "MUJ Library OPAC",
+    "url": "https://library.jaipur.manipal.edu/book/os-tanenbaum"
+  },
+  {
+    "title": "Software Engineering Notes",
+    "content": "SDLC models (Waterfall, Agile, Scrum), requirements engineering, software design patterns, and testing methodologies (Unit, Integration, System).",
+    "source": "MUJ Toppers",
+    "url": "https://mujtoppers.in/cse/se"
+  },
+  {
+    "title": "Object-Oriented Programming (Java) PYQs",
+    "content": "Past Year Questions covering encapsulation, inheritance, polymorphism, abstraction, exception handling, and multithreading in Java.",
+    "source": "MUJ Toppers",
+    "url": "https://mujtoppers.in/cse/oop-java-pyq"
+  },
+  {
+    "title": "Introduction to Algorithms (Cormen)",
+    "content": "CLRS textbook. The standard reference for rigorous algorithm analysis, dynamic programming, and greedy algorithms.",
+    "source": "MUJ Library OPAC",
+    "url": "https://library.jaipur.manipal.edu/book/algo-clrs"
+  },
+  {
+    "title": "Artificial Intelligence: A Modern Approach",
+    "content": "Stuart Russell and Peter Norvig's text on intelligent agents, search algorithms (A*), machine learning foundations, and natural language processing.",
+    "source": "MUJ Library OPAC",
+    "url": "https://library.jaipur.manipal.edu/book/ai-russell-norvig"
+  }
+]

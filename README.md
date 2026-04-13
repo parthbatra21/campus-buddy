@@ -1,129 +1,83 @@
-# Campus Buddy
+# 🎓 Campus Buddy — Next-Generation Campus Management Platform
 
-Campus Buddy is a comprehensive campus management application designed to streamline interactions between students, faculty, and administration. It features a microservices architecture for the backend and a modern React-based frontend.
+Campus Buddy is a state-of-the-art, semi-autonomous campus orchestration platform. Built on a professional **Microservices Architecture**, it integrates AI-powered academic assistance, real-time attendance tracking with computer vision, and streamlined campus resource management.
 
-## 🚀 Key Features
+---
 
-*   **Authentication & User Management**: Secure login for Students, Faculty, and Admins.
-*   **Academic Management**: Attendance tracking, timetable management, and academic records.
-*   **Campus Services**: Notices, events, and other campus-related updates.
-*   **Modern UI**: A responsive and aesthetic user interface built with React and TailwindCSS.
+## 🏛️ System Architecture
+
+The platform follows a **Backend-for-Frontend (BFF)** pattern to aggregate data from multiple specialized microservices:
+
+- **Auth Service (8081)**: JWT-based secure authentication and RBAC.
+- **Academic Service (8082)**: Manages Attendance (MediaPipe Vision), Timetables, and Student records.
+- **Notice Service (8083)**: Priority-tagged campus announcements and notifications.
+- **Booking Service (8084)**: Conflict-aware room and facility reservation system.
+- **BFF Gateway (8080)**: The central brain and API aggregator.
+- **RAG Service (8000)**: Python-based Local AI engine for document retrieval and analysis.
+- **Ollama (11434)**: Local LLM runner (Llama 3.2:3b) powering the Campus Copilot.
+
+---
+
+## ✨ Key Features
+
+### 🤖 Campus Copilot (AI assistant)
+- **Local RAG**: Queries university documents using a vector database (ChromaDB).
+- **Vision Processing**: Submit whiteboard photos or notes for instant summarization and indexing.
+- **Action Chips**: Ready-to-use intents for timetable summaries and attendance checks.
+
+### 📸 Smart Attendance
+- **Liveness Verification**: Uses MediaPipe for QR scan + Face liveness checks.
+- **Faculty Polling**: Real-time session management for teachers.
+- **Student Dashboard**: Visualized attendance percentages and history.
+
+### 📅 Resource Management
+- **Interactive Timetable**: Professional weekly grid with role-based editing.
+- **Room Booking**: Real-time availability checks for labs and seminar halls.
+- **Priority Notice Board**: Tagged announcements (Urgent, Academic, Social) with read tracking.
+
+---
 
 ## 🛠️ Technology Stack
 
-*   **Backend**: Java 21, Spring Boot (Microservices)
-*   **Frontend**: React (Vite), JavaScript
-*   **Database**: PostgreSQL (Auth, Academic), H2 (Campus)
-*   **Build Tools**: Maven (Backend), npm/Vite (Frontend)
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | React 18, Vite, Vanilla CSS (Premium Design System) |
+| **Microservices** | Java 21, Spring Boot 3, Spring Security |
+| **AI / ML** | Python 3.10, FastAPI, LangChain, Ollama (Llama 3.2), MediaPipe |
+| **Databases** | PostgreSQL 16 (with pgvector), ChromaDB |
+| **Infrastructure** | Docker, Nginx, Docker Compose |
 
-## 📋 Prerequisites
+---
 
-Before you begin, ensure you have the following installed:
+## 🐳 Getting Started (Docker)
 
-*   **Java 21 JDK**: [Download](https://www.oracle.com/java/technologies/downloads/#java21)
-*   **Maven**: [Download](https://maven.apache.org/download.cgi)
-*   **Node.js (v18+)**: [Download](https://nodejs.org/)
-*   **PostgreSQL**: [Download](https://www.postgresql.org/download/)
+The entire ecosystem is containerized for consistent deployment.
 
-## ⚙️ Database Setup
+### 1. Requirements
+- Docker Desktop (Windows/Mac/Linux)
+- 8GB+ RAM (Recommended for local LLM)
 
-The backend uses PostgreSQL for all services when running in Docker.
+### 2. Launch
+```bash
+# Clone the repository
+git clone https://github.com/parthbatra21/campus-buddy.git
+cd campus-buddy
 
-### Manual Setup (Without Docker)
-If you prefer to run services manually, you need to create three PostgreSQL databases:
-
-1.  Open your terminal or a database tool (like pgAdmin).
-2.  Run the following SQL commands:
-
-```sql
-CREATE DATABASE campus_buddy_auth;
-CREATE DATABASE campus_buddy_academic;
-CREATE DATABASE campus_buddy_campus;
+# Build and start all services
+docker-compose up --build -d
 ```
 
-> **Note**: The application assumes the default PostgreSQL user is `parth` with no password by default (configurable via env vars).
+### 3. Access
+- **Frontend**: [http://localhost:8088](http://localhost:8088)
+- **BFF API**: [http://localhost:8080](http://localhost:8080)
+- **Ollama**: [http://localhost:11434](http://localhost:11434)
 
-## 🐳 Running with Docker (Highly Recommended)
+---
 
-The easiest and most reliable way to run Campus Buddy is using Docker. This will set up all microservices and three PostgreSQL databases automatically with persistence.
+## 🛡️ Security
+The platform uses **Stateless JWT Authentication**. The `bff-service` acts as a security gateway, validating tokens before routing requests to internal microservices over a private Docker network.
 
-### Prerequisites
-*   **Docker Desktop**: [Download](https://www.docker.com/products/docker-desktop/)
+---
 
-### Quick Start
-1.  Open your terminal in the root directory.
-2.  Build and start all containers:
-    ```bash
-    docker-compose up --build -d
-    ```
-3.  **Access the application**:
-    *   **Frontend**: [http://localhost](http://localhost) (Production-ready Nginx build)
-    *   **BFF Service API**: [http://localhost:8080](http://localhost:8080)
-
-4.  **Useful Commands**:
-    *   View all logs: `docker-compose logs -f`
-    *   Stop application: `docker-compose down`
-    *   Remove all data: `docker-compose down -v`
-
-## 🏃‍♂️ How to Run (Manual Setup)
-
-### 1. Backend (Microservices)
-
-We have provided a convenient script to start all backend services at once.
-
-1.  Open a terminal in the root directory (`campus-buddy`).
-2.  Run the startup script:
-
-    ```bash
-    ./start_backend.sh
-    ```
-
-    This will start:
-    *   **Auth Service** (Port 8081)
-    *   **Academic Service** (Port 8082)
-    *   **Campus Service** (Port 8083)
-    *   **BFF Service** (Port 8080) - *The frontend communicates with this.*
-
-    > **Tip**: Logs for each service are written to `startup.log` in their respective directories (e.g., `backend/auth-service/startup.log`).
-
-### 2. Frontend
-
-1.  Open a new terminal window.
-2.  Navigate to the frontend directory:
-
-    ```bash
-    cd frontend/campus-buddy-ui
-    ```
-
-3.  Install dependencies (first time only):
-
-    ```bash
-    npm install
-    ```
-
-4.  Start the development server:
-
-    ```bash
-    npm run dev
-    ```
-
-5.  Open your browser and visit: `http://localhost:5173`
-
-## 🧪 Testing Credentials
-
-*   **Student**: `student@example.com` / `password` (if seeded)
-*   **Faculty**: `faculty@example.com` / `password` (if seeded)
-
-## 📁 Project Structure
-
-```
-campus-buddy/
-├── backend/
-│   ├── auth-service/       # Authentication & User Service
-│   ├── academic-service/   # Academics, Attendance, Timetable
-│   ├── campus-service/     # Notices, Events (H2 DB)
-│   └── bff-service/        # Backend for Frontend (API Gateway logic)
-├── frontend/
-│   └── campus-buddy-ui/    # React Application
-└── start_backend.sh        # unified startup script
-```
+## 📄 License
+Designed and maintained by Parth Batra.

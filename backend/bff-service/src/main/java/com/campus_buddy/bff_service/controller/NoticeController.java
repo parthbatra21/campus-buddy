@@ -1,90 +1,80 @@
 package com.campus_buddy.bff_service.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
-import reactor.core.publisher.Mono;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping("/api/campus/notices")
+@RequestMapping("/api/notices")
+@RequiredArgsConstructor
 public class NoticeController {
 
-    private final WebClient webClient;
+    private final RestTemplate restTemplate;
 
-    @Value("${services.campus.url}")
-    private String campusServiceUrl;
-
-    public NoticeController(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.build();
-    }
+    @Value("${services.notices.url}")
+    private String noticeServiceUrl;
 
     @GetMapping
-    public ResponseEntity<String> getAllNotices(
-            @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader,
-            @RequestParam(defaultValue = "false") boolean archived) {
-        return webClient.get()
-                .uri(campusServiceUrl + "/notices?archived=" + archived)
-                .header(HttpHeaders.AUTHORIZATION, authHeader)
-                .retrieve()
-                .toEntity(String.class)
-                .map(entity -> ResponseEntity.status(entity.getStatusCode())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(entity.getBody()))
-                .onErrorResume(WebClientResponseException.class, e ->
-                    Mono.just(ResponseEntity.status(e.getStatusCode())
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .body(e.getResponseBodyAsString())))
-                .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to fetch notices\"}")))
-                .block();
+    public ResponseEntity<Object> getAllNotices(@RequestHeader("Authorization") String authHeader) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", authHeader);
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<Object> response = restTemplate.exchange(
+                noticeServiceUrl + "/api/notices",
+                HttpMethod.GET,
+                entity,
+                Object.class
+        );
+        return sanitizeResponse(response);
     }
 
     @PostMapping
-    public ResponseEntity<String> createNotice(
-            @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader,
-            @RequestBody String requestBody) {
-        return webClient.post()
-                .uri(campusServiceUrl + "/notices")
-                .header(HttpHeaders.AUTHORIZATION, authHeader)
-                .header(HttpHeaders.CONTENT_TYPE, "application/json")
-                .bodyValue(requestBody)
-                .retrieve()
-                .toEntity(String.class)
-                .map(entity -> ResponseEntity.status(entity.getStatusCode())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(entity.getBody()))
-                .onErrorResume(WebClientResponseException.class, e ->
-                    Mono.just(ResponseEntity.status(e.getStatusCode())
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .body(e.getResponseBodyAsString())))
-                .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to create notice\"}")))
-                .block();
+    public ResponseEntity<Object> createNotice(@RequestHeader("Authorization") String authHeader, @RequestBody Object notice) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", authHeader);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Object> entity = new HttpEntity<>(notice, headers);
+
+        ResponseEntity<Object> response = restTemplate.exchange(
+                noticeServiceUrl + "/api/notices",
+                HttpMethod.POST,
+                entity,
+                Object.class
+        );
+        return sanitizeResponse(response);
     }
 
-    /**
-     * Archive a notice (Faculty/Admin only).
-     * PUT /api/campus/notices/{id}/archive -> Campus Service PUT /notices/{id}/archive
-     */
-    @PutMapping("/{id}/archive")
-    public ResponseEntity<String> archiveNotice(
-            @RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader,
-            @PathVariable Long id) {
-        return webClient.put()
-                .uri(campusServiceUrl + "/notices/" + id + "/archive")
-                .header(HttpHeaders.AUTHORIZATION, authHeader)
-                .retrieve()
-                .toEntity(String.class)
-                .map(entity -> ResponseEntity.status(entity.getStatusCode())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(entity.getBody()))
-                .onErrorResume(WebClientResponseException.class, e ->
-                    Mono.just(ResponseEntity.status(e.getStatusCode())
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .body(e.getResponseBodyAsString())))
-                .onErrorResume(e -> Mono.just(ResponseEntity.status(500).body("{\"error\":\"Failed to archive notice\"}")))
-                .block();
+    @PostMapping("/{id}/read")
+    public ResponseEntity<Object> markAsRead(@RequestHeader("Authorization") String authHeader, @PathVariable String id) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", authHeader);
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<Object> response = restTemplate.exchange(
+                noticeServiceUrl + "/api/notices/" + id + "/read",
+                HttpMethod.POST,
+                entity,
+                Object.class
+        );
+        return sanitizeResponse(response);
+    }
+
+    private ResponseEntity<Object> sanitizeResponse(ResponseEntity<Object> upstreamResponse) {
+        HttpHeaders sanitizedHeaders = new HttpHeaders();
+        sanitizedHeaders.addAll(upstreamResponse.getHeaders());
+        // Remove problematic headers that cause duplicate header errors in Nginx/Spring
+        sanitizedHeaders.remove(HttpHeaders.TRANSFER_ENCODING);
+        sanitizedHeaders.remove(HttpHeaders.CONTENT_LENGTH);
+        sanitizedHeaders.remove(HttpHeaders.CONNECTION);
+
+        return new ResponseEntity<>(
+                upstreamResponse.getBody(),
+                sanitizedHeaders,
+                upstreamResponse.getStatusCode()
+        );
     }
 }
