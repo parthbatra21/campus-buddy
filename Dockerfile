@@ -24,12 +24,13 @@ COPY model/ieee_vam/requirements.txt .
 RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
 # Final Runtime Stage
-FROM python:3.10-slim-bookworm
+FROM eclipse-temurin:21-jre-bookworm
 WORKDIR /app
 
-# Install Java 21 JRE and other utilities
+# Install Python 3.10, curl, and cleanup
 RUN apt-get update && apt-get install -y \
-    openjdk-21-jre-headless \
+    python3 \
+    python3-pip \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
