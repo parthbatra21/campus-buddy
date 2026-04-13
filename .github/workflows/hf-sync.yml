@@ -15,4 +15,4 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git push -f https://parthbatra21:$HF_TOKEN@huggingface.co/spaces/parthbatra21/campus-buddy main
+          git push --force https://parthbatra21:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/parthbatra21/campus-buddy main
