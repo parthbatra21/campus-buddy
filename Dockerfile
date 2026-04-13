@@ -1,5 +1,5 @@
 # Build Stage for Java
-FROM maven:3.9.6-eclipse-temurin-21-bookworm AS java-builder
+FROM maven:3.9-eclipse-temurin-21 AS java-builder
 WORKDIR /build
 
 # Copy backend source code (only for services we have)
