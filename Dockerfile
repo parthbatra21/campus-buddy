@@ -19,7 +19,15 @@ RUN cd notice-service && mvn clean package -DskipTests
 # Build Stage for Python RAG
 FROM python:3.12-slim-bookworm AS python-builder
 WORKDIR /python-build
-RUN apt-get update && apt-get install -y gcc g++ python3-dev libxml2-dev libxslt-dev
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    python3-dev \
+    libxml2-dev \
+    libxslt-dev \
+    swig \
+    pkg-config \
+    libmagic-dev \
+    && rm -rf /var/lib/apt/lists/*
 COPY model/ieee_vam/requirements.txt .
 RUN pip install --no-cache-dir --user -r requirements.txt
 
