@@ -24,7 +24,7 @@ COPY model/ieee_vam/requirements.txt .
 RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
 # Final Runtime Stage
-FROM eclipse-temurin:21-jre-bookworm
+FROM eclipse-temurin:21
 WORKDIR /app
 
 # Install Python 3.10, curl, and cleanup
