@@ -15,4 +15,14 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
+          git config --global user.email "sync-bot@example.com"
+          git config --global user.name "Sync Bot"
+          # Create a temporary clean repo to skip old history with binaries
+          mkdir -p /tmp/hf_sync
+          cp -r . /tmp/hf_sync/
+          cd /tmp/hf_sync
+          rm -rf .git
+          git init
+          git add .
+          git commit -m "Deploy: Clean sync"
           git push --force https://parthbatra21:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/parthbatra21/campus-buddy main
