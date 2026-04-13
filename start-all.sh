@@ -18,7 +18,12 @@ JAVA_OPTS="-Xmx256m -Xms64m"
 
 # 1. Start Python RAG Service (Port 8000)
 echo "Starting Python RAG Service..."
-cd /app/rag-service && uvicorn rag_api:app --host 0.0.0.0 --port 8000 > /app/logs/rag.log 2>&1 &
+cd /app/rag-service
+if [ ! -d "db" ]; then
+    echo "No RAG database found. Running initial ingestion (this may take a minute)..."
+    python3 ingest.py
+fi
+uvicorn rag_api:app --host 0.0.0.0 --port 8000 > /app/logs/rag.log 2>&1 &
 
 # 2. Start Auth Service (Port 8081)
 echo "Starting Auth Service..."

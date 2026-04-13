@@ -20,3 +20,6 @@ target/
 
 # Logs
 *.log
+
+# AI RAG Database
+model/ieee_vam/db/
