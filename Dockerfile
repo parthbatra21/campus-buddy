@@ -35,10 +35,13 @@ RUN pip install --no-cache-dir --user -r requirements.txt
 FROM eclipse-temurin:21
 WORKDIR /app
 
-# Install Python 3.11, curl, and cleanup
+# Install Python 3.12, runtime libs for RAG (poppler, tesseract, magic), and cleanup
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
+    libmagic1 \
+    poppler-utils \
+    tesseract-ocr \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
