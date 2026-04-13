@@ -1,3 +1,13 @@
+---
+title: Campus Buddy
+emoji: 🎓
+colorFrom: indigo
+colorTo: blue
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # 🎓 Campus Buddy — Next-Generation Campus Management Platform
 
 Campus Buddy is a state-of-the-art, semi-autonomous campus orchestration platform. Built on a professional **Microservices Architecture**, it integrates AI-powered academic assistance, real-time attendance tracking with computer vision, and streamlined campus resource management.
