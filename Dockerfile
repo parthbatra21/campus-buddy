@@ -17,17 +17,17 @@ RUN cd booking-service && mvn clean package -DskipTests
 RUN cd notice-service && mvn clean package -DskipTests
 
 # Build Stage for Python RAG
-FROM python:3.10-slim-bookworm AS python-builder
+FROM python:3.11-slim-bookworm AS python-builder
 WORKDIR /python-build
 RUN apt-get update && apt-get install -y gcc g++ python3-dev
 COPY model/ieee_vam/requirements.txt .
-RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
+RUN pip install --no-cache-dir --user -r requirements.txt
 
 # Final Runtime Stage
 FROM eclipse-temurin:21
 WORKDIR /app
 
-# Install Python 3.10, curl, and cleanup
+# Install Python 3.11, curl, and cleanup
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
@@ -42,7 +42,9 @@ COPY --from=java-builder /build/booking-service/target/*.jar booking-service.jar
 COPY --from=java-builder /build/notice-service/target/*.jar notice-service.jar
 
 # Copy Python RAG dependencies and source
-COPY --from=python-builder /install /usr/local
+COPY --from=python-builder /root/.local /root/.local
+ENV PATH=/root/.local/bin:$PATH
+ENV PYTHONPATH=/root/.local/lib/python3.11/site-packages
 COPY model/ieee_vam /app/rag-service
 
 # Copy entrypoint script

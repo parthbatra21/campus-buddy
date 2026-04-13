@@ -10,6 +10,8 @@ services:
     url: ${SERVICES_NOTICES_URL:http://localhost:8083}
   bookings:
     url: ${SERVICES_BOOKINGS_URL:http://localhost:8084}
+  rag:
+    url: ${SERVICES_RAG_PYTHON_URL:http://localhost:8000}
 
 jwt:
   secret: ${JWT_SECRET:campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security}
