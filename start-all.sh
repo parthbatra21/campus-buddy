@@ -41,8 +41,19 @@ java $JAVA_OPTS -jar /app/notice-service.jar > /app/logs/notice.log 2>&1 &
 echo "Starting Booking Service..."
 java $JAVA_OPTS -jar /app/booking-service.jar > /app/logs/booking.log 2>&1 &
 
-# Wait for sidecars to start a bit
-sleep 5
+# Wait for RAG service to be healthy before starting Java services
+echo "Waiting for RAG service to be ready on port 8000..."
+MAX_RETRIES=30
+RETRY_COUNT=0
+while ! curl -s http://localhost:8000/health > /dev/null; do
+    RETRY_COUNT=$((RETRY_COUNT+1))
+    if [ $RETRY_COUNT -ge $MAX_RETRIES ]; then
+        echo "Warning: RAG service timed out. Continuing anyway..."
+        break
+    fi
+    sleep 2
+done
+echo "RAG service is healthy! Starting Java business services..."
 
 # 6. Start BFF Service (The main entry point, listens on $PORT)
 echo "Starting BFF Service on port ${PORT:-7860}..."

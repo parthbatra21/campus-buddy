@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Buddy API | Production</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --accent: #10b981;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .gradient-sphere {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(40px);
+            animation: pulse 10s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); opacity: 0.5; }
+            to { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #818cf8, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 100px;
+            color: var(--accent);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card);
+            padding: 1.25rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: left;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .footer {
+            margin-top: 3rem;
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-sphere"></div>
+    <div class="container">
+        <div class="logo">Campus Buddy</div>
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            Unified AI Backend Live
+        </div>
+        
+        <p style="color: #cbd5e1; line-height: 1.6;">
+            This is the headless production API and RAG brain for Campus Buddy. 
+            All microservices (Auth, Academic, Notice, Booking) are healthy and connected.
+        </p>
+
+        <div class="grid">
+            <div class="stat-card">
+                <div class="stat-label">Stack</div>
+                <div class="stat-value">Java 21 + Python 3.12</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">AI Engine</div>
+                <div class="stat-value">Gemini Flash 1.5</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Database</div>
+                <div class="stat-value">Neon PostgreSQL</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Region</div>
+                <div class="stat-value">Hugging Face Global</div>
+            </div>
+        </div>
+
+        <a href="https://github.com/parthbatra21/campus-buddy" class="btn" target="_blank">Documentation</a>
+
+        <div class="footer">
+            &copy; 2026 Campus Buddy PBL Project
+        </div>
+    </div>
+</body>
+</html>
