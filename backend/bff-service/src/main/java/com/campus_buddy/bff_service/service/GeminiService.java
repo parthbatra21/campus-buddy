@@ -52,6 +52,11 @@ public class GeminiService {
      * @param systemContext Retrieved RAG context to inject
      * @return Generated text response
      */
+    public String generateContent(String userMessage, String systemContext) {
+        if (!isConfigured()) {
+            return fallbackResponse(userMessage);
+        }
+
         try {
             // Diagnostic: Verify API Key is present
             if (apiKey == null || apiKey.length() < 10) {
@@ -121,6 +126,7 @@ public class GeminiService {
             }
             return "I'm having trouble connecting to my AI brain right now. Please try again in a moment.";
         }
+    }
 
     /**
      * Generate embedding vector for text using Gemini Embedding API.
