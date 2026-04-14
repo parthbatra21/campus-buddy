@@ -27,7 +27,7 @@ public class GeminiService {
     @Value("${gemini.api-key:}")
     private String apiKey;
 
-    @Value("${gemini.model:gemini-2.0-flash}")
+    @Value("${gemini.model:gemini-1.5-flash}")
     private String model;
 
     @Value("${gemini.embedding-model:text-embedding-004}")
@@ -102,7 +102,12 @@ public class GeminiService {
             return extractTextFromResponse(responseJson);
 
         } catch (Exception e) {
-            log.error("Gemini generateContent failed: {}", e.getMessage(), e);
+            log.error("Gemini generateContent failed for model {}: {}", model, e.getMessage());
+            // Log detail if it's a webclient exception
+            if (e instanceof org.springframework.web.reactive.function.client.WebClientResponseException) {
+                org.springframework.web.reactive.function.client.WebClientResponseException wce = (org.springframework.web.reactive.function.client.WebClientResponseException) e;
+                log.error("API Response Body: {}", wce.getResponseBodyAsString());
+            }
             return "I'm having trouble connecting to my AI brain right now. Please try again in a moment.";
         }
     }
