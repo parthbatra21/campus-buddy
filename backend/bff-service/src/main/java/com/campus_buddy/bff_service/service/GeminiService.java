@@ -23,6 +23,8 @@ public class GeminiService {
     private static final Logger log = LoggerFactory.getLogger(GeminiService.class);
     private final WebClient webClient;
     private final ObjectMapper objectMapper;
+    private String discoveredModel = null;
+    private String discoveredApiBase = "https://generativelanguage.googleapis.com/v1beta";
 
     @Value("${gemini.api-key:}")
     private String apiKey;
@@ -58,6 +60,11 @@ public class GeminiService {
         }
 
         try {
+            // 0. Auto-Discovery if model isn't confirmed yet
+            if (discoveredModel == null) {
+                discoverWorkingModel();
+            }
+
             // Diagnostic: Verify API Key is present
             if (apiKey == null || apiKey.length() < 10) {
                  log.error("CRITICAL: GEMINI_API_KEY is missing or too short!");
@@ -89,8 +96,9 @@ public class GeminiService {
             genConfig.put("maxOutputTokens", 2048);
             requestBody.set("generationConfig", genConfig);
 
-            String url = apiBase + "/models/" + model + ":generateContent?key=" + apiKey;
-            log.info("Calling Gemini API: {}/models/{}:generateContent", apiBase, model);
+            String activeModel = discoveredModel != null ? discoveredModel : model;
+            String url = discoveredApiBase + "/models/" + activeModel + ":generateContent?key=" + apiKey;
+            log.info("Calling Gemini API: {}/models/{}:generateContent", discoveredApiBase, activeModel);
 
             try {
                 String responseJson = webClient.post()
@@ -116,7 +124,9 @@ public class GeminiService {
                             .block();
                     return extractTextFromResponse(fallbackResponse);
                 }
-                throw e; // Rethrow if not a 404 or already using fallback
+                // If it fails with new discovered model, try discovery again once
+                discoveredModel = null;
+                throw e; 
             }
 
         } catch (Exception e) {
@@ -255,6 +265,48 @@ public class GeminiService {
                 
                 RETRIEVED CONTEXT (use this to answer the student's question):
                 """ + context;
+    }
+
+    private synchronized void discoverWorkingModel() {
+        log.info("Starting automated model discovery for Gemini...");
+        try {
+            // Try v1beta first as it has more models
+            String[] versions = {"v1beta", "v1"};
+            for (String v : versions) {
+                String listUrl = "https://generativelanguage.googleapis.com/" + v + "/models?key=" + apiKey;
+                String resp = webClient.get().uri(listUrl).retrieve().bodyToMono(String.class).block();
+                JsonNode root = objectMapper.readTree(resp);
+                JsonNode modelsList = root.path("models");
+                
+                if (modelsList.isArray()) {
+                    List<String> validModels = new ArrayList<>();
+                    for (JsonNode m : modelsList) {
+                        String name = m.path("name").asText("").replace("models/", "");
+                        JsonNode methods = m.path("supportedGenerationMethods");
+                        boolean supportsGen = false;
+                        if (methods.isArray()) {
+                            for (JsonNode meth : methods) {
+                                if ("generateContent".equals(meth.asText())) supportsGen = true;
+                            }
+                        }
+                        if (supportsGen) validModels.add(name);
+                    }
+
+                    if (!validModels.isEmpty()) {
+                        // Prioritize Flash 1.5, then Pro, then anything
+                        discoveredModel = validModels.stream().filter(m -> m.contains("1.5-flash")).findFirst()
+                                .orElse(validModels.stream().filter(m -> m.contains("pro")).findFirst()
+                                .orElse(validModels.get(0)));
+                        
+                        discoveredApiBase = "https://generativelanguage.googleapis.com/" + v;
+                        log.info("Auto-Discovery Successful! Using model: {} via version: {}", discoveredModel, v);
+                        return;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.warn("Auto-discovery failed: {}. Falling back to default static configuration.", e.getMessage());
+        }
     }
 
     private String extractTextFromResponse(String responseJson) throws Exception {
