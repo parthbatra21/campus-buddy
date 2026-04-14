@@ -28,8 +28,8 @@ fi
 export ANONYMIZED_TELEMETRY=False
 export CHROMA_TELEMETRY_DISABLED=1
 
-# Start uvicorn with explicit 0.0.0.0
-uvicorn rag_api:app --host 0.0.0.0 --port 8000 > /app/logs/rag.log 2>&1 &
+# Start uvicorn without redirecting logs so we can see the exact error in Hugging Face!
+python3 -m uvicorn rag_api:app --host 127.0.0.1 --port 8000 &
 cd /app
 
 # Wait for RAG service to be healthy (up to 2 minutes)

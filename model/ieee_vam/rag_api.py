@@ -36,6 +36,10 @@ PERSIST_DIRECTORY = os.environ.get("PERSIST_DIRECTORY", "db")
 TARGET_SOURCE_CHUNKS = int(os.environ.get('TARGET_SOURCE_CHUNKS', 4))
 GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY", "")
 
+# Mock Ollama variables to prevent NameErrors in legacy LangChain chains
+OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
+MODEL = os.environ.get("MODEL", "llama2")
+
 app = FastAPI(title="Campus Buddy Local RAG API")
 
 # Global state for the QA chain
@@ -154,35 +158,41 @@ async def retrieve(request: QueryRequest):
 
 @app.post("/ask", response_model=QueryResponse)
 async def ask(request: QueryRequest):
-    # Use the global qa_chain initialized at startup
-    global qa_chain
-    if qa_chain is None:
-        raise HTTPException(status_code=503, detail="RAG engine is still initializing. Please wait 1-2 minutes.")
+    if db_instance is None:
+        raise HTTPException(status_code=503, detail="RAG engine is still initializing. Please wait.")
     
     try:
-        current_chain = qa_chain
-        # Add collection count debug
-        db = current_chain.retriever.vectorstore
-        count = db._collection.count()
-        print(f"DEBUG: Vector store has {count} total documents.")
+        # 1. Retrieve Context
+        retriever = db_instance.as_retriever(search_kwargs={"k": TARGET_SOURCE_CHUNKS})
+        docs = retriever.get_relevant_documents(request.message)
+        context = "\n\n".join([d.page_content for d in docs])
+        sources = list(set([d.metadata.get("source", "Unknown") for d in docs]))
         
-        print(f"DEBUG: Processing query: {request.message}")
-        res = current_chain({"query": request.message})
-        answer = res["result"]
+        # 2. Call Gemini API Directly
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GOOGLE_API_KEY}"
         
-        # Log retrieved context for debugging
-        if "source_documents" in res:
-            print(f"DEBUG: Retrieved {len(res['source_documents'])} documents.")
-            for i, doc in enumerate(res["source_documents"]):
-                print(f"  [{i}] Source: {doc.metadata.get('source')} | Preview: {doc.page_content[:100]}...")
+        prompt = f"""You are Campus Copilot, a helpful assistant for MUJ. 
+        Answer the user's question based strictly on the context below. 
+        If the answer is not in the context, say so.
         
-        # Extract sources from documents
-        sources = []
-        if "source_documents" in res:
-            for doc in res["source_documents"]:
-                sources.append(doc.metadata.get("source", "Unknown"))
+        Context:
+        {context}
         
-        return QueryResponse(answer=answer, sources=list(set(sources)))
+        Question: {request.message}"""
+        
+        resp = requests.post(url, json={
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {"temperature": 0.3}
+        }).json()
+        
+        answer = "I couldn't process this request with the AI."
+        if "candidates" in resp and len(resp["candidates"]) > 0:
+            parts = resp["candidates"][0].get("content", {}).get("parts", [])
+            if parts:
+                answer = parts[0].get("text", answer)
+                
+        return QueryResponse(answer=answer, sources=sources)
+        
     except Exception as e:
         print(f"Error during QA: {e}")
         raise HTTPException(status_code=500, detail=str(e))
