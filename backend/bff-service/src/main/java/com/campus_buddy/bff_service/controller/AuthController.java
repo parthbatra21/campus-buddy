@@ -32,23 +32,39 @@ public class AuthController {
      */
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody String loginRequest) {
+        System.out.println("[BFF] Proxying login request to: " + authServiceUrl + "/auth/login");
         return webClient.post()
                 .uri(authServiceUrl + "/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(loginRequest)
                 .retrieve()
                 .toEntity(String.class)
-                .map(entity -> ResponseEntity.status(entity.getStatusCode())
+                .timeout(java.time.Duration.ofSeconds(10))
+                .map(entity -> {
+                    System.out.println("[BFF] Login response received: " + entity.getStatusCode());
+                    return ResponseEntity.status(entity.getStatusCode())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(entity.getBody()))
-                .onErrorResume(WebClientResponseException.class, e -> 
-                    Mono.just(ResponseEntity.status(e.getStatusCode())
+                        .body(entity.getBody());
+                })
+                .onErrorResume(java.util.concurrent.TimeoutException.class, e -> {
+                    System.err.println("[BFF ERROR] Login TIMEOUT (10s) - Auth Service or DB not responding!");
+                    return Mono.just(ResponseEntity.status(504)
                             .contentType(MediaType.APPLICATION_JSON)
-                            .body(e.getResponseBodyAsString()))
-                )
-                .onErrorResume(e -> Mono.just(ResponseEntity.status(500)
+                            .body("{\"error\":\"Auth service timeout - check database connection\"}"));
+                })
+                .onErrorResume(WebClientResponseException.class, e -> {
+                    System.err.println("[BFF ERROR] Auth Service returned: " + e.getStatusCode());
+                    return Mono.just(ResponseEntity.status(e.getStatusCode())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body(e.getResponseBodyAsString()));
+                })
+                .onErrorResume(e -> {
+                    System.err.println("[BFF ERROR] Internal Proxy Error: " + e.getMessage());
+                    e.printStackTrace();
+                    return Mono.just(ResponseEntity.status(500)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body("{\"error\":\"Auth service unavailable\"}")))
+                        .body("{\"error\":\"Auth service unavailable: " + e.getMessage() + "\"}"));
+                })
                 .block();
     }
 
