@@ -20,7 +20,7 @@ jwt:
 gemini:
   api-key: ${GEMINI_API_KEY:}
   embedding-model: ${GEMINI_EMBEDDING_MODEL:text-embedding-004}
-  api-base: https://generativelanguage.googleapis.com/v1beta
+  api-base: https://generativelanguage.googleapis.com/v1
   model: ${GEMINI_MODEL:gemini-1.5-flash}
 
 # pgvector Store

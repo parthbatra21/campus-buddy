@@ -33,7 +33,7 @@ public class GeminiService {
     @Value("${gemini.embedding-model:text-embedding-004}")
     private String embeddingModel;
 
-    @Value("${gemini.api-base:https://generativelanguage.googleapis.com/v1beta}")
+    @Value("${gemini.api-base:https://generativelanguage.googleapis.com/v1}")
     private String apiBase;
 
     public GeminiService(WebClient.Builder webClientBuilder) {
