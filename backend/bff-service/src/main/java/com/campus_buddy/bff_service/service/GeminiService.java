@@ -27,10 +27,10 @@ public class GeminiService {
     @Value("${gemini.api-key:}")
     private String apiKey;
 
-    @Value("${gemini.model:gemini-1.5-flash}")
+    @Value("${GEMINI_MODEL:gemini-1.5-flash-latest}")
     private String model;
 
-    @Value("${gemini.embedding-model:text-embedding-004}")
+    @Value("${GEMINI_EMBEDDING_MODEL:text-embedding-004}")
     private String embeddingModel;
 
     @Value("${gemini.api-base:https://generativelanguage.googleapis.com/v1}")
@@ -52,21 +52,22 @@ public class GeminiService {
      * @param systemContext Retrieved RAG context to inject
      * @return Generated text response
      */
-    public String generateContent(String userMessage, String systemContext) {
-        if (!isConfigured()) {
-            return fallbackResponse(userMessage);
-        }
-
         try {
-            ObjectNode requestBody = objectMapper.createObjectNode();
+            // Diagnostic: Verify API Key is present
+            if (apiKey == null || apiKey.length() < 10) {
+                 log.error("CRITICAL: GEMINI_API_KEY is missing or too short!");
+                 return fallbackResponse(userMessage);
+            }
+            log.debug("Using API Key starting with: {}...", apiKey.substring(0, 5));
 
-            // Prepend system context to user message for universal compatibility with v1 API
+            ObjectNode requestBody = objectMapper.createObjectNode();
+            
+            // Universal prompt format (v1 compatible)
             String fullPrompt = userMessage;
             if (systemContext != null && !systemContext.isBlank()) {
                 fullPrompt = buildSystemPrompt(systemContext) + "\n\nUser Question: " + userMessage;
             }
 
-            // contents array
             ArrayNode contents = objectMapper.createArrayNode();
             ObjectNode content = objectMapper.createObjectNode();
             content.put("role", "user");
@@ -78,34 +79,48 @@ public class GeminiService {
             contents.add(content);
             requestBody.set("contents", contents);
 
-            // Generation config
             ObjectNode genConfig = objectMapper.createObjectNode();
             genConfig.put("temperature", 0.7);
             genConfig.put("maxOutputTokens", 2048);
             requestBody.set("generationConfig", genConfig);
 
             String url = apiBase + "/models/" + model + ":generateContent?key=" + apiKey;
+            log.info("Calling Gemini API: {}/models/{}:generateContent", apiBase, model);
 
-            String responseJson = webClient.post()
-                    .uri(url)
-                    .header("Content-Type", "application/json")
-                    .bodyValue(objectMapper.writeValueAsString(requestBody))
-                    .retrieve()
-                    .bodyToMono(String.class)
-                    .block();
+            try {
+                String responseJson = webClient.post()
+                        .uri(url)
+                        .header("Content-Type", "application/json")
+                        .bodyValue(objectMapper.writeValueAsString(requestBody))
+                        .retrieve()
+                        .bodyToMono(String.class)
+                        .block();
 
-            return extractTextFromResponse(responseJson);
+                return extractTextFromResponse(responseJson);
+            } catch (Exception e) {
+                // Self-healing: If 404, try fallback model 'gemini-pro'
+                if (e.getMessage().contains("404") && !model.equals("gemini-pro")) {
+                    log.warn("Model {} failed with 404, attempting fallback to gemini-pro...", model);
+                    String fallbackUrl = apiBase + "/models/gemini-pro:generateContent?key=" + apiKey;
+                    String fallbackResponse = webClient.post()
+                            .uri(fallbackUrl)
+                            .header("Content-Type", "application/json")
+                            .bodyValue(objectMapper.writeValueAsString(requestBody))
+                            .retrieve()
+                            .bodyToMono(String.class)
+                            .block();
+                    return extractTextFromResponse(fallbackResponse);
+                }
+                throw e; // Rethrow if not a 404 or already using fallback
+            }
 
         } catch (Exception e) {
-            log.error("Gemini generateContent failed for model {}: {}", model, e.getMessage());
-            // Log detail if it's a webclient exception
+            log.error("Gemini call failed: {}", e.getMessage());
             if (e instanceof org.springframework.web.reactive.function.client.WebClientResponseException) {
-                org.springframework.web.reactive.function.client.WebClientResponseException wce = (org.springframework.web.reactive.function.client.WebClientResponseException) e;
-                log.error("API Response Body: {}", wce.getResponseBodyAsString());
+                log.error("API Response Body: {}", ((org.springframework.web.reactive.function.client.WebClientResponseException)e).getResponseBodyAsString());
             }
             return "I'm having trouble connecting to my AI brain right now. Please try again in a moment.";
         }
-    }
 
     /**
      * Generate embedding vector for text using Gemini Embedding API.
