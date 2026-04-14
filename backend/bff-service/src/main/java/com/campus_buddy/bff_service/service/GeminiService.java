@@ -60,23 +60,18 @@ public class GeminiService {
         try {
             ObjectNode requestBody = objectMapper.createObjectNode();
 
-            // System instruction with RAG context
+            // Prepend system context to user message for universal compatibility with v1 API
+            String fullPrompt = userMessage;
             if (systemContext != null && !systemContext.isBlank()) {
-                ObjectNode systemInstruction = objectMapper.createObjectNode();
-                ObjectNode systemPart = objectMapper.createObjectNode();
-                systemPart.put("text", buildSystemPrompt(systemContext));
-                ArrayNode systemParts = objectMapper.createArrayNode();
-                systemParts.add(systemPart);
-                systemInstruction.set("parts", systemParts);
-                requestBody.set("system_instruction", systemInstruction);
+                fullPrompt = buildSystemPrompt(systemContext) + "\n\nUser Question: " + userMessage;
             }
 
-            // User message
+            // contents array
             ArrayNode contents = objectMapper.createArrayNode();
             ObjectNode content = objectMapper.createObjectNode();
             content.put("role", "user");
             ObjectNode part = objectMapper.createObjectNode();
-            part.put("text", userMessage);
+            part.put("text", fullPrompt);
             ArrayNode parts = objectMapper.createArrayNode();
             parts.add(part);
             content.set("parts", parts);
