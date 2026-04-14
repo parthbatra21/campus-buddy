@@ -1,4 +1,4 @@
----
+[---
 title: Campus Buddy
 emoji: 🎓
 colorFrom: indigo
@@ -6,7 +6,7 @@ colorTo: blue
 sdk: docker
 app_port: 7860
 pinned: false
----
+---](https://campus-buddy-mmk0plq7f-parth-batras-projects-4fa1e7d2.vercel.app/)
 
 # 🎓 Campus Buddy — Next-Generation Campus Management Platform
 
