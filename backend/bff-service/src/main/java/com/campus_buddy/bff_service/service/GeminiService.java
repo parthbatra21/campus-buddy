@@ -293,10 +293,11 @@ public class GeminiService {
                     }
 
                     if (!validModels.isEmpty()) {
-                        // Prioritize any Flash model, then any Pro model, then first available
-                        discoveredModel = validModels.stream().filter(m -> m.toLowerCase().contains("flash")).findFirst()
+                        // Prioritize Flash (1.5 or latest), then any Flash, then any Pro
+                        discoveredModel = validModels.stream().filter(m -> m.contains("1.5-flash") || m.contains("flash-latest")).findFirst()
+                                .orElse(validModels.stream().filter(m -> m.toLowerCase().contains("flash") && !m.contains("2.5")).findFirst()
                                 .orElse(validModels.stream().filter(m -> m.toLowerCase().contains("pro")).findFirst()
-                                .orElse(validModels.get(0)));
+                                .orElse(validModels.get(0))));
                         
                         discoveredApiBase = "https://generativelanguage.googleapis.com/" + v;
                         log.info("Auto-Discovery Successful! Using model: {} via version: {}", discoveredModel, v);
