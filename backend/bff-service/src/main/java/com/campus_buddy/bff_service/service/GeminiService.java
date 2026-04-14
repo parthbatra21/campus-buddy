@@ -293,9 +293,9 @@ public class GeminiService {
                     }
 
                     if (!validModels.isEmpty()) {
-                        // Prioritize Flash 1.5, then Pro, then anything
-                        discoveredModel = validModels.stream().filter(m -> m.contains("1.5-flash")).findFirst()
-                                .orElse(validModels.stream().filter(m -> m.contains("pro")).findFirst()
+                        // Prioritize any Flash model, then any Pro model, then first available
+                        discoveredModel = validModels.stream().filter(m -> m.toLowerCase().contains("flash")).findFirst()
+                                .orElse(validModels.stream().filter(m -> m.toLowerCase().contains("pro")).findFirst()
                                 .orElse(validModels.get(0)));
                         
                         discoveredApiBase = "https://generativelanguage.googleapis.com/" + v;
