@@ -53,13 +53,18 @@ public class SecurityConfig {
         String allowedOriginsEnv = System.getenv("ALLOWED_ORIGINS");
         if (allowedOriginsEnv != null && !allowedOriginsEnv.isEmpty()) {
             configuration.setAllowedOriginPatterns(Arrays.asList(allowedOriginsEnv.split(",")));
+            configuration.setAllowCredentials(true);
         } else {
+            // In production, '*' is not allowed with allowCredentials(true)
+            // We default to allowing everything BUT disabling credentials for maximum compatibility
             configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+            configuration.setAllowCredentials(false);
         }
         
-        configuration.setAllowedMethods(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowCredentials(true);
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With", "Accept", "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers"));
+        configuration.setExposedHeaders(Arrays.asList("Authorization", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+        
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

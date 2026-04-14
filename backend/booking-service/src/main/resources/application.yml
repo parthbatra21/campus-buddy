@@ -5,9 +5,9 @@ spring:
   application:
     name: booking-service
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/neondb?currentSchema=booking}
-    username: ${DATABASE_USERNAME:parth}
-    password: ${DATABASE_PASSWORD:parth}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/neondb}
+    username: ${DB_USERNAME:parth}
+    password: ${DB_PASSWORD:parth}
   jpa:
     hibernate:
       ddl-auto: update
@@ -17,4 +17,4 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
 jwt:
-  secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+  secret: ${JWT_SECRET:campus-buddy-super-secret-key-change-this-in-production-with-minimum-256-bits-for-security}

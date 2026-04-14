@@ -1,3 +1,13 @@
+---
+title: Campus Buddy
+emoji: 🎓
+colorFrom: indigo
+colorTo: blue
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # 🎓 Campus Buddy — Next-Generation Campus Management Platform
 
 Campus Buddy is a state-of-the-art, semi-autonomous campus orchestration platform. Built on a professional **Microservices Architecture**, it integrates AI-powered academic assistance, real-time attendance tracking with computer vision, and streamlined campus resource management.
@@ -68,7 +78,9 @@ docker-compose up --build -d
 ```
 
 ### 3. Access
-Live Link : https://campus-buddy-mmk0plq7f-parth-batras-projects-4fa1e7d2.vercel.app
+- **Frontend**: [http://localhost:8088](http://localhost:8088)
+- **BFF API**: [http://localhost:8080](http://localhost:8080)
+- **Ollama**: [http://localhost:11434](http://localhost:11434)
 
 ---
 

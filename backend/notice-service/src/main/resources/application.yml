@@ -5,9 +5,9 @@ spring:
   application:
     name: notice-service
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/neondb?currentSchema=notice}
-    username: ${DATABASE_USERNAME:parth}
-    password: ${DATABASE_PASSWORD:parth}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/neondb}
+    username: ${DB_USERNAME:parth}
+    password: ${DB_PASSWORD:parth}
   jpa:
     hibernate:
       ddl-auto: update

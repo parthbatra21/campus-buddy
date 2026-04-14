@@ -54,10 +54,26 @@ fi
 
 # 2-5. Start Java Services
 echo "Starting Business Microservices..."
-java $JAVA_OPTS -jar /app/auth-service.jar > /app/logs/auth.log 2>&1 &
-java $JAVA_OPTS -jar /app/academic-service.jar > /app/logs/academic.log 2>&1 &
-java $JAVA_OPTS -jar /app/notice-service.jar > /app/logs/notice.log 2>&1 &
-java $JAVA_OPTS -jar /app/booking-service.jar > /app/logs/booking.log 2>&1 &
+java $JAVA_OPTS -jar /app/auth-service.jar &
+java $JAVA_OPTS -jar /app/academic-service.jar &
+java $JAVA_OPTS -jar /app/notice-service.jar &
+java $JAVA_OPTS -jar /app/booking-service.jar &
+
+# Wait for core services to be healthy (specifically Auth and Academic)
+echo "Waiting for microservices to reach ports 8081-8084..."
+for port in 8081 8082 8083 8084; do
+    echo "Checking port $port..."
+    RETRY=0
+    while ! nc -z localhost $port; do
+        RETRY=$((RETRY+1))
+        if [ $RETRY -ge 30 ]; then
+            echo "Warning: Port $port timed out. Continuing anyway..."
+            break
+        fi
+        sleep 2
+    done
+done
+echo "All microservices are up! Finalizing startup..."
 
 # 6. Start BFF Service (The main entry point)
 echo "Starting BFF Service on port ${PORT:-7860}..."

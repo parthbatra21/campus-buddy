@@ -25,7 +25,7 @@ gemini:
 
 # pgvector Store
 vectorstore:
-  url: ${VECTORSTORE_URL:jdbc:postgresql://localhost:5432/neondb?currentSchema=vectors}
+  url: ${VECTORSTORE_URL:jdbc:postgresql://localhost:5432/neondb}
   username: ${VECTORSTORE_USERNAME:parth}
   password: ${VECTORSTORE_PASSWORD:password}
 
