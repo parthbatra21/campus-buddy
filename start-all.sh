@@ -20,43 +20,46 @@ JAVA_OPTS="-Xmx256m -Xms64m"
 echo "Starting Python RAG Service..."
 cd /app/rag-service
 if [ ! -d "db" ]; then
-    echo "No RAG database found. Running initial ingestion (this may take a minute)..."
+    echo "No RAG database found. Running initial ingestion..."
     python3 ingest.py
 fi
+
+# Disable Chroma telemetry to clean up logs
+export ANONYMIZED_TELEMETRY=False
+export CHROMA_TELEMETRY_DISABLED=1
+
+# Start uvicorn with explicit 0.0.0.0
 uvicorn rag_api:app --host 0.0.0.0 --port 8000 > /app/logs/rag.log 2>&1 &
+cd /app
 
-# 2. Start Auth Service (Port 8081)
-echo "Starting Auth Service..."
-java $JAVA_OPTS -jar /app/auth-service.jar > /app/logs/auth.log 2>&1 &
-
-# 3. Start Academic Service (Port 8082)
-echo "Starting Academic Service..."
-java $JAVA_OPTS -jar /app/academic-service.jar > /app/logs/academic.log 2>&1 &
-
-# 4. Start Notice Service (Port 8083)
-echo "Starting Notice Service..."
-java $JAVA_OPTS -jar /app/notice-service.jar > /app/logs/notice.log 2>&1 &
-
-# 5. Start Booking Service (Port 8084)
-echo "Starting Booking Service..."
-java $JAVA_OPTS -jar /app/booking-service.jar > /app/logs/booking.log 2>&1 &
-
-# Wait for RAG service to be healthy before starting Java services
-echo "Waiting for RAG service to be ready on port 8000..."
-MAX_RETRIES=30
+# Wait for RAG service to be healthy (up to 2 minutes)
+echo "Waiting for RAG service to be ready on 127.0.0.1:8000..."
+MAX_RETRIES=60
 RETRY_COUNT=0
-while ! curl -s http://localhost:8000/health > /dev/null; do
+while ! curl -s http://127.0.0.1:8000/health > /dev/null; do
     RETRY_COUNT=$((RETRY_COUNT+1))
     if [ $RETRY_COUNT -ge $MAX_RETRIES ]; then
-        echo "Warning: RAG service timed out. Continuing anyway..."
+        echo "Warning: RAG service timed out after 120s. Continuing..."
         break
     fi
     sleep 2
 done
-echo "RAG service is healthy! Starting Java business services..."
 
-# 6. Start BFF Service (The main entry point, listens on $PORT)
+# Check if actually healthy for logging
+if curl -s http://127.0.0.1:8000/health | grep -q "ready"; then
+    echo "RAG service is READY! Starting Java business services..."
+else
+    echo "RAG service is starting in background. Starting Java business services..."
+fi
+
+# 2-5. Start Java Services
+echo "Starting Business Microservices..."
+java $JAVA_OPTS -jar /app/auth-service.jar > /app/logs/auth.log 2>&1 &
+java $JAVA_OPTS -jar /app/academic-service.jar > /app/logs/academic.log 2>&1 &
+java $JAVA_OPTS -jar /app/notice-service.jar > /app/logs/notice.log 2>&1 &
+java $JAVA_OPTS -jar /app/booking-service.jar > /app/logs/booking.log 2>&1 &
+
+# 6. Start BFF Service (The main entry point)
 echo "Starting BFF Service on port ${PORT:-7860}..."
 export SERVER_PORT=${PORT:-7860}
-# We run BFF in foreground to keep the container alive and stream logs
-java -Xmx512m -Xms128m -jar /app/bff-service.jar
+java -Xmx1024m -jar /app/bff-service.jar

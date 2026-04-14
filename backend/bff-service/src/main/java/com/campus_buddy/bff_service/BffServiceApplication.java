@@ -7,12 +7,21 @@ import org.springframework.context.annotation.Bean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.scheduling.annotation.EnableAsync;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
 @SpringBootApplication
 @EnableAsync
+@Controller
 public class BffServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BffServiceApplication.class, args);
+	}
+
+	@GetMapping("/")
+	public String index() {
+		return "forward:/index.html";
 	}
 
 	@Bean
