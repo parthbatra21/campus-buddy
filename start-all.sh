@@ -64,7 +64,8 @@ echo "Waiting for microservices to reach ports 8081-8084..."
 for port in 8081 8082 8083 8084; do
     echo "Checking port $port..."
     RETRY=0
-    while ! nc -z localhost $port; do
+    # Use curl instead of nc since curl is already in the image!
+    while ! curl -s localhost:$port > /dev/null; do
         RETRY=$((RETRY+1))
         if [ $RETRY -ge 30 ]; then
             echo "Warning: Port $port timed out. Continuing anyway..."
