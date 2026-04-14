@@ -55,6 +55,28 @@ def initialize_rag():
     # 1. Initialize embeddings using Gemini API
     embeddings = GeminiEmbeddings(api_key=GOOGLE_API_KEY)
     
+    # --- MODEL DISCOVERY ---
+    print("\n--- DISCOVERING AVAILABLE MODELS ---")
+    try:
+        discovery_url = f"https://generativelanguage.googleapis.com/v1beta/models?key={GOOGLE_API_KEY}"
+        resp = requests.get(discovery_url).json()
+        if "models" in resp:
+            for m in resp["models"]:
+                m_name = m['name'].replace('models/', '')
+                methods = ", ".join(m.get('supportedGenerationMethods', []))
+                print(f"AVAILABLE MODEL: {m_name} (Methods: {methods})")
+        else:
+            # Try v1 if v1beta failed to list
+            discovery_url_v1 = f"https://generativelanguage.googleapis.com/v1/models?key={GOOGLE_API_KEY}"
+            resp_v1 = requests.get(discovery_url_v1).json()
+            if "models" in resp_v1:
+                for m in resp_v1["models"]:
+                    m_name = m['name'].replace('models/', '')
+                    print(f"AVAILABLE MODEL [v1]: {m_name}")
+    except Exception as e:
+        print(f"Discovery error: {e}")
+    print("--- DISCOVERY END ---\n")
+    
     # 2. Check for vectorstore
     if not os.path.exists(PERSIST_DIRECTORY):
         print(f"Vector database not found at {PERSIST_DIRECTORY}. Please run ingest.py first or ensure volume is mounted.")
